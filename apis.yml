@@ -1,32 +1,48 @@
 aid: qlik
 name: Qlik
-description: >-
-  Qlik provides APIs to support automation, configuration, observability, and
-  integration with third-party applications to incorporate Qlik Cloud
-  capabilities directly into those applications. 
+description: APIs for Qlik's analytics and data integration platform
 type: Index
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo.png
 tags:
-  - API
+- API
 created: '2025-02-24'
 modified: '2025-02-24'
 url: https://raw.githubusercontent.com/api-evangelist/qlik/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: qlik:qlik
-    name: Qlik
-    description: >-
-      Qlik provides APIs to support automation, configuration, observability,
-      and integration with third-party applications to incorporate Qlik Cloud
-      capabilities directly into those applications. 
-    humanURL: ' https://qlik.dev/apis/'
-    tags:
-      - API
-    properties:
-      - type: Documentation
-        url: ' https://qlik.dev/apis/'
+- aid: qlik:qlik
+  name: Qlik
+  description: 'Qlik provides APIs to support automation, configuration, observability, and integration with third-party applications to incorporate Qlik Cloud capabilities directly into those applications. '
+  humanURL: ' https://qlik.dev/apis/'
+  tags:
+  - API
+  properties:
+  - type: Documentation
+    url: ' https://qlik.dev/apis/'
 maintainers:
-  - FN: Kin Lane
-    email: info@apievangelist.com
+- FN: Kin Lane
+  email: info@apievangelist.com
+- name: Qlik
+  email: developer@qlik.com
+  url: https://qlik.dev
+common:
+- url: https://qlik.dev
+  type: Developer Portal
+- url: https://qlik.dev/authenticate
+  type: Authentication
+- url: https://qlik.dev/get-started
+  type: Getting Started
+- url: https://qlik.dev/libraries-and-tools
+  type: SDKs
+- url: https://community.qlik.com/t5/Qlik-Design-Blog/bg-p/qlik-design-blog
+  type: Blog
+- url: https://community.qlik.com
+  type: Community
+- url: https://support.qlik.com
+  type: Support
+- url: https://www.qlik.com/us/legal/license-terms
+  type: Terms of Service
+- url: https://www.qlik.com/us/legal/privacy
+  type: Privacy Policy
