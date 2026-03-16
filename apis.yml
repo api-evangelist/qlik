@@ -8,7 +8,7 @@ image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo.png
 tags:
 - API
 created: '2025-02-24'
-modified: '2026-03-03'
+modified: '2026-03-16'
 url: https://raw.githubusercontent.com/api-evangelist/qlik/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
@@ -974,11 +974,8 @@ apis:
   - type: OpenRPC
     url: https://qlik.dev/specs/json-rpc/qix.json
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
-- name: Qlik
-  email: developer@qlik.com
-  url: https://qlik.dev
+  - FN: Kin Lane
+    email: kin@apievangelist.com
 common:
 - url: https://qlik.dev
   type: Developer Portal
