@@ -6,12 +6,10 @@ type: Index
 position: Consumer
 access: 3rd-Party
 image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo.png
-tags:
-  - API
+tags: []
 created: '2025-02-24'
 modified: '2026-03-16'
-url: 
-  https://raw.githubusercontent.com/api-evangelist/qlik/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/qlik/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
   - aid: qlik:qlik
@@ -22,8 +20,7 @@ apis:
       capabilities directly into those applications.
     humanURL: https://qlik.dev/apis/
     baseURL: https://{tenant}.{region}.qlikcloud.com/api/v1
-    tags:
-      - API
+    tags: []
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/
@@ -37,8 +34,8 @@ apis:
       Analytics and represent either an Analytics app or a script.
     humanURL: https://qlik.dev/apis/rest/apps/
     tags:
-      - Applications
       - Analytics
+      - Applications
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/apps/
@@ -66,8 +63,8 @@ apis:
       access.
     humanURL: https://qlik.dev/apis/rest/spaces/
     tags:
-      - Spaces
       - Access Control
+      - Spaces
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/spaces/
@@ -94,8 +91,8 @@ apis:
       creating, listing, and revoking API keys.
     humanURL: https://qlik.dev/apis/rest/api-keys/
     tags:
-      - Authentication
       - API Keys
+      - Authentication
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/api-keys/
@@ -238,8 +235,8 @@ apis:
       tags, public and private collections, and favorites.
     humanURL: https://qlik.dev/apis/rest/collections/
     tags:
-      - Collections
       - Catalog
+      - Collections
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/collections/
@@ -265,8 +262,8 @@ apis:
       can interact with the Qlik Cloud tenant.
     humanURL: https://qlik.dev/apis/rest/csp-origins/
     tags:
-      - Security
       - Content Security Policy
+      - Security
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/csp-origins/
@@ -279,8 +276,8 @@ apis:
       cross-site request forgery attacks.
     humanURL: https://qlik.dev/apis/rest/csrf-token/
     tags:
-      - Security
       - CSRF
+      - Security
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/csrf-token/
@@ -307,8 +304,8 @@ apis:
       governance for data resources.
     humanURL: https://qlik.dev/apis/rest/data-assets/
     tags:
-      - Data Assets
       - Catalog
+      - Data Assets
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/data-assets/
@@ -364,8 +361,8 @@ apis:
       management.
     humanURL: https://qlik.dev/apis/rest/data-sets/
     tags:
-      - Data Sets
       - Catalog
+      - Data Sets
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/data-sets/
@@ -431,8 +428,8 @@ apis:
       Cloud and on-premises data sources.
     humanURL: https://qlik.dev/apis/rest/direct-access-agents/
     tags:
-      - Direct Access
       - Agents
+      - Direct Access
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/direct-access-agents/
@@ -502,8 +499,8 @@ apis:
       assigned to simplify access control management.
     humanURL: https://qlik.dev/apis/rest/groups/
     tags:
-      - Groups
       - Access Control
+      - Groups
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/groups/
@@ -516,8 +513,8 @@ apis:
       integration with external authentication systems.
     humanURL: https://qlik.dev/apis/rest/identity-providers/
     tags:
-      - Identity Providers
       - Authentication
+      - Identity Providers
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/identity-providers/
@@ -597,8 +594,8 @@ apis:
       Cloud analytics applications.
     humanURL: https://qlik.dev/apis/rest/questions/
     tags:
-      - Natural Language
       - AI
+      - Natural Language
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/questions/
@@ -611,8 +608,8 @@ apis:
       collaboration and documentation.
     humanURL: https://qlik.dev/apis/rest/notes/
     tags:
-      - Notes
       - Collaboration
+      - Notes
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/notes/
@@ -638,8 +635,8 @@ apis:
       Cloud APIs.
     humanURL: https://qlik.dev/apis/rest/oauth/
     tags:
-      - OAuth
       - Authentication
+      - OAuth
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/oauth/
@@ -652,8 +649,8 @@ apis:
       Cloud through OAuth 2.0.
     humanURL: https://qlik.dev/apis/rest/oauth-clients/
     tags:
-      - OAuth
       - Clients
+      - OAuth
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/oauth-clients/
@@ -680,8 +677,8 @@ apis:
       endpoint, token endpoint, and supported grant types.
     humanURL: https://qlik.dev/apis/rest/.well-known/
     tags:
-      - OAuth
       - Configuration
+      - OAuth
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/.well-known/
@@ -694,8 +691,8 @@ apis:
       about resource limits and usage quotas.
     humanURL: https://qlik.dev/apis/rest/quotas/
     tags:
-      - Quotas
       - Licensing
+      - Quotas
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/quotas/
@@ -722,8 +719,8 @@ apis:
       via REST API instead of only through the JSON-RPC WebSocket API.
     humanURL: https://qlik.dev/apis/rest/reloads/
     tags:
-      - Reloads
       - Data Refresh
+      - Reloads
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/reloads/
@@ -764,8 +761,8 @@ apis:
       permissions and access within Qlik Cloud.
     humanURL: https://qlik.dev/apis/rest/roles/
     tags:
-      - Roles
       - Access Control
+      - Roles
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/roles/
@@ -778,8 +775,8 @@ apis:
       recipients within Qlik Cloud.
     humanURL: https://qlik.dev/apis/rest/sharing-tasks/
     tags:
-      - Sharing
       - Distribution
+      - Sharing
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/sharing-tasks/
@@ -792,8 +789,8 @@ apis:
       orchestrating platform operations.
     humanURL: https://qlik.dev/apis/rest/tasks/
     tags:
-      - Tasks
       - Scheduling
+      - Tasks
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/tasks/
@@ -831,8 +828,8 @@ apis:
       the Qlik Cloud platform.
     humanURL: https://qlik.dev/apis/rest/tenant-settings/
     tags:
-      - Tenants
       - Settings
+      - Tenants
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/tenant-settings/
@@ -846,8 +843,8 @@ apis:
       archives.
     humanURL: https://qlik.dev/apis/rest/themes/
     tags:
-      - Themes
       - Customization
+      - Themes
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/themes/
@@ -860,8 +857,8 @@ apis:
       from Qlik Cloud.
     humanURL: https://qlik.dev/apis/rest/transports/
     tags:
-      - Email
       - Configuration
+      - Email
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/transports/
@@ -874,8 +871,8 @@ apis:
       interface for quick access to resources.
     humanURL: https://qlik.dev/apis/rest/ui-config/
     tags:
-      - UI Configuration
       - Links
+      - UI Configuration
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/ui-config/
@@ -888,8 +885,8 @@ apis:
       and interact with Qlik Cloud content.
     humanURL: https://qlik.dev/apis/rest/web-integrations/
     tags:
-      - Web Integrations
       - Embedding
+      - Web Integrations
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/web-integrations/
@@ -916,8 +913,8 @@ apis:
       external applications, with delivery history tracking.
     humanURL: https://qlik.dev/apis/rest/webhooks/
     tags:
-      - Webhooks
       - Events
+      - Webhooks
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/webhooks/
@@ -930,8 +927,8 @@ apis:
       Cloud tenant.
     humanURL: https://qlik.dev/apis/rest/core/ip-policies/
     tags:
-      - Security
       - IP Policies
+      - Security
     properties:
       - type: Documentation
         url: https://qlik.dev/apis/rest/core/ip-policies/
