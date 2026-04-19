@@ -8,7 +8,7 @@ access: 3rd-Party
 image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo.png
 tags: []
 created: '2025-02-24'
-modified: '2026-03-16'
+modified: '2026-04-19'
 url: https://raw.githubusercontent.com/api-evangelist/qlik/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
@@ -977,58 +977,40 @@ maintainers:
     email: kin@apievangelist.com
 common:
   - url: https://qlik.dev
-    type: Developer Portal
+    type: DeveloperPortal
   - url: https://qlik.dev/authenticate
     type: Authentication
-  - url: https://qlik.dev/authenticate/oauth/
-    type: OAuth2 Authentication
-  - url: https://qlik.dev/authenticate/jwt/implement-jwt-authorization/
-    type: JWT Authentication
-  - url: https://qlik.dev/authenticate/api-key/generate-your-first-api-key/
-    type: API Key Authentication
   - url: https://qlik.dev/get-started
-    type: Getting Started
-  - url: https://qlik.dev/libraries-and-tools
-    type: SDKs
+    type: GettingStarted
   - url: https://qlik.dev/toolkits/qlik-api/
     type: SDK
   - url: https://qlik.dev/toolkits/qlik-cli/
     type: CLI
-  - url: https://qlik.dev/toolkits/platform-sdk/
-    type: Python SDK
   - url: https://qlik.dev/apis/rest/
-    type: REST API Documentation
-  - url: https://qlik.dev/apis/javascript/
-    type: JavaScript API Documentation
-  - url: https://qlik.dev/apis/json-rpc/
-    type: JSON-RPC API Documentation
+    type: Documentation
   - url: https://qlik.dev/apis/rest/rate-limiting/
-    type: Rate Limits
-  - url: https://qlik.dev/apis/api-policy/
-    type: API Policy
-  - url: https://qlik.dev/embed/
-    type: Embedded Analytics
-  - url: https://qlik.dev/embed/qlik-embed/
-    type: Qlik Embed Framework
+    type: RateLimits
   - url: https://qlik.dev/examples/
-    type: Examples
+    type: CodeExamples
   - url: https://qlik.dev/changelog/
-    type: Changelog
+    type: ChangeLog
   - url: https://github.com/qlik-oss
-    type: GitHub Organization
+    type: GitHubOrganization
   - url: https://status.qlikcloud.com/
-    type: Status
+    type: StatusPage
   - url: https://community.qlik.com/t5/Qlik-Design-Blog/bg-p/qlik-design-blog
     type: Blog
   - url: https://community.qlik.com
     type: Community
   - url: https://support.qlik.com
     type: Support
-  - url: https://qlik.dev/toolkits/
-    type: Toolkits
-  - url: https://qlik.dev/manage/
-    type: Management Documentation
   - url: https://www.qlik.com/us/legal/license-terms
-    type: Terms of Service
+    type: TermsOfService
   - url: https://www.qlik.com/us/legal/privacy
-    type: Privacy Policy
+    type: PrivacyPolicy
+  - url: https://www.qlik.com/us/products/qlik-cloud
+    type: Features
+  - url: https://www.qlik.com/us/solutions
+    type: UseCases
+  - url: https://www.qlik.com/us/products/technology-partners
+    type: Integrations
