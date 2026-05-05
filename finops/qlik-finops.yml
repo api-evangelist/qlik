@@ -1,0 +1,592 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+provider: Qlik
+providerId: qlik
+publisherName: Qlik
+serviceCategory: API
+created: '2026-05-04'
+modified: '2026-05-04'
+tags:
+  - FinOps
+  - Cost Management
+  - FOCUS
+description: FinOps framework definition for the Qlik API surface. Provides a FOCUS-aligned mapping for
+  cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
+principles:
+  - name: Visibility
+    description: Make API consumption costs visible to engineering, product, and finance teams in near
+      real-time.
+  - name: Allocation
+    description: Tag every chargeable API call with the consuming team, environment, application, and
+      feature so cost can be allocated.
+  - name: Optimization
+    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
+      cost per useful unit of work.
+  - name: Accountability
+    description: Establish budget owners and chargeback or showback flows for each consuming team.
+domains:
+  - name: Understand Usage and Cost
+    capabilities:
+      - Data Ingestion
+      - Allocation
+      - Reporting and Analytics
+      - Anomaly Management
+  - name: Quantify Business Value
+    capabilities:
+      - Planning and Estimating
+      - Forecasting
+      - Budgeting
+      - Benchmarking
+      - Unit Economics
+  - name: Optimize Usage and Cost
+    capabilities:
+      - Architecting for Cloud
+      - Rate Optimization
+      - Workload Optimization
+      - Cloud Sustainability
+      - Licensing and SaaS
+  - name: Manage the FinOps Practice
+    capabilities:
+      - FinOps Practice Operations
+      - FinOps Education and Enablement
+      - Invoicing and Chargeback
+      - Onboarding Workloads
+      - Intersecting Disciplines
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Tax
+    - Credit
+    - Adjustment
+  chargeFrequency: Recurring
+focusColumns:
+  ServiceName: Qlik
+  ServiceCategory: Developer Tools / API
+  ProviderName: Qlik
+  PublisherName: Qlik
+  InvoiceIssuerName: Qlik
+  PricingCategory: Usage-Based
+  PricingUnit: request
+  BillingCurrency: USD
+  ChargeCategory: Usage
+meters:
+  - name: api_requests
+    description: Count of billable API requests
+    unit: request
+    aggregation: sum
+    dimensions:
+      - api
+      - endpoint
+      - tier
+      - region
+      - consumer
+  - name: data_egress
+    description: Bytes returned over the network in API responses
+    unit: GB
+    aggregation: sum
+    dimensions:
+      - api
+      - region
+      - consumer
+  - name: compute_seconds
+    description: Server-side compute consumed by the request, where applicable
+    unit: second
+    aggregation: sum
+    dimensions:
+      - api
+      - endpoint
+      - tier
+apis:
+  - name: Qlik
+    baseURL: https://{tenant}.{region}.qlikcloud.com/api/v1
+    tags: []
+    serviceName: Qlik
+    serviceCategory: API
+  - name: Qlik Apps API
+    baseURL: ''
+    tags:
+      - Analytics
+      - Applications
+    serviceName: Qlik Apps API
+    serviceCategory: API
+  - name: Qlik Users API
+    baseURL: ''
+    tags:
+      - Users
+    serviceName: Qlik Users API
+    serviceCategory: API
+  - name: Qlik Spaces API
+    baseURL: ''
+    tags:
+      - Access Control
+      - Spaces
+    serviceName: Qlik Spaces API
+    serviceCategory: API
+  - name: Qlik Items API
+    baseURL: ''
+    tags:
+      - Items
+      - Resources
+    serviceName: Qlik Items API
+    serviceCategory: API
+  - name: Qlik API Keys API
+    baseURL: ''
+    tags:
+      - API Keys
+      - Authentication
+    serviceName: Qlik API Keys API
+    serviceCategory: API
+  - name: Qlik Audits API
+    baseURL: ''
+    tags:
+      - Audits
+      - Events
+      - Observability
+    serviceName: Qlik Audits API
+    serviceCategory: API
+  - name: Qlik Automations API
+    baseURL: ''
+    tags:
+      - Automations
+      - Workflows
+    serviceName: Qlik Automations API
+    serviceCategory: API
+  - name: Qlik Automation Connections API
+    baseURL: ''
+    tags:
+      - Automations
+      - Connections
+    serviceName: Qlik Automation Connections API
+    serviceCategory: API
+  - name: Qlik Automation Connectors API
+    baseURL: ''
+    tags:
+      - Automations
+      - Connectors
+    serviceName: Qlik Automation Connectors API
+    serviceCategory: API
+  - name: Qlik AutoML Dataset Predictions API
+    baseURL: ''
+    tags:
+      - Machine Learning
+      - Predictions
+    serviceName: Qlik AutoML Dataset Predictions API
+    serviceCategory: API
+  - name: Qlik AutoML Real-Time Predictions API
+    baseURL: ''
+    tags:
+      - Machine Learning
+      - Predictions
+      - Real-Time
+    serviceName: Qlik AutoML Real-Time Predictions API
+    serviceCategory: API
+  - name: Qlik Assistants API
+    baseURL: ''
+    tags:
+      - AI
+      - Assistants
+    serviceName: Qlik Assistants API
+    serviceCategory: API
+  - name: Qlik Banners API
+    baseURL: ''
+    tags:
+      - Banners
+      - Notifications
+    serviceName: Qlik Banners API
+    serviceCategory: API
+  - name: Qlik Brands API
+    baseURL: ''
+    tags:
+      - Branding
+      - Customization
+    serviceName: Qlik Brands API
+    serviceCategory: API
+  - name: Qlik Collections API
+    baseURL: ''
+    tags:
+      - Catalog
+      - Collections
+    serviceName: Qlik Collections API
+    serviceCategory: API
+  - name: Qlik Conditions API
+    baseURL: ''
+    tags:
+      - Conditions
+    serviceName: Qlik Conditions API
+    serviceCategory: API
+  - name: Qlik CSP Origins API
+    baseURL: ''
+    tags:
+      - Content Security Policy
+      - Security
+    serviceName: Qlik CSP Origins API
+    serviceCategory: API
+  - name: Qlik CSRF Token API
+    baseURL: ''
+    tags:
+      - CSRF
+      - Security
+    serviceName: Qlik CSRF Token API
+    serviceCategory: API
+  - name: Qlik Data Alerts API
+    baseURL: ''
+    tags:
+      - Alerts
+      - Data
+    serviceName: Qlik Data Alerts API
+    serviceCategory: API
+  - name: Qlik Data Assets API
+    baseURL: ''
+    tags:
+      - Catalog
+      - Data Assets
+    serviceName: Qlik Data Assets API
+    serviceCategory: API
+  - name: Qlik Data Connections API
+    baseURL: ''
+    tags:
+      - Data Connections
+      - Integration
+    serviceName: Qlik Data Connections API
+    serviceCategory: API
+  - name: Qlik Data Credentials API
+    baseURL: ''
+    tags:
+      - Credentials
+      - Data
+    serviceName: Qlik Data Credentials API
+    serviceCategory: API
+  - name: Qlik Data Files API
+    baseURL: ''
+    tags:
+      - Data Files
+      - Upload
+    serviceName: Qlik Data Files API
+    serviceCategory: API
+  - name: Qlik Data Sets API
+    baseURL: ''
+    tags:
+      - Catalog
+      - Data Sets
+    serviceName: Qlik Data Sets API
+    serviceCategory: API
+  - name: Qlik Data Sources API
+    baseURL: ''
+    tags:
+      - Data Sources
+    serviceName: Qlik Data Sources API
+    serviceCategory: API
+  - name: Qlik Data Stores API
+    baseURL: ''
+    tags:
+      - Data Stores
+    serviceName: Qlik Data Stores API
+    serviceCategory: API
+  - name: Qlik Data Qualities API
+    baseURL: ''
+    tags:
+      - Data Quality
+    serviceName: Qlik Data Qualities API
+    serviceCategory: API
+  - name: Qlik Data Integration Projects API
+    baseURL: ''
+    tags:
+      - Data Integration
+      - Projects
+    serviceName: Qlik Data Integration Projects API
+    serviceCategory: API
+  - name: Qlik Direct Access Agents API
+    baseURL: ''
+    tags:
+      - Agents
+      - Direct Access
+    serviceName: Qlik Direct Access Agents API
+    serviceCategory: API
+  - name: Qlik Encryption API
+    baseURL: ''
+    tags:
+      - Encryption
+      - Security
+    serviceName: Qlik Encryption API
+    serviceCategory: API
+  - name: Qlik Entitlement Consumption API
+    baseURL: ''
+    tags:
+      - Consumption
+      - Licensing
+    serviceName: Qlik Entitlement Consumption API
+    serviceCategory: API
+  - name: Qlik Extensions API
+    baseURL: ''
+    tags:
+      - Extensions
+      - Visualizations
+    serviceName: Qlik Extensions API
+    serviceCategory: API
+  - name: Qlik Glossaries API
+    baseURL: ''
+    tags:
+      - Glossaries
+      - Governance
+    serviceName: Qlik Glossaries API
+    serviceCategory: API
+  - name: Qlik Groups API
+    baseURL: ''
+    tags:
+      - Access Control
+      - Groups
+    serviceName: Qlik Groups API
+    serviceCategory: API
+  - name: Qlik Identity Providers API
+    baseURL: ''
+    tags:
+      - Authentication
+      - Identity Providers
+    serviceName: Qlik Identity Providers API
+    serviceCategory: API
+  - name: Qlik Knowledgebases API
+    baseURL: ''
+    tags:
+      - AI
+      - Knowledge Bases
+    serviceName: Qlik Knowledgebases API
+    serviceCategory: API
+  - name: Qlik Licenses API
+    baseURL: ''
+    tags:
+      - Licenses
+    serviceName: Qlik Licenses API
+    serviceCategory: API
+  - name: Qlik Lineage Graphs API
+    baseURL: ''
+    tags:
+      - Data Lineage
+      - Governance
+    serviceName: Qlik Lineage Graphs API
+    serviceCategory: API
+  - name: Qlik Login API
+    baseURL: ''
+    tags:
+      - Authentication
+      - Login
+    serviceName: Qlik Login API
+    serviceCategory: API
+  - name: Qlik Machine Learning API
+    baseURL: ''
+    tags:
+      - Machine Learning
+    serviceName: Qlik Machine Learning API
+    serviceCategory: API
+  - name: Qlik Natural Language API
+    baseURL: ''
+    tags:
+      - AI
+      - Natural Language
+    serviceName: Qlik Natural Language API
+    serviceCategory: API
+  - name: Qlik Notes API
+    baseURL: ''
+    tags:
+      - Collaboration
+      - Notes
+    serviceName: Qlik Notes API
+    serviceCategory: API
+  - name: Qlik Notifications API
+    baseURL: ''
+    tags:
+      - Notifications
+    serviceName: Qlik Notifications API
+    serviceCategory: API
+  - name: Qlik OAuth API
+    baseURL: ''
+    tags:
+      - Authentication
+      - OAuth
+    serviceName: Qlik OAuth API
+    serviceCategory: API
+  - name: Qlik OAuth Clients API
+    baseURL: ''
+    tags:
+      - Clients
+      - OAuth
+    serviceName: Qlik OAuth Clients API
+    serviceCategory: API
+  - name: Qlik OAuth Tokens API
+    baseURL: ''
+    tags:
+      - OAuth
+      - Tokens
+    serviceName: Qlik OAuth Tokens API
+    serviceCategory: API
+  - name: Qlik OAuth Well-Known Configuration API
+    baseURL: ''
+    tags:
+      - Configuration
+      - OAuth
+    serviceName: Qlik OAuth Well-Known Configuration API
+    serviceCategory: API
+  - name: Qlik Quotas API
+    baseURL: ''
+    tags:
+      - Licensing
+      - Quotas
+    serviceName: Qlik Quotas API
+    serviceCategory: API
+  - name: Qlik Reload Tasks API
+    baseURL: ''
+    tags:
+      - Reloads
+      - Scheduling
+    serviceName: Qlik Reload Tasks API
+    serviceCategory: API
+  - name: Qlik Reloads API
+    baseURL: ''
+    tags:
+      - Data Refresh
+      - Reloads
+    serviceName: Qlik Reloads API
+    serviceCategory: API
+  - name: Qlik Report Templates API
+    baseURL: ''
+    tags:
+      - Reports
+      - Templates
+    serviceName: Qlik Report Templates API
+    serviceCategory: API
+  - name: Qlik Reports API
+    baseURL: ''
+    tags:
+      - Reports
+    serviceName: Qlik Reports API
+    serviceCategory: API
+  - name: Qlik Roles API
+    baseURL: ''
+    tags:
+      - Access Control
+      - Roles
+    serviceName: Qlik Roles API
+    serviceCategory: API
+  - name: Qlik Sharing Tasks API
+    baseURL: ''
+    tags:
+      - Distribution
+      - Sharing
+    serviceName: Qlik Sharing Tasks API
+    serviceCategory: API
+  - name: Qlik Tasks API
+    baseURL: ''
+    tags:
+      - Scheduling
+      - Tasks
+    serviceName: Qlik Tasks API
+    serviceCategory: API
+  - name: Qlik Temporary Contents API
+    baseURL: ''
+    tags:
+      - Temporary Storage
+    serviceName: Qlik Temporary Contents API
+    serviceCategory: API
+  - name: Qlik Tenants API
+    baseURL: ''
+    tags:
+      - Tenants
+    serviceName: Qlik Tenants API
+    serviceCategory: API
+  - name: Qlik Tenant Settings API
+    baseURL: ''
+    tags:
+      - Settings
+      - Tenants
+    serviceName: Qlik Tenant Settings API
+    serviceCategory: API
+  - name: Qlik Themes API
+    baseURL: ''
+    tags:
+      - Customization
+      - Themes
+    serviceName: Qlik Themes API
+    serviceCategory: API
+  - name: Qlik Email Configuration API
+    baseURL: ''
+    tags:
+      - Configuration
+      - Email
+    serviceName: Qlik Email Configuration API
+    serviceCategory: API
+  - name: Qlik Pinned Links API
+    baseURL: ''
+    tags:
+      - Links
+      - UI Configuration
+    serviceName: Qlik Pinned Links API
+    serviceCategory: API
+  - name: Qlik Web Integrations API
+    baseURL: ''
+    tags:
+      - Embedding
+      - Web Integrations
+    serviceName: Qlik Web Integrations API
+    serviceCategory: API
+  - name: Qlik Web Notifications API
+    baseURL: ''
+    tags:
+      - Notifications
+      - Web
+    serviceName: Qlik Web Notifications API
+    serviceCategory: API
+  - name: Qlik Webhooks API
+    baseURL: ''
+    tags:
+      - Events
+      - Webhooks
+    serviceName: Qlik Webhooks API
+    serviceCategory: API
+  - name: Qlik IP Policies API
+    baseURL: ''
+    tags:
+      - IP Policies
+      - Security
+    serviceName: Qlik IP Policies API
+    serviceCategory: API
+  - name: Qlik Change Stores API
+    baseURL: ''
+    tags:
+      - Analytics
+      - Change Tracking
+    serviceName: Qlik Change Stores API
+    serviceCategory: API
+  - name: Qlik Data Products API
+    baseURL: ''
+    tags:
+      - Data Products
+      - Governance
+    serviceName: Qlik Data Products API
+    serviceCategory: API
+  - name: Qlik Engine JSON-RPC API
+    baseURL: ''
+    tags:
+      - Engine
+      - JSON-RPC
+      - WebSocket
+    serviceName: Qlik Engine JSON-RPC API
+    serviceCategory: API
+unitEconomics:
+  - name: Cost per 1K Requests
+    metric: billed_cost / (api_requests / 1000)
+    target: TBD
+  - name: Cost per Active Consumer
+    metric: billed_cost / active_consumers
+    target: TBD
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

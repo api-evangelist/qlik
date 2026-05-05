@@ -1,0 +1,424 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Qlik
+providerId: qlik
+created: '2026-05-04'
+modified: '2026-05-04'
+tags:
+  - Rate Limiting
+  - Quotas
+  - Throttling
+description: Machine-readable rate limit definitions for the Qlik API surface. Captures per-tier quotas,
+  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
+  with published provider limits.
+headers:
+  limit: X-RateLimit-Limit
+  remaining: X-RateLimit-Remaining
+  reset: X-RateLimit-Reset
+  retryAfter: Retry-After
+  policy: RateLimit-Policy
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+  serviceUnavailable: 503
+limits:
+  - tier: free
+    name: Free Tier Default
+    scope: api-key
+    metric: requests_per_minute
+    limit: 10
+    burst: 20
+    timeFrame: minute
+    applies:
+      - Qlik
+      - Qlik Apps API
+      - Qlik Users API
+      - Qlik Spaces API
+      - Qlik Items API
+      - Qlik API Keys API
+      - Qlik Audits API
+      - Qlik Automations API
+      - Qlik Automation Connections API
+      - Qlik Automation Connectors API
+      - Qlik AutoML Dataset Predictions API
+      - Qlik AutoML Real-Time Predictions API
+      - Qlik Assistants API
+      - Qlik Banners API
+      - Qlik Brands API
+      - Qlik Collections API
+      - Qlik Conditions API
+      - Qlik CSP Origins API
+      - Qlik CSRF Token API
+      - Qlik Data Alerts API
+      - Qlik Data Assets API
+      - Qlik Data Connections API
+      - Qlik Data Credentials API
+      - Qlik Data Files API
+      - Qlik Data Sets API
+      - Qlik Data Sources API
+      - Qlik Data Stores API
+      - Qlik Data Qualities API
+      - Qlik Data Integration Projects API
+      - Qlik Direct Access Agents API
+      - Qlik Encryption API
+      - Qlik Entitlement Consumption API
+      - Qlik Extensions API
+      - Qlik Glossaries API
+      - Qlik Groups API
+      - Qlik Identity Providers API
+      - Qlik Knowledgebases API
+      - Qlik Licenses API
+      - Qlik Lineage Graphs API
+      - Qlik Login API
+      - Qlik Machine Learning API
+      - Qlik Natural Language API
+      - Qlik Notes API
+      - Qlik Notifications API
+      - Qlik OAuth API
+      - Qlik OAuth Clients API
+      - Qlik OAuth Tokens API
+      - Qlik OAuth Well-Known Configuration API
+      - Qlik Quotas API
+      - Qlik Reload Tasks API
+      - Qlik Reloads API
+      - Qlik Report Templates API
+      - Qlik Reports API
+      - Qlik Roles API
+      - Qlik Sharing Tasks API
+      - Qlik Tasks API
+      - Qlik Temporary Contents API
+      - Qlik Tenants API
+      - Qlik Tenant Settings API
+      - Qlik Themes API
+      - Qlik Email Configuration API
+      - Qlik Pinned Links API
+      - Qlik Web Integrations API
+      - Qlik Web Notifications API
+      - Qlik Webhooks API
+      - Qlik IP Policies API
+      - Qlik Change Stores API
+      - Qlik Data Products API
+      - Qlik Engine JSON-RPC API
+  - tier: free
+    name: Free Tier Monthly Quota
+    scope: api-key
+    metric: requests_per_month
+    limit: 1000
+    timeFrame: month
+    applies:
+      - Qlik
+      - Qlik Apps API
+      - Qlik Users API
+      - Qlik Spaces API
+      - Qlik Items API
+      - Qlik API Keys API
+      - Qlik Audits API
+      - Qlik Automations API
+      - Qlik Automation Connections API
+      - Qlik Automation Connectors API
+      - Qlik AutoML Dataset Predictions API
+      - Qlik AutoML Real-Time Predictions API
+      - Qlik Assistants API
+      - Qlik Banners API
+      - Qlik Brands API
+      - Qlik Collections API
+      - Qlik Conditions API
+      - Qlik CSP Origins API
+      - Qlik CSRF Token API
+      - Qlik Data Alerts API
+      - Qlik Data Assets API
+      - Qlik Data Connections API
+      - Qlik Data Credentials API
+      - Qlik Data Files API
+      - Qlik Data Sets API
+      - Qlik Data Sources API
+      - Qlik Data Stores API
+      - Qlik Data Qualities API
+      - Qlik Data Integration Projects API
+      - Qlik Direct Access Agents API
+      - Qlik Encryption API
+      - Qlik Entitlement Consumption API
+      - Qlik Extensions API
+      - Qlik Glossaries API
+      - Qlik Groups API
+      - Qlik Identity Providers API
+      - Qlik Knowledgebases API
+      - Qlik Licenses API
+      - Qlik Lineage Graphs API
+      - Qlik Login API
+      - Qlik Machine Learning API
+      - Qlik Natural Language API
+      - Qlik Notes API
+      - Qlik Notifications API
+      - Qlik OAuth API
+      - Qlik OAuth Clients API
+      - Qlik OAuth Tokens API
+      - Qlik OAuth Well-Known Configuration API
+      - Qlik Quotas API
+      - Qlik Reload Tasks API
+      - Qlik Reloads API
+      - Qlik Report Templates API
+      - Qlik Reports API
+      - Qlik Roles API
+      - Qlik Sharing Tasks API
+      - Qlik Tasks API
+      - Qlik Temporary Contents API
+      - Qlik Tenants API
+      - Qlik Tenant Settings API
+      - Qlik Themes API
+      - Qlik Email Configuration API
+      - Qlik Pinned Links API
+      - Qlik Web Integrations API
+      - Qlik Web Notifications API
+      - Qlik Webhooks API
+      - Qlik IP Policies API
+      - Qlik Change Stores API
+      - Qlik Data Products API
+      - Qlik Engine JSON-RPC API
+  - tier: professional
+    name: Professional Tier Default
+    scope: api-key
+    metric: requests_per_minute
+    limit: 100
+    burst: 200
+    timeFrame: minute
+    applies:
+      - Qlik
+      - Qlik Apps API
+      - Qlik Users API
+      - Qlik Spaces API
+      - Qlik Items API
+      - Qlik API Keys API
+      - Qlik Audits API
+      - Qlik Automations API
+      - Qlik Automation Connections API
+      - Qlik Automation Connectors API
+      - Qlik AutoML Dataset Predictions API
+      - Qlik AutoML Real-Time Predictions API
+      - Qlik Assistants API
+      - Qlik Banners API
+      - Qlik Brands API
+      - Qlik Collections API
+      - Qlik Conditions API
+      - Qlik CSP Origins API
+      - Qlik CSRF Token API
+      - Qlik Data Alerts API
+      - Qlik Data Assets API
+      - Qlik Data Connections API
+      - Qlik Data Credentials API
+      - Qlik Data Files API
+      - Qlik Data Sets API
+      - Qlik Data Sources API
+      - Qlik Data Stores API
+      - Qlik Data Qualities API
+      - Qlik Data Integration Projects API
+      - Qlik Direct Access Agents API
+      - Qlik Encryption API
+      - Qlik Entitlement Consumption API
+      - Qlik Extensions API
+      - Qlik Glossaries API
+      - Qlik Groups API
+      - Qlik Identity Providers API
+      - Qlik Knowledgebases API
+      - Qlik Licenses API
+      - Qlik Lineage Graphs API
+      - Qlik Login API
+      - Qlik Machine Learning API
+      - Qlik Natural Language API
+      - Qlik Notes API
+      - Qlik Notifications API
+      - Qlik OAuth API
+      - Qlik OAuth Clients API
+      - Qlik OAuth Tokens API
+      - Qlik OAuth Well-Known Configuration API
+      - Qlik Quotas API
+      - Qlik Reload Tasks API
+      - Qlik Reloads API
+      - Qlik Report Templates API
+      - Qlik Reports API
+      - Qlik Roles API
+      - Qlik Sharing Tasks API
+      - Qlik Tasks API
+      - Qlik Temporary Contents API
+      - Qlik Tenants API
+      - Qlik Tenant Settings API
+      - Qlik Themes API
+      - Qlik Email Configuration API
+      - Qlik Pinned Links API
+      - Qlik Web Integrations API
+      - Qlik Web Notifications API
+      - Qlik Webhooks API
+      - Qlik IP Policies API
+      - Qlik Change Stores API
+      - Qlik Data Products API
+      - Qlik Engine JSON-RPC API
+  - tier: professional
+    name: Professional Tier Monthly Quota
+    scope: api-key
+    metric: requests_per_month
+    limit: 100000
+    timeFrame: month
+    applies:
+      - Qlik
+      - Qlik Apps API
+      - Qlik Users API
+      - Qlik Spaces API
+      - Qlik Items API
+      - Qlik API Keys API
+      - Qlik Audits API
+      - Qlik Automations API
+      - Qlik Automation Connections API
+      - Qlik Automation Connectors API
+      - Qlik AutoML Dataset Predictions API
+      - Qlik AutoML Real-Time Predictions API
+      - Qlik Assistants API
+      - Qlik Banners API
+      - Qlik Brands API
+      - Qlik Collections API
+      - Qlik Conditions API
+      - Qlik CSP Origins API
+      - Qlik CSRF Token API
+      - Qlik Data Alerts API
+      - Qlik Data Assets API
+      - Qlik Data Connections API
+      - Qlik Data Credentials API
+      - Qlik Data Files API
+      - Qlik Data Sets API
+      - Qlik Data Sources API
+      - Qlik Data Stores API
+      - Qlik Data Qualities API
+      - Qlik Data Integration Projects API
+      - Qlik Direct Access Agents API
+      - Qlik Encryption API
+      - Qlik Entitlement Consumption API
+      - Qlik Extensions API
+      - Qlik Glossaries API
+      - Qlik Groups API
+      - Qlik Identity Providers API
+      - Qlik Knowledgebases API
+      - Qlik Licenses API
+      - Qlik Lineage Graphs API
+      - Qlik Login API
+      - Qlik Machine Learning API
+      - Qlik Natural Language API
+      - Qlik Notes API
+      - Qlik Notifications API
+      - Qlik OAuth API
+      - Qlik OAuth Clients API
+      - Qlik OAuth Tokens API
+      - Qlik OAuth Well-Known Configuration API
+      - Qlik Quotas API
+      - Qlik Reload Tasks API
+      - Qlik Reloads API
+      - Qlik Report Templates API
+      - Qlik Reports API
+      - Qlik Roles API
+      - Qlik Sharing Tasks API
+      - Qlik Tasks API
+      - Qlik Temporary Contents API
+      - Qlik Tenants API
+      - Qlik Tenant Settings API
+      - Qlik Themes API
+      - Qlik Email Configuration API
+      - Qlik Pinned Links API
+      - Qlik Web Integrations API
+      - Qlik Web Notifications API
+      - Qlik Webhooks API
+      - Qlik IP Policies API
+      - Qlik Change Stores API
+      - Qlik Data Products API
+      - Qlik Engine JSON-RPC API
+  - tier: enterprise
+    name: Enterprise Negotiated Limit
+    scope: contract
+    metric: requests_per_minute
+    limit: 1000
+    burst: 5000
+    timeFrame: minute
+    applies:
+      - Qlik
+      - Qlik Apps API
+      - Qlik Users API
+      - Qlik Spaces API
+      - Qlik Items API
+      - Qlik API Keys API
+      - Qlik Audits API
+      - Qlik Automations API
+      - Qlik Automation Connections API
+      - Qlik Automation Connectors API
+      - Qlik AutoML Dataset Predictions API
+      - Qlik AutoML Real-Time Predictions API
+      - Qlik Assistants API
+      - Qlik Banners API
+      - Qlik Brands API
+      - Qlik Collections API
+      - Qlik Conditions API
+      - Qlik CSP Origins API
+      - Qlik CSRF Token API
+      - Qlik Data Alerts API
+      - Qlik Data Assets API
+      - Qlik Data Connections API
+      - Qlik Data Credentials API
+      - Qlik Data Files API
+      - Qlik Data Sets API
+      - Qlik Data Sources API
+      - Qlik Data Stores API
+      - Qlik Data Qualities API
+      - Qlik Data Integration Projects API
+      - Qlik Direct Access Agents API
+      - Qlik Encryption API
+      - Qlik Entitlement Consumption API
+      - Qlik Extensions API
+      - Qlik Glossaries API
+      - Qlik Groups API
+      - Qlik Identity Providers API
+      - Qlik Knowledgebases API
+      - Qlik Licenses API
+      - Qlik Lineage Graphs API
+      - Qlik Login API
+      - Qlik Machine Learning API
+      - Qlik Natural Language API
+      - Qlik Notes API
+      - Qlik Notifications API
+      - Qlik OAuth API
+      - Qlik OAuth Clients API
+      - Qlik OAuth Tokens API
+      - Qlik OAuth Well-Known Configuration API
+      - Qlik Quotas API
+      - Qlik Reload Tasks API
+      - Qlik Reloads API
+      - Qlik Report Templates API
+      - Qlik Reports API
+      - Qlik Roles API
+      - Qlik Sharing Tasks API
+      - Qlik Tasks API
+      - Qlik Temporary Contents API
+      - Qlik Tenants API
+      - Qlik Tenant Settings API
+      - Qlik Themes API
+      - Qlik Email Configuration API
+      - Qlik Pinned Links API
+      - Qlik Web Integrations API
+      - Qlik Web Notifications API
+      - Qlik Webhooks API
+      - Qlik IP Policies API
+      - Qlik Change Stores API
+      - Qlik Data Products API
+      - Qlik Engine JSON-RPC API
+policies:
+  - name: Backoff Strategy
+    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
+      when present.
+  - name: Burst Handling
+    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
+      before throttling engages.
+  - name: Quota Reset
+    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
+      windows reset on a sliding-window basis.
+  - name: Fair Use
+    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
+      may be subject to fair-use throttling.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
