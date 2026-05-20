@@ -3,12 +3,11 @@
   "feeds": [
     {
       "source": "https://community.qlik.com/t5/Qlik-Design-Blog/bg-p/qlik-design-blog",
-      "feed_url": "",
-      "title": "",
-      "saved": 0,
-      "error": "no_feed"
+      "feed_url": "https://community.qlik.com:443/cyjdu72974/rss/board?board.id=qlik-design-blog",
+      "title": "Design articles",
+      "saved": 12
     }
   ],
-  "post_count": 10,
-  "fetched": "2026-05-09T20:17:51Z"
+  "post_count": 22,
+  "fetched": "2026-05-17T20:48:52Z"
 }
