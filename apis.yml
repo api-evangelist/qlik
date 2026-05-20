@@ -976,6 +976,8 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/qlik
   - url: https://qlik.dev
     type: DeveloperPortal
   - url: https://qlik.dev/authenticate
