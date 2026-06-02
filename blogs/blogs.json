@@ -2,12 +2,20 @@
   "repo": "qlik",
   "feeds": [
     {
+      "source": "https://community.qlik.com:443/cyjdu72974/rss/board?board.id=qlik-design-blog",
+      "feed_url": "https://community.qlik.com:443/cyjdu72974/rss/board?board.id=qlik-design-blog",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
       "source": "https://community.qlik.com/t5/Qlik-Design-Blog/bg-p/qlik-design-blog",
       "feed_url": "https://community.qlik.com:443/cyjdu72974/rss/board?board.id=qlik-design-blog",
-      "title": "Design articles",
-      "saved": 12
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
     }
   ],
-  "post_count": 22,
-  "fetched": "2026-05-17T20:48:52Z"
+  "post_count": 24,
+  "fetched": "2026-06-01T23:35:02Z"
 }
