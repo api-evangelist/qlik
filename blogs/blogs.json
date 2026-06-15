@@ -5,7 +5,7 @@
       "source": "https://community.qlik.com:443/cyjdu72974/rss/board?board.id=qlik-design-blog",
       "feed_url": "https://community.qlik.com:443/cyjdu72974/rss/board?board.id=qlik-design-blog",
       "title": "",
-      "saved": 0,
+      "saved": 2,
       "method": "feed"
     },
     {
@@ -16,6 +16,6 @@
       "method": "discovered"
     }
   ],
-  "post_count": 24,
-  "fetched": "2026-06-01T23:35:02Z"
+  "post_count": 27,
+  "fetched": "2026-06-14T20:42:17Z"
 }
