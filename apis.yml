@@ -985,7 +985,7 @@ common:
   - url: https://qlik.dev/get-started
     type: GettingStarted
   - url: https://qlik.dev/toolkits/qlik-api/
-    type: SDK
+    type: SDKs
   - url: https://qlik.dev/toolkits/qlik-cli/
     type: CLI
   - url: https://qlik.dev/apis/rest/
