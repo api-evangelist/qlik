@@ -3,6 +3,18 @@ name: Qlik
 description: >-
   APIs for Qlik's analytics and data integration platform.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
 image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo.png
