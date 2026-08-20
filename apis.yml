@@ -47,6 +47,9 @@ apis:
     humanURL: https://qlik.dev/apis/rest/apps/
     tags:
       - Analytics
+      - Application
+    tags_raw:
+      - Analytics
       - Applications
     properties:
       - type: Documentation
@@ -61,6 +64,8 @@ apis:
       updating, deleting users and managing invitations.
     humanURL: https://qlik.dev/apis/rest/users/
     tags:
+      - User
+    tags_raw:
       - Users
     properties:
       - type: Documentation
@@ -89,6 +94,9 @@ apis:
       such as apps, automations, and data sets that a user has access to.
     humanURL: https://qlik.dev/apis/rest/items/
     tags:
+      - Item
+      - Resources
+    tags_raw:
       - Items
       - Resources
     properties:
@@ -103,6 +111,9 @@ apis:
       creating, listing, and revoking API keys.
     humanURL: https://qlik.dev/apis/rest/api-keys/
     tags:
+      - APIKeys
+      - Authentication
+    tags_raw:
       - API Keys
       - Authentication
     properties:
@@ -118,6 +129,10 @@ apis:
       are stored for 90 days.
     humanURL: https://qlik.dev/apis/rest/audits/
     tags:
+      - Audits
+      - Event
+      - Observability
+    tags_raw:
       - Audits
       - Events
       - Observability
@@ -176,6 +191,9 @@ apis:
       datasets using trained machine learning models.
     humanURL: https://qlik.dev/apis/rest/automl-predictions/
     tags:
+      - Machine-Learning
+      - Predictions
+    tags_raw:
       - Machine Learning
       - Predictions
     properties:
@@ -190,6 +208,10 @@ apis:
       predictions using trained machine learning models.
     humanURL: https://qlik.dev/apis/rest/automl-deployments/
     tags:
+      - Machine-Learning
+      - Predictions
+      - Real-Time
+    tags_raw:
       - Machine Learning
       - Predictions
       - Real-Time
@@ -205,6 +227,9 @@ apis:
       and natural language interactions with data.
     humanURL: https://qlik.dev/apis/rest/assistants/
     tags:
+      - Artificial Intelligence
+      - Assistants
+    tags_raw:
       - AI
       - Assistants
     properties:
@@ -219,6 +244,9 @@ apis:
       Cloud interface.
     humanURL: https://qlik.dev/apis/rest/banners/
     tags:
+      - Banners
+      - Notification
+    tags_raw:
       - Banners
       - Notifications
     properties:
@@ -247,6 +275,9 @@ apis:
       tags, public and private collections, and favorites.
     humanURL: https://qlik.dev/apis/rest/collections/
     tags:
+      - Catalog
+      - Collection
+    tags_raw:
       - Catalog
       - Collections
     properties:
@@ -374,6 +405,9 @@ apis:
     humanURL: https://qlik.dev/apis/rest/data-sets/
     tags:
       - Catalog
+      - Datasets
+    tags_raw:
+      - Catalog
       - Data Sets
     properties:
       - type: Documentation
@@ -400,6 +434,8 @@ apis:
       scenarios.
     humanURL: https://qlik.dev/apis/rest/data-stores/
     tags:
+      - Datastores
+    tags_raw:
       - Data Stores
     properties:
       - type: Documentation
@@ -426,6 +462,9 @@ apis:
       transformation workflows within Qlik Cloud.
     humanURL: https://qlik.dev/apis/rest/di-projects/
     tags:
+      - Data Integration
+      - Project
+    tags_raw:
       - Data Integration
       - Projects
     properties:
@@ -497,6 +536,9 @@ apis:
       definitions across the Qlik Cloud tenant.
     humanURL: https://qlik.dev/apis/rest/glossaries/
     tags:
+      - Glossary
+      - Governance
+    tags_raw:
       - Glossaries
       - Governance
     properties:
@@ -511,6 +553,9 @@ apis:
       assigned to simplify access control management.
     humanURL: https://qlik.dev/apis/rest/groups/
     tags:
+      - Access Control
+      - Group
+    tags_raw:
       - Access Control
       - Groups
     properties:
@@ -539,6 +584,9 @@ apis:
       features for conversational analytics.
     humanURL: https://qlik.dev/apis/rest/knowledgebases/
     tags:
+      - Artificial Intelligence
+      - Knowledge Bases
+    tags_raw:
       - AI
       - Knowledge Bases
     properties:
@@ -593,6 +641,8 @@ apis:
       Cloud for predictive analytics.
     humanURL: https://qlik.dev/apis/rest/ml/
     tags:
+      - Machine-Learning
+    tags_raw:
       - Machine Learning
     properties:
       - type: Documentation
@@ -606,6 +656,9 @@ apis:
       Cloud analytics applications.
     humanURL: https://qlik.dev/apis/rest/questions/
     tags:
+      - Artificial Intelligence
+      - Natural-Language
+    tags_raw:
       - AI
       - Natural Language
     properties:
@@ -634,6 +687,8 @@ apis:
       alerts.
     humanURL: https://qlik.dev/apis/rest/notifications/
     tags:
+      - Notification
+    tags_raw:
       - Notifications
     properties:
       - type: Documentation
@@ -647,6 +702,8 @@ apis:
       Cloud APIs.
     humanURL: https://qlik.dev/apis/rest/oauth/
     tags:
+      - Authentication
+    tags_raw:
       - Authentication
       - OAuth
     properties:
@@ -662,6 +719,9 @@ apis:
     humanURL: https://qlik.dev/apis/rest/oauth-clients/
     tags:
       - Clients
+      - Authentication
+    tags_raw:
+      - Clients
       - OAuth
     properties:
       - type: Documentation
@@ -675,6 +735,9 @@ apis:
       Qlik Cloud.
     humanURL: https://qlik.dev/apis/rest/oauth-tokens/
     tags:
+      - Authentication
+      - Tokens
+    tags_raw:
       - OAuth
       - Tokens
     properties:
@@ -689,6 +752,9 @@ apis:
       endpoint, token endpoint, and supported grant types.
     humanURL: https://qlik.dev/apis/rest/.well-known/
     tags:
+      - Configuration
+      - Authentication
+    tags_raw:
       - Configuration
       - OAuth
     properties:
@@ -802,6 +868,9 @@ apis:
     humanURL: https://qlik.dev/apis/rest/tasks/
     tags:
       - Scheduling
+      - Task
+    tags_raw:
+      - Scheduling
       - Tasks
     properties:
       - type: Documentation
@@ -911,6 +980,9 @@ apis:
       Cloud user interface.
     humanURL: https://qlik.dev/apis/rest/web-notifications/
     tags:
+      - Notification
+      - Web
+    tags_raw:
       - Notifications
       - Web
     properties:
@@ -925,6 +997,9 @@ apis:
       external applications, with delivery history tracking.
     humanURL: https://qlik.dev/apis/rest/webhooks/
     tags:
+      - Event
+      - Webhook
+    tags_raw:
       - Events
       - Webhooks
     properties:
