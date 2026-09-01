@@ -445,7 +445,7 @@ apis:
       scenarios.
     humanURL: https://qlik.dev/apis/rest/data-stores/
     tags:
-      - Data Stores
+      - Datastores
     tags_raw:
       - Data Stores
     properties:
@@ -668,7 +668,7 @@ apis:
     humanURL: https://qlik.dev/apis/rest/questions/
     tags:
       - Artificial Intelligence
-      - Natural Language
+      - Natural-Language
     tags_raw:
       - AI
       - Natural Language
