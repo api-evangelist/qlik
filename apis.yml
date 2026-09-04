@@ -26,7 +26,7 @@ accessModel:
   - plans
   generated: '2026-07-22'
   method: derived
-position: Consumer
+position: Consuming
 access: 3rd-Party
 image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo.png
 tags: []
