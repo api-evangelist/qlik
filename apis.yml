@@ -88,6 +88,9 @@ apis:
   humanURL: https://qlik.dev/apis/rest/spaces/
   tags:
   - Access Control
+  - Space
+  tags_raw:
+  - Access Control
   - Spaces
   properties:
   - type: Documentation
@@ -132,7 +135,7 @@ apis:
     detailed access to what is happening in the tenant. Events are stored for 90 days.
   humanURL: https://qlik.dev/apis/rest/audits/
   tags:
-  - Audits
+  - Audit
   - Event
   - Observability
   tags_raw:
@@ -150,6 +153,9 @@ apis:
     together. Supports creating, updating, deleting, and executing automations.
   humanURL: https://qlik.dev/apis/rest/automations/
   tags:
+  - Automation
+  - Workflows
+  tags_raw:
   - Automations
   - Workflows
   properties:
@@ -163,6 +169,9 @@ apis:
     within Qlik Automate.
   humanURL: https://qlik.dev/apis/rest/automation-connections/
   tags:
+  - Automation
+  - Connections
+  tags_raw:
   - Automations
   - Connections
   properties:
@@ -176,6 +185,9 @@ apis:
     with third-party services.
   humanURL: https://qlik.dev/apis/rest/automation-connectors/
   tags:
+  - Automation
+  - Connectors
+  tags_raw:
   - Automations
   - Connectors
   properties:
@@ -224,7 +236,7 @@ apis:
   humanURL: https://qlik.dev/apis/rest/assistants/
   tags:
   - Artificial Intelligence
-  - Assistants
+  - Assistant
   tags_raw:
   - AI
   - Assistants
@@ -489,6 +501,9 @@ apis:
     other presentation objects to be used in the Qlik Sense client.
   humanURL: https://qlik.dev/apis/rest/extensions/
   tags:
+  - Extensions
+  - Visualization
+  tags_raw:
   - Extensions
   - Visualizations
   properties:
@@ -896,6 +911,9 @@ apis:
     with Qlik Cloud content.
   humanURL: https://qlik.dev/apis/rest/web-integrations/
   tags:
+  - Embeddings
+  - Web Integrations
+  tags_raw:
   - Embedding
   - Web Integrations
   properties:
