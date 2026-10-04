@@ -1,0 +1,61 @@
+{
+  "provider": "qlik",
+  "sources": [
+    "apps.json"
+  ],
+  "outputs": [
+    "qlik-apps-api-openapi.yml",
+    "qlik-evaluation-api-openapi.yml",
+    "qlik-filters-api-openapi.yml",
+    "qlik-insight-analyses-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi/apps.json"
+  ],
+  "errors": [],
+  "warnings": [
+    "apps.json: info.version missing"
+  ],
+  "notes": [
+    "apps.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "apps.json: tagged paths POST /api/v1/apps -> Apps",
+    "apps.json: tagged paths GET /api/v1/apps/{appId} -> Apps",
+    "apps.json: tagged paths PUT /api/v1/apps/{appId} -> Apps",
+    "apps.json: tagged paths DELETE /api/v1/apps/{appId} -> Apps",
+    "apps.json: tagged paths POST /api/v1/apps/{appId}/copy -> Apps",
+    "apps.json: tagged paths GET /api/v1/apps/{appId}/data/lineage -> Apps",
+    "apps.json: tagged paths GET /api/v1/apps/{appId}/data/metadata -> Apps",
+    "apps.json: tagged paths POST /api/v1/apps/{appId}/export -> Apps",
+    "apps.json: tagged paths GET /api/v1/apps/{appId}/media/files/{path} -> Apps",
+    "apps.json: tagged paths PUT /api/v1/apps/{appId}/media/files/{path} -> Apps",
+    "apps.json: tagged paths DELETE /api/v1/apps/{appId}/media/files/{path} -> Apps",
+    "apps.json: tagged paths GET /api/v1/apps/{appId}/media/list/{path} -> Apps",
+    "apps.json: tagged paths GET /api/v1/apps/{appId}/media/thumbnail -> Apps",
+    "apps.json: tagged paths POST /api/v1/apps/{appId}/objects/{objectId}/actions/change-owner -> Apps",
+    "apps.json: tagged paths PUT /api/v1/apps/{appId}/owner -> Apps",
+    "apps.json: tagged paths GET /api/v1/apps/{appId}/placement -> Apps",
+    "apps.json: tagged paths PUT /api/v1/apps/{appId}/placement -> Apps",
+    "apps.json: tagged paths DELETE /api/v1/apps/{appId}/placement -> Apps",
+    "apps.json: tagged paths POST /api/v1/apps/{appId}/publish -> Apps",
+    "apps.json: tagged paths PUT /api/v1/apps/{appId}/publish -> Apps",
+    "apps.json: tagged paths GET /api/v1/apps/{appId}/reloads/logs -> Apps",
+    "apps.json: tagged paths GET /api/v1/apps/{appId}/reloads/logs/{reloadId} -> Apps",
+    "apps.json: tagged paths GET /api/v1/apps/{appId}/reloads/metadata/{reloadId} -> Apps",
+    "apps.json: tagged paths GET /api/v1/apps/{appId}/scripts -> Apps",
+    "apps.json: tagged paths POST /api/v1/apps/{appId}/scripts -> Apps",
+    "apps.json: tagged paths GET /api/v1/apps/{appId}/scripts/{id} -> Apps",
+    "apps.json: tagged paths PATCH /api/v1/apps/{appId}/scripts/{id} -> Apps",
+    "apps.json: tagged paths DELETE /api/v1/apps/{appId}/scripts/{id} -> Apps",
+    "apps.json: tagged paths PUT /api/v1/apps/{appId}/space -> Apps",
+    "apps.json: tagged paths DELETE /api/v1/apps/{appId}/space -> Apps",
+    "apps.json: tagged paths POST /api/v1/apps/import -> Apps",
+    "apps.json: tagged paths GET /api/v1/apps/privileges -> Apps",
+    "apps.json: tagged paths POST /api/v1/apps/validatescript -> Apps",
+    "apps.json: declared missing tag: Apps",
+    "apps.json: declared missing tag: evaluation",
+    "apps.json: declared missing tag: filters",
+    "apps.json: declared missing tag: insight-analyses",
+    "apis.yml register: written (+4 apis, 9 total)"
+  ],
+  "skipped": []
+}

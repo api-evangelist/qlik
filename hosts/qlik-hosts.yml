@@ -1,0 +1,163 @@
+generated: '2026-10-03'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 12
+  own: 3
+  other_domain: 7
+  platform: 2
+  roles:
+  - api
+  - community
+  - legal
+  - other
+  - portal
+  - source
+  - status
+  - support
+  - website
+hosts:
+- host: api.qlik.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: qlik.com
+  role: api
+  relation: other-domain
+- host: api.qlik.dev
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: qlik.dev
+  role: api
+  relation: own
+- host: api.qlikcloud.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: qlikcloud.com
+  role: api
+  relation: other-domain
+- host: community.qlik.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - Blog
+  - Community
+  serves: []
+  registrable_domain: qlik.com
+  role: community
+  relation: other-domain
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  - MCPServer
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: portal.qlik.dev
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - docs-index
+  - well-known
+  types:
+  - DeveloperPortal
+  serves:
+  - docs
+  registrable_domain: qlik.dev
+  role: portal
+  relation: own
+- host: qlik.dev
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Website
+  - DeveloperPortal
+  - Authentication
+  - GettingStarted
+  - SDKs
+  - CLI
+  - Documentation
+  - RateLimits
+  - CodeExamples
+  - ChangeLog
+  serves:
+  - docs
+  - cdn
+  vendor: cloudfront
+  registrable_domain: qlik.dev
+  role: website
+  relation: own
+- host: status.qlikcloud.com
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: qlikcloud.com
+  role: status
+  relation: other-domain
+- host: support.qlik.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - Support
+  serves: []
+  registrable_domain: qlik.com
+  role: support
+  relation: other-domain
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform
+- host: www.qlik.com
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - TermsOfService
+  - PrivacyPolicy
+  - Features
+  - UseCases
+  - Integrations
+  serves: []
+  registrable_domain: qlik.com
+  role: legal
+  relation: other-domain
+- host: '{tenant}.{region}.qlikcloud.com'
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: qlikcloud.com
+  role: other
+  relation: other-domain

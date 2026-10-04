@@ -1,0 +1,1205 @@
+{
+  "@context": {
+    "@vocab": "https://qlik.dev/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "qlik": "https://qlik.dev/schema#",
+    "Analysis": "qlik:Analysis",
+    "AnalysisComposition": "qlik:AnalysisComposition",
+    "dims": {
+      "@id": "qlik:dims",
+      "@type": "@id"
+    },
+    "geos": {
+      "@id": "qlik:geos",
+      "@type": "@id"
+    },
+    "msrs": {
+      "@id": "qlik:msrs",
+      "@type": "@id"
+    },
+    "items": {
+      "@id": "qlik:items",
+      "@type": "@id"
+    },
+    "temporals": {
+      "@id": "qlik:temporals",
+      "@type": "@id"
+    },
+    "description": {
+      "@id": "qlik:description"
+    },
+    "AnalysisDescriptor": "qlik:AnalysisDescriptor",
+    "id": {
+      "@id": "qlik:id",
+      "@type": "xsd:string"
+    },
+    "compositions": {
+      "@id": "qlik:compositions",
+      "@container": "@list"
+    },
+    "supportsMasterItems": {
+      "@id": "qlik:supportsMasterItems",
+      "@type": "xsd:boolean"
+    },
+    "requiresAutoCalendarPeriod": {
+      "@id": "qlik:requiresAutoCalendarPeriod",
+      "@type": "xsd:boolean"
+    },
+    "requiresDefinedAnalysisPeriod": {
+      "@id": "qlik:requiresDefinedAnalysisPeriod",
+      "@type": "xsd:boolean"
+    },
+    "requiresAvailableAnalysisPeriod": {
+      "@id": "qlik:requiresAvailableAnalysisPeriod",
+      "@type": "xsd:boolean"
+    },
+    "AnalysisDescriptorResponse": "qlik:AnalysisDescriptorResponse",
+    "data": {
+      "@id": "qlik:data",
+      "@container": "@list"
+    },
+    "links": {
+      "@id": "qlik:links",
+      "@type": "@id"
+    },
+    "AnalysisDetails": "qlik:AnalysisDetails",
+    "title": {
+      "@id": "qlik:title",
+      "@type": "xsd:string"
+    },
+    "analysis": {
+      "@id": "qlik:analysis",
+      "@type": "@id"
+    },
+    "analysisGroup": {
+      "@id": "qlik:analysisGroup",
+      "@type": "@id"
+    },
+    "AnalysisGroup": "qlik:AnalysisGroup",
+    "AnalysisModelItemField": "qlik:AnalysisModelItemField",
+    "name": {
+      "@id": "qlik:name",
+      "@type": "xsd:string"
+    },
+    "isHidden": {
+      "@id": "qlik:isHidden",
+      "@type": "xsd:boolean"
+    },
+    "classifications": {
+      "@id": "qlik:classifications",
+      "@type": "@id"
+    },
+    "simplifiedClassifications": {
+      "@id": "qlik:simplifiedClassifications",
+      "@type": "@id"
+    },
+    "AnalysisModelItemMasterItem": "qlik:AnalysisModelItemMasterItem",
+    "libId": {
+      "@id": "qlik:libId",
+      "@type": "xsd:string"
+    },
+    "caption": {
+      "@id": "qlik:caption",
+      "@type": "xsd:string"
+    },
+    "AnalysisModelResponse": "qlik:AnalysisModelResponse",
+    "AnalysisModelResponseDetail": "qlik:AnalysisModelResponseDetail",
+    "fields": {
+      "@id": "qlik:fields",
+      "@container": "@list"
+    },
+    "masterItems": {
+      "@id": "qlik:masterItems",
+      "@container": "@list"
+    },
+    "isLogicalModelEnabled": {
+      "@id": "qlik:isLogicalModelEnabled",
+      "@type": "xsd:boolean"
+    },
+    "isDefinedLogicalModelValid": {
+      "@id": "qlik:isDefinedLogicalModelValid",
+      "@type": "xsd:boolean"
+    },
+    "AnalysisRecommendationResponse": "qlik:AnalysisRecommendationResponse",
+    "AnalysisRecommendationResponseDetail": "qlik:AnalysisRecommendationResponseDetail",
+    "nluInfo": {
+      "@id": "qlik:nluInfo",
+      "@container": "@list"
+    },
+    "recAnalyses": {
+      "@id": "qlik:recAnalyses",
+      "@container": "@list"
+    },
+    "AppAttributes": "qlik:AppAttributes",
+    "usage": {
+      "@id": "qlik:usage",
+      "@type": "@id"
+    },
+    "locale": {
+      "@id": "qlik:locale",
+      "@type": "xsd:string"
+    },
+    "spaceId": {
+      "@id": "qlik:spaceId",
+      "@type": "xsd:string"
+    },
+    "AppContentList": "qlik:AppContentList",
+    "library": {
+      "@id": "qlik:library",
+      "@type": "xsd:string"
+    },
+    "subpath": {
+      "@id": "qlik:subpath",
+      "@type": "xsd:string"
+    },
+    "AppContentListItem": "qlik:AppContentListItem",
+    "link": {
+      "@id": "qlik:link",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "qlik:type",
+      "@type": "xsd:string"
+    },
+    "AppUpdateAttributes": "qlik:AppUpdateAttributes",
+    "ChartType": "qlik:ChartType",
+    "comparison": "qlik:comparison",
+    "objHeavy": {
+      "@id": "qlik:objHeavy",
+      "@type": "@id"
+    },
+    "rowCount": {
+      "@id": "qlik:rowCount",
+      "@type": "@id"
+    },
+    "objNoCache": {
+      "@id": "qlik:objNoCache",
+      "@type": "@id"
+    },
+    "sheetCount": {
+      "@id": "qlik:sheetCount",
+      "@type": "@id"
+    },
+    "fileSizeMib": {
+      "@id": "qlik:fileSizeMib",
+      "@type": "@id"
+    },
+    "objectCount": {
+      "@id": "qlik:objectCount",
+      "@type": "@id"
+    },
+    "maxMemoryMib": {
+      "@id": "qlik:maxMemoryMib",
+      "@type": "@id"
+    },
+    "sheetsCached": {
+      "@id": "qlik:sheetsCached",
+      "@type": "@id"
+    },
+    "objSlowCached": {
+      "@id": "qlik:objSlowCached",
+      "@type": "@id"
+    },
+    "objMemoryLimit": {
+      "@id": "qlik:objMemoryLimit",
+      "@type": "@id"
+    },
+    "sheetsUncached": {
+      "@id": "qlik:sheetsUncached",
+      "@type": "@id"
+    },
+    "documentSizeMib": {
+      "@id": "qlik:documentSizeMib",
+      "@type": "@id"
+    },
+    "objSlowUncached": {
+      "@id": "qlik:objSlowUncached",
+      "@type": "@id"
+    },
+    "dataModelSizeMib": {
+      "@id": "qlik:dataModelSizeMib",
+      "@type": "@id"
+    },
+    "hasSectionAccess": {
+      "@id": "qlik:hasSectionAccess",
+      "@type": "@id"
+    },
+    "topFieldsByBytes": {
+      "@id": "qlik:topFieldsByBytes",
+      "@type": "@id"
+    },
+    "topTablesByBytes": {
+      "@id": "qlik:topTablesByBytes",
+      "@type": "@id"
+    },
+    "objSingleThreaded": {
+      "@id": "qlik:objSingleThreaded",
+      "@type": "@id"
+    },
+    "appOpenTimeSeconds": {
+      "@id": "qlik:appOpenTimeSeconds",
+      "@type": "@id"
+    },
+    "CompositionMinMax": "qlik:CompositionMinMax",
+    "max": {
+      "@id": "qlik:max",
+      "@type": "xsd:decimal"
+    },
+    "min": {
+      "@id": "qlik:min",
+      "@type": "xsd:decimal"
+    },
+    "CreateApp": "qlik:CreateApp",
+    "attributes": {
+      "@id": "qlik:attributes",
+      "@type": "@id"
+    },
+    "DataModelMetadata": "qlik:DataModelMetadata",
+    "tables": {
+      "@id": "qlik:tables",
+      "@container": "@list"
+    },
+    "reload_meta": {
+      "@id": "qlik:reload_meta",
+      "@type": "@id"
+    },
+    "static_byte_size": {
+      "@id": "qlik:static_byte_size",
+      "@type": "xsd:integer"
+    },
+    "has_section_access": {
+      "@id": "qlik:has_section_access",
+      "@type": "xsd:boolean"
+    },
+    "is_direct_query_mode": {
+      "@id": "qlik:is_direct_query_mode",
+      "@type": "xsd:boolean"
+    },
+    "tables_profiling_data": {
+      "@id": "qlik:tables_profiling_data",
+      "@container": "@list"
+    },
+    "EngineSize": "qlik:EngineSize",
+    "minEngineSize": {
+      "@id": "qlik:minEngineSize",
+      "@type": "@id"
+    },
+    "Error": "qlik:Error",
+    "code": {
+      "@id": "qlik:code",
+      "@type": "xsd:string"
+    },
+    "meta": {
+      "@id": "qlik:meta"
+    },
+    "detail": {
+      "@id": "qlik:detail",
+      "@type": "xsd:string"
+    },
+    "source": {
+      "@id": "qlik:source"
+    },
+    "Errors": "qlik:Errors",
+    "errors": {
+      "@id": "qlik:errors",
+      "@container": "@list"
+    },
+    "evaluation": "qlik:evaluation",
+    "appId": {
+      "@id": "qlik:appId",
+      "@type": "xsd:string"
+    },
+    "ended": {
+      "@id": "qlik:ended",
+      "@type": "xsd:dateTime"
+    },
+    "events": {
+      "@id": "qlik:events",
+      "@container": "@list"
+    },
+    "result": {
+      "@id": "qlik:result",
+      "@type": "@id"
+    },
+    "status": {
+      "@id": "qlik:status",
+      "@type": "xsd:string"
+    },
+    "appName": {
+      "@id": "qlik:appName",
+      "@type": "xsd:string"
+    },
+    "details": {
+      "@id": "qlik:details"
+    },
+    "sheetId": {
+      "@id": "qlik:sheetId",
+      "@type": "xsd:string"
+    },
+    "started": {
+      "@id": "qlik:started",
+      "@type": "xsd:dateTime"
+    },
+    "version": {
+      "@id": "qlik:version",
+      "@type": "xsd:decimal"
+    },
+    "metadata": {
+      "@id": "qlik:metadata",
+      "@type": "@id"
+    },
+    "tenantId": {
+      "@id": "qlik:tenantId",
+      "@type": "xsd:string"
+    },
+    "appItemId": {
+      "@id": "qlik:appItemId",
+      "@type": "xsd:string"
+    },
+    "timestamp": {
+      "@id": "qlik:timestamp",
+      "@type": "xsd:dateTime"
+    },
+    "sheetTitle": {
+      "@id": "qlik:sheetTitle",
+      "@type": "xsd:string"
+    },
+    "evaluations": "qlik:evaluations",
+    "EvaluatorError": "qlik:EvaluatorError",
+    "event": "qlik:event",
+    "objectId": {
+      "@id": "qlik:objectId",
+      "@type": "xsd:string"
+    },
+    "severity": {
+      "@id": "qlik:severity",
+      "@type": "xsd:string"
+    },
+    "errorCode": {
+      "@id": "qlik:errorCode",
+      "@type": "xsd:string"
+    },
+    "objectType": {
+      "@id": "qlik:objectType",
+      "@type": "xsd:string"
+    },
+    "objectTitle": {
+      "@id": "qlik:objectTitle",
+      "@type": "xsd:string"
+    },
+    "objectVisualization": {
+      "@id": "qlik:objectVisualization",
+      "@type": "xsd:string"
+    },
+    "FieldAttributes": "qlik:FieldAttributes",
+    "Dec": {
+      "@id": "qlik:Dec",
+      "@type": "xsd:string"
+    },
+    "Fmt": {
+      "@id": "qlik:Fmt",
+      "@type": "xsd:string"
+    },
+    "Thou": {
+      "@id": "qlik:Thou",
+      "@type": "xsd:string"
+    },
+    "Type": {
+      "@id": "qlik:Type",
+      "@type": "@id"
+    },
+    "nDec": {
+      "@id": "qlik:nDec",
+      "@type": "xsd:integer"
+    },
+    "UseThou": {
+      "@id": "qlik:UseThou",
+      "@type": "xsd:integer"
+    },
+    "FieldInTableProfilingData": "qlik:FieldInTableProfilingData",
+    "Max": {
+      "@id": "qlik:Max",
+      "@type": "xsd:decimal"
+    },
+    "Min": {
+      "@id": "qlik:Min",
+      "@type": "xsd:decimal"
+    },
+    "Std": {
+      "@id": "qlik:Std",
+      "@type": "xsd:decimal"
+    },
+    "Sum": {
+      "@id": "qlik:Sum",
+      "@type": "xsd:decimal"
+    },
+    "Name": {
+      "@id": "qlik:Name",
+      "@type": "xsd:string"
+    },
+    "Sum2": {
+      "@id": "qlik:Sum2",
+      "@type": "xsd:decimal"
+    },
+    "Median": {
+      "@id": "qlik:Median",
+      "@type": "xsd:decimal"
+    },
+    "Average": {
+      "@id": "qlik:Average",
+      "@type": "xsd:decimal"
+    },
+    "Kurtosis": {
+      "@id": "qlik:Kurtosis",
+      "@type": "xsd:decimal"
+    },
+    "Skewness": {
+      "@id": "qlik:Skewness",
+      "@type": "xsd:decimal"
+    },
+    "FieldTags": {
+      "@id": "qlik:FieldTags",
+      "@container": "@list"
+    },
+    "Fractiles": {
+      "@id": "qlik:Fractiles",
+      "@container": "@list"
+    },
+    "NegValues": {
+      "@id": "qlik:NegValues",
+      "@type": "xsd:integer"
+    },
+    "PosValues": {
+      "@id": "qlik:PosValues",
+      "@type": "xsd:integer"
+    },
+    "LastSorted": {
+      "@id": "qlik:LastSorted",
+      "@type": "xsd:string"
+    },
+    "NullValues": {
+      "@id": "qlik:NullValues",
+      "@type": "xsd:integer"
+    },
+    "TextValues": {
+      "@id": "qlik:TextValues",
+      "@type": "xsd:integer"
+    },
+    "ZeroValues": {
+      "@id": "qlik:ZeroValues",
+      "@type": "xsd:integer"
+    },
+    "FirstSorted": {
+      "@id": "qlik:FirstSorted",
+      "@type": "xsd:string"
+    },
+    "AvgStringLen": {
+      "@id": "qlik:AvgStringLen",
+      "@type": "xsd:decimal"
+    },
+    "DataEvenness": {
+      "@id": "qlik:DataEvenness",
+      "@type": "xsd:decimal"
+    },
+    "EmptyStrings": {
+      "@id": "qlik:EmptyStrings",
+      "@type": "xsd:integer"
+    },
+    "MaxStringLen": {
+      "@id": "qlik:MaxStringLen",
+      "@type": "xsd:integer"
+    },
+    "MinStringLen": {
+      "@id": "qlik:MinStringLen",
+      "@type": "xsd:integer"
+    },
+    "MostFrequent": {
+      "@id": "qlik:MostFrequent",
+      "@container": "@list"
+    },
+    "NumberFormat": {
+      "@id": "qlik:NumberFormat",
+      "@type": "@id"
+    },
+    "SumStringLen": {
+      "@id": "qlik:SumStringLen",
+      "@type": "xsd:integer"
+    },
+    "NumericValues": {
+      "@id": "qlik:NumericValues",
+      "@type": "xsd:integer"
+    },
+    "DistinctValues": {
+      "@id": "qlik:DistinctValues",
+      "@type": "xsd:integer"
+    },
+    "DistinctTextValues": {
+      "@id": "qlik:DistinctTextValues",
+      "@type": "xsd:integer"
+    },
+    "DistinctNumericValues": {
+      "@id": "qlik:DistinctNumericValues",
+      "@type": "xsd:integer"
+    },
+    "FrequencyDistribution": {
+      "@id": "qlik:FrequencyDistribution",
+      "@type": "@id"
+    },
+    "FieldMetadata": "qlik:FieldMetadata",
+    "hash": {
+      "@id": "qlik:hash",
+      "@type": "xsd:string"
+    },
+    "tags": {
+      "@id": "qlik:tags",
+      "@container": "@list"
+    },
+    "comment": {
+      "@id": "qlik:comment",
+      "@type": "xsd:string"
+    },
+    "cardinal": {
+      "@id": "qlik:cardinal",
+      "@type": "xsd:integer"
+    },
+    "byte_size": {
+      "@id": "qlik:byte_size",
+      "@type": "xsd:integer"
+    },
+    "is_hidden": {
+      "@id": "qlik:is_hidden",
+      "@type": "xsd:boolean"
+    },
+    "is_locked": {
+      "@id": "qlik:is_locked",
+      "@type": "xsd:boolean"
+    },
+    "is_system": {
+      "@id": "qlik:is_system",
+      "@type": "xsd:boolean"
+    },
+    "is_numeric": {
+      "@id": "qlik:is_numeric",
+      "@type": "xsd:boolean"
+    },
+    "src_tables": {
+      "@id": "qlik:src_tables",
+      "@container": "@list"
+    },
+    "is_semantic": {
+      "@id": "qlik:is_semantic",
+      "@type": "xsd:boolean"
+    },
+    "total_count": {
+      "@id": "qlik:total_count",
+      "@type": "xsd:integer"
+    },
+    "distinct_only": {
+      "@id": "qlik:distinct_only",
+      "@type": "xsd:boolean"
+    },
+    "always_one_selected": {
+      "@id": "qlik:always_one_selected",
+      "@type": "xsd:boolean"
+    },
+    "FieldOverride": "qlik:FieldOverride",
+    "defaultAggregation": {
+      "@id": "qlik:defaultAggregation",
+      "@type": "xsd:string"
+    },
+    "Filter": "qlik:Filter",
+    "ownerId": {
+      "@id": "qlik:ownerId",
+      "@type": "xsd:string"
+    },
+    "createdAt": {
+      "@id": "qlik:createdAt",
+      "@type": "xsd:dateTime"
+    },
+    "updatedAt": {
+      "@id": "qlik:updatedAt",
+      "@type": "xsd:dateTime"
+    },
+    "filterType": {
+      "@id": "qlik:filterType",
+      "@type": "@id"
+    },
+    "filterV1_0": {
+      "@id": "qlik:filterV1_0",
+      "@type": "@id"
+    },
+    "filterVersion": {
+      "@id": "qlik:filterVersion",
+      "@type": "xsd:string"
+    },
+    "FilterError": "qlik:FilterError",
+    "FilterErrors": "qlik:FilterErrors",
+    "FilterField": "qlik:FilterField",
+    "values": {
+      "@id": "qlik:values",
+      "@container": "@list"
+    },
+    "overrideValues": {
+      "@id": "qlik:overrideValues",
+      "@type": "xsd:boolean"
+    },
+    "selectExcluded": {
+      "@id": "qlik:selectExcluded",
+      "@type": "xsd:boolean"
+    },
+    "FilterFieldValue": "qlik:FilterFieldValue",
+    "valueType": {
+      "@id": "qlik:valueType",
+      "@type": "xsd:string"
+    },
+    "valueAsText": {
+      "@id": "qlik:valueAsText",
+      "@type": "xsd:string"
+    },
+    "valueAsNumber": {
+      "@id": "qlik:valueAsNumber",
+      "@type": "@id"
+    },
+    "FilterItemPatch": "qlik:FilterItemPatch",
+    "FilterList": "qlik:FilterList",
+    "FilterListItem": "qlik:FilterListItem",
+    "FilterRequest": "qlik:FilterRequest",
+    "FiltersCount": "qlik:FiltersCount",
+    "total": {
+      "@id": "qlik:total",
+      "@type": "xsd:decimal"
+    },
+    "FilterType": "qlik:FilterType",
+    "FilterV1_0": "qlik:FilterV1_0",
+    "variables": {
+      "@id": "qlik:variables",
+      "@container": "@list"
+    },
+    "fieldsByState": {
+      "@id": "qlik:fieldsByState"
+    },
+    "FilterVariable": "qlik:FilterVariable",
+    "value": {
+      "@id": "qlik:value",
+      "@type": "xsd:string"
+    },
+    "evaluate": {
+      "@id": "qlik:evaluate",
+      "@type": "xsd:boolean"
+    },
+    "FrequencyDistributionData": "qlik:FrequencyDistributionData",
+    "BinsEdges": {
+      "@id": "qlik:BinsEdges",
+      "@container": "@list"
+    },
+    "Frequencies": {
+      "@id": "qlik:Frequencies",
+      "@container": "@list"
+    },
+    "NumberOfBins": {
+      "@id": "qlik:NumberOfBins",
+      "@type": "xsd:integer"
+    },
+    "HardwareMeta": "qlik:HardwareMeta",
+    "total_memory": {
+      "@id": "qlik:total_memory",
+      "@type": "xsd:integer"
+    },
+    "logical_cores": {
+      "@id": "qlik:logical_cores",
+      "@type": "xsd:integer"
+    },
+    "Href": "qlik:Href",
+    "href": {
+      "@id": "qlik:href",
+      "@type": "@id"
+    },
+    "LastReloadMetadata": "qlik:LastReloadMetadata",
+    "hardware": {
+      "@id": "qlik:hardware",
+      "@type": "@id"
+    },
+    "cpu_time_spent_ms": {
+      "@id": "qlik:cpu_time_spent_ms",
+      "@type": "xsd:integer"
+    },
+    "peak_memory_bytes": {
+      "@id": "qlik:peak_memory_bytes",
+      "@type": "xsd:integer"
+    },
+    "fullReloadPeakMemoryBytes": {
+      "@id": "qlik:fullReloadPeakMemoryBytes",
+      "@type": "xsd:integer"
+    },
+    "partialReloadPeakMemoryBytes": {
+      "@id": "qlik:partialReloadPeakMemoryBytes",
+      "@type": "xsd:integer"
+    },
+    "LineageInfoRest": "qlik:LineageInfoRest",
+    "statement": {
+      "@id": "qlik:statement",
+      "@type": "xsd:string"
+    },
+    "discriminator": {
+      "@id": "qlik:discriminator",
+      "@type": "xsd:string"
+    },
+    "LinkResponse": "qlik:LinkResponse",
+    "Links": "qlik:Links",
+    "next": {
+      "@id": "qlik:next",
+      "@type": "@id"
+    },
+    "prev": {
+      "@id": "qlik:prev",
+      "@type": "@id"
+    },
+    "self": {
+      "@id": "qlik:self",
+      "@type": "@id"
+    },
+    "LinksResponse": "qlik:LinksResponse",
+    "Log": "qlik:Log",
+    "log": {
+      "@id": "qlik:log",
+      "@type": "xsd:string"
+    },
+    "NavigationLink": "qlik:NavigationLink",
+    "NavigationLinks": "qlik:NavigationLinks",
+    "numberFormat": "qlik:numberFormat",
+    "qDec": {
+      "@id": "qlik:qDec",
+      "@type": "xsd:string"
+    },
+    "qFmt": {
+      "@id": "qlik:qFmt",
+      "@type": "xsd:string"
+    },
+    "qThou": {
+      "@id": "qlik:qThou",
+      "@type": "xsd:string"
+    },
+    "qType": {
+      "@id": "qlik:qType",
+      "@type": "xsd:string"
+    },
+    "qnDec": {
+      "@id": "qlik:qnDec",
+      "@type": "xsd:decimal"
+    },
+    "qUseThou": {
+      "@id": "qlik:qUseThou",
+      "@type": "xsd:decimal"
+    },
+    "NxApp": "qlik:NxApp",
+    "create": {
+      "@id": "qlik:create",
+      "@container": "@list"
+    },
+    "privileges": {
+      "@id": "qlik:privileges",
+      "@container": "@list"
+    },
+    "NxAppCreatePrivileges": "qlik:NxAppCreatePrivileges",
+    "resource": {
+      "@id": "qlik:resource",
+      "@type": "xsd:string"
+    },
+    "canCreate": {
+      "@id": "qlik:canCreate",
+      "@type": "xsd:boolean"
+    },
+    "NxAppObject": "qlik:NxAppObject",
+    "NxAttributes": "qlik:NxAttributes",
+    "owner": {
+      "@id": "qlik:owner",
+      "@type": "xsd:string"
+    },
+    "custom": {
+      "@id": "qlik:custom",
+      "@type": "@id"
+    },
+    "encrypted": {
+      "@id": "qlik:encrypted",
+      "@type": "xsd:boolean"
+    },
+    "published": {
+      "@id": "qlik:published",
+      "@type": "xsd:boolean"
+    },
+    "thumbnail": {
+      "@id": "qlik:thumbnail",
+      "@type": "xsd:string"
+    },
+    "createdDate": {
+      "@id": "qlik:createdDate",
+      "@type": "xsd:dateTime"
+    },
+    "originAppId": {
+      "@id": "qlik:originAppId",
+      "@type": "xsd:string"
+    },
+    "publishTime": {
+      "@id": "qlik:publishTime",
+      "@type": "xsd:dateTime"
+    },
+    "dynamicColor": {
+      "@id": "qlik:dynamicColor",
+      "@type": "xsd:string"
+    },
+    "modifiedDate": {
+      "@id": "qlik:modifiedDate",
+      "@type": "xsd:dateTime"
+    },
+    "lastReloadTime": {
+      "@id": "qlik:lastReloadTime",
+      "@type": "xsd:dateTime"
+    },
+    "isDirectQueryMode": {
+      "@id": "qlik:isDirectQueryMode",
+      "@type": "xsd:boolean"
+    },
+    "NxObjectAttributes": "qlik:NxObjectAttributes",
+    "approved": {
+      "@id": "qlik:approved",
+      "@type": "xsd:boolean"
+    },
+    "genericType": {
+      "@id": "qlik:genericType",
+      "@type": "@id"
+    },
+    "publishedAt": {
+      "@id": "qlik:publishedAt",
+      "@type": "xsd:dateTime"
+    },
+    "NxPatch": "qlik:NxPatch",
+    "Op": {
+      "@id": "qlik:Op",
+      "@type": "@id"
+    },
+    "Path": {
+      "@id": "qlik:Path",
+      "@type": "xsd:string"
+    },
+    "Value": {
+      "@id": "qlik:Value",
+      "@type": "xsd:string"
+    },
+    "objectmetrics": "qlik:objectmetrics",
+    "cpuSeconds": {
+      "@id": "qlik:cpuSeconds",
+      "@container": "@list"
+    },
+    "cpuQuotients": {
+      "@id": "qlik:cpuQuotients",
+      "@container": "@list"
+    },
+    "responseTimeSeconds": {
+      "@id": "qlik:responseTimeSeconds",
+      "@type": "xsd:decimal"
+    },
+    "objectspec": "qlik:objectspec",
+    "objecttopspec": "qlik:objecttopspec",
+    "PartialNluInfo": "qlik:PartialNluInfo",
+    "role": {
+      "@id": "qlik:role",
+      "@type": "xsd:string"
+    },
+    "text": {
+      "@id": "qlik:text",
+      "@type": "xsd:string"
+    },
+    "fieldName": {
+      "@id": "qlik:fieldName",
+      "@type": "xsd:string"
+    },
+    "fieldValue": {
+      "@id": "qlik:fieldValue",
+      "@type": "xsd:string"
+    },
+    "PatchFilterItem": "qlik:PatchFilterItem",
+    "op": {
+      "@id": "qlik:op",
+      "@type": "xsd:string"
+    },
+    "path": {
+      "@id": "qlik:path",
+      "@type": "xsd:string"
+    },
+    "Placement": "qlik:Placement",
+    "PublishApp": "qlik:PublishApp",
+    "moveApp": {
+      "@id": "qlik:moveApp",
+      "@type": "xsd:boolean"
+    },
+    "RecommendedAnalysisCore": "qlik:RecommendedAnalysisCore",
+    "options": {
+      "@id": "qlik:options"
+    },
+    "chartType": {
+      "@id": "qlik:chartType",
+      "@type": "@id"
+    },
+    "relevance": {
+      "@id": "qlik:relevance",
+      "@type": "xsd:decimal"
+    },
+    "RecommendFieldItem": "qlik:RecommendFieldItem",
+    "overrides": {
+      "@id": "qlik:overrides",
+      "@type": "@id"
+    },
+    "RecommendItems": "qlik:RecommendItems",
+    "libItems": {
+      "@id": "qlik:libItems",
+      "@container": "@list"
+    },
+    "targetAnalysis": {
+      "@id": "qlik:targetAnalysis"
+    },
+    "RecommendMasterItem": "qlik:RecommendMasterItem",
+    "RecommendNaturalLangQuery": "qlik:RecommendNaturalLangQuery",
+    "ReloadIncludeFile": "qlik:ReloadIncludeFile",
+    "qri": {
+      "@id": "qlik:qri",
+      "@type": "xsd:string"
+    },
+    "connection": {
+      "@id": "qlik:connection",
+      "@type": "xsd:string"
+    },
+    "ReloadListMetadata": "qlik:ReloadListMetadata",
+    "ReloadMeta": "qlik:ReloadMeta",
+    "endTime": {
+      "@id": "qlik:endTime",
+      "@type": "xsd:dateTime"
+    },
+    "success": {
+      "@id": "qlik:success",
+      "@type": "xsd:boolean"
+    },
+    "duration": {
+      "@id": "qlik:duration",
+      "@type": "xsd:integer"
+    },
+    "reloadId": {
+      "@id": "qlik:reloadId",
+      "@type": "xsd:string"
+    },
+    "rowLimit": {
+      "@id": "qlik:rowLimit",
+      "@type": "xsd:integer"
+    },
+    "appDbHash": {
+      "@id": "qlik:appDbHash",
+      "@type": "xsd:string"
+    },
+    "skipStore": {
+      "@id": "qlik:skipStore",
+      "@type": "xsd:boolean"
+    },
+    "storeHash": {
+      "@id": "qlik:storeHash",
+      "@type": "xsd:string"
+    },
+    "statements": {
+      "@id": "qlik:statements",
+      "@container": "@list"
+    },
+    "accessDbHash": {
+      "@id": "qlik:accessDbHash",
+      "@type": "xsd:string"
+    },
+    "includeFiles": {
+      "@id": "qlik:includeFiles",
+      "@container": "@list"
+    },
+    "loadFilesBytes": {
+      "@id": "qlik:loadFilesBytes",
+      "@type": "xsd:integer"
+    },
+    "isPartialReload": {
+      "@id": "qlik:isPartialReload",
+      "@type": "xsd:boolean"
+    },
+    "storeFilesBytes": {
+      "@id": "qlik:storeFilesBytes",
+      "@type": "xsd:integer"
+    },
+    "loadExternalBytes": {
+      "@id": "qlik:loadExternalBytes",
+      "@type": "xsd:integer"
+    },
+    "loadDataFilesBytes": {
+      "@id": "qlik:loadDataFilesBytes",
+      "@type": "xsd:integer"
+    },
+    "storeDataFilesBytes": {
+      "@id": "qlik:storeDataFilesBytes",
+      "@type": "xsd:integer"
+    },
+    "ReloadStatements": "qlik:ReloadStatements",
+    "label": {
+      "@id": "qlik:label",
+      "@type": "xsd:string"
+    },
+    "dataSize": {
+      "@id": "qlik:dataSize",
+      "@type": "xsd:integer"
+    },
+    "nbrOfRows": {
+      "@id": "qlik:nbrOfRows",
+      "@type": "xsd:integer"
+    },
+    "tableName": {
+      "@id": "qlik:tableName",
+      "@type": "xsd:string"
+    },
+    "nbrOfFields": {
+      "@id": "qlik:nbrOfFields",
+      "@type": "xsd:integer"
+    },
+    "connectionId": {
+      "@id": "qlik:connectionId",
+      "@type": "xsd:string"
+    },
+    "partialReloadOperation": {
+      "@id": "qlik:partialReloadOperation",
+      "@type": "xsd:string"
+    },
+    "RepublishApp": "qlik:RepublishApp",
+    "targetId": {
+      "@id": "qlik:targetId",
+      "@type": "xsd:string"
+    },
+    "checkOriginAppId": {
+      "@id": "qlik:checkOriginAppId",
+      "@type": "xsd:boolean"
+    },
+    "resultobjsheet": "qlik:resultobjsheet",
+    "sheet": {
+      "@id": "qlik:sheet",
+      "@type": "@id"
+    },
+    "sheetObjects": {
+      "@id": "qlik:sheetObjects",
+      "@container": "@list"
+    },
+    "Script": "qlik:Script",
+    "script": {
+      "@id": "qlik:script",
+      "@type": "xsd:string"
+    },
+    "ScriptIssue": "qlik:ScriptIssue",
+    "Msg": {
+      "@id": "qlik:Msg",
+      "@type": "xsd:string"
+    },
+    "Tab": {
+      "@id": "qlik:Tab",
+      "@type": "xsd:integer"
+    },
+    "Info": {
+      "@id": "qlik:Info",
+      "@type": "xsd:string"
+    },
+    "Line": {
+      "@id": "qlik:Line",
+      "@type": "xsd:integer"
+    },
+    "Column": {
+      "@id": "qlik:Column",
+      "@type": "xsd:integer"
+    },
+    "ScriptIssues": "qlik:ScriptIssues",
+    "Warnings": {
+      "@id": "qlik:Warnings",
+      "@container": "@list"
+    },
+    "ScriptLogList": "qlik:ScriptLogList",
+    "ScriptLogMeta": "qlik:ScriptLogMeta",
+    "ScriptMeta": "qlik:ScriptMeta",
+    "size": {
+      "@id": "qlik:size",
+      "@type": "xsd:integer"
+    },
+    "scriptId": {
+      "@id": "qlik:scriptId",
+      "@type": "xsd:string"
+    },
+    "modifierId": {
+      "@id": "qlik:modifierId",
+      "@type": "xsd:string"
+    },
+    "modifiedTime": {
+      "@id": "qlik:modifiedTime",
+      "@type": "xsd:string"
+    },
+    "versionMessage": {
+      "@id": "qlik:versionMessage",
+      "@type": "xsd:string"
+    },
+    "ScriptMetaList": "qlik:ScriptMetaList",
+    "scripts": {
+      "@id": "qlik:scripts",
+      "@container": "@list"
+    },
+    "ScriptVersion": "qlik:ScriptVersion",
+    "SymbolFrequency": "qlik:SymbolFrequency",
+    "Symbol": {
+      "@id": "qlik:Symbol",
+      "@type": "@id"
+    },
+    "Frequency": {
+      "@id": "qlik:Frequency",
+      "@type": "xsd:integer"
+    },
+    "SymbolValue": "qlik:SymbolValue",
+    "Text": {
+      "@id": "qlik:Text",
+      "@type": "xsd:string"
+    },
+    "Number": {
+      "@id": "qlik:Number",
+      "@type": "xsd:decimal"
+    },
+    "TableMetadata": "qlik:TableMetadata",
+    "is_loose": {
+      "@id": "qlik:is_loose",
+      "@type": "xsd:boolean"
+    },
+    "no_of_rows": {
+      "@id": "qlik:no_of_rows",
+      "@type": "xsd:integer"
+    },
+    "no_of_fields": {
+      "@id": "qlik:no_of_fields",
+      "@type": "xsd:integer"
+    },
+    "no_of_key_fields": {
+      "@id": "qlik:no_of_key_fields",
+      "@type": "xsd:integer"
+    },
+    "TableProfilingData": "qlik:TableProfilingData",
+    "NoOfRows": {
+      "@id": "qlik:NoOfRows",
+      "@type": "xsd:integer"
+    },
+    "FieldProfiling": {
+      "@id": "qlik:FieldProfiling",
+      "@container": "@list"
+    },
+    "UpdateApp": "qlik:UpdateApp",
+    "UpdateOwner": "qlik:UpdateOwner",
+    "UpdateSpace": "qlik:UpdateSpace"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Qlik API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Qlik's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-03) from openapi/apps.json.",
+  "dcterms:created": "2026-10-03",
+  "dcterms:source": [
+    "openapi/apps.json"
+  ]
+}
