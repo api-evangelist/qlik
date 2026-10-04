@@ -31,6 +31,11 @@ image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo.png
 tags:
 - Security
 - Access Control
+- Machine Learning
+- Artificial Intelligence
+tags_raw:
+- Security
+- Access Control
 - Machine-Learning
 - Artificial Intelligence
 created: '2025-02-24'
@@ -88,10 +93,12 @@ apis:
   humanURL: https://qlik.dev/apis/rest/spaces/
   tags:
   - Access Control
+  - Spaces
   - Space
   tags_raw:
   - Access Control
   - Spaces
+  - Space
   properties:
   - type: Documentation
     url: https://qlik.dev/apis/rest/spaces/
@@ -201,11 +208,12 @@ apis:
     trained machine learning models.
   humanURL: https://qlik.dev/apis/rest/automl-predictions/
   tags:
-  - Machine-Learning
+  - Machine Learning
   - Predictions
   tags_raw:
   - Machine Learning
   - Predictions
+  - Machine-Learning
   properties:
   - type: Documentation
     url: https://qlik.dev/apis/rest/automl-predictions/
@@ -217,13 +225,14 @@ apis:
     machine learning models.
   humanURL: https://qlik.dev/apis/rest/automl-deployments/
   tags:
-  - Machine-Learning
+  - Machine Learning
   - Predictions
   - Real-Time
   tags_raw:
   - Machine Learning
   - Predictions
   - Real-Time
+  - Machine-Learning
   properties:
   - type: Documentation
     url: https://qlik.dev/apis/rest/automl-deployments/
@@ -615,9 +624,10 @@ apis:
     analytics.
   humanURL: https://qlik.dev/apis/rest/ml/
   tags:
-  - Machine-Learning
+  - Machine Learning
   tags_raw:
   - Machine Learning
+  - Machine-Learning
   properties:
   - type: Documentation
     url: https://qlik.dev/apis/rest/ml/
