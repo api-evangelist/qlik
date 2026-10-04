@@ -1,7 +1,7 @@
 {
   "provider": "qlik",
   "sources": [
-    "apps.json"
+    "_original/apps.json"
   ],
   "outputs": [
     "qlik-apps-api-openapi.yml",
@@ -9,14 +9,13 @@
     "qlik-filters-api-openapi.yml",
     "qlik-insight-analyses-api-openapi.yml"
   ],
-  "archived": [
-    "archived openapi/apps.json"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [
     "apps.json: info.version missing"
   ],
   "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "apps.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
     "apps.json: tagged paths POST /api/v1/apps -> Apps",
     "apps.json: tagged paths GET /api/v1/apps/{appId} -> Apps",
@@ -55,7 +54,12 @@
     "apps.json: declared missing tag: evaluation",
     "apps.json: declared missing tag: filters",
     "apps.json: declared missing tag: insight-analyses",
-    "apis.yml register: written (+4 apis, 9 total)"
+    "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "qlik-apps-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "qlik-evaluation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "qlik-filters-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "qlik-insight-analyses-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

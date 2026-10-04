@@ -397,101 +397,36 @@ paths:
         limit: 1000
 components:
   schemas:
-    classification:
-      allOf:
-      - type: object
-        properties:
-          diff:
-            type: number
-            example: 0.5
-          trend:
-            type: string
-            example: up
-          absoluteDiff:
-            type: number
-            example: 2.5
-    evaluations:
+    event:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/evaluation'
-        links:
-          type: object
-          properties:
-            next:
-              type: object
-              properties:
-                href:
-                  $ref: '#/components/schemas/href'
-            prev:
-              type: object
-              properties:
-                href:
-                  $ref: '#/components/schemas/href'
-    comparisontables:
-      type: array
-      items:
-        allOf:
-        - $ref: '#/components/schemas/objecttopspec'
-        - type: object
-          properties:
-            name:
-              type: string
-              example: a
-            byte_size:
-              $ref: '#/components/schemas/cmpint'
-            is_system:
-              $ref: '#/components/schemas/cmpbool'
-            no_of_rows:
-              $ref: '#/components/schemas/cmpint'
-            dataSourceStatus:
-              enum:
-              - full
-              - none
-              - baselinemissing
-              - comparisonmissing
-              type: string
-              example: full
-    cmpfloatWithTimeout:
-      allOf:
-      - $ref: '#/components/schemas/cmpfloat'
-      - type: object
-        properties:
-          baselineTimeoutStatusCode:
-            type: string
-            example: CALC-TIMEOUT
-          comparisonTimeoutStatusCode:
-            type: string
-            example: CALC-TIMEOUT
-    EvaluatorError:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-                example: ERR-INVALID-AUTH
-              title:
-                type: string
-                example: An error occured
-              status:
-                type: integer
-                format: int32
-                example: 427
-    resultentry:
-      allOf:
-      - $ref: '#/components/schemas/objectspec'
-      - type: object
-        properties:
-          passes:
-            type: array
-            items:
-              $ref: '#/components/schemas/objectmetrics'
+        details:
+          type: string
+          example: An object failed
+        sheetId:
+          type: string
+          example: gregFG
+        objectId:
+          type: string
+          example: adfRFr
+        severity:
+          type: string
+          example: warning
+        errorCode:
+          type: string
+          example: ERR-GOPHERCISER
+        objectType:
+          type: string
+          example: linechart
+        sheetTitle:
+          type: string
+          example: mysheet
+        objectTitle:
+          type: string
+          example: profit
+        objectVisualization:
+          type: string
+          example: linechart
     sortedcomparisonobjresponsetime:
       allOf:
       - type: object
@@ -514,68 +449,6 @@ components:
             example: full
           relativeDiffDesc:
             $ref: '#/components/schemas/comparisonobjresponsetime'
-    resultobjMemoryLimit:
-      allOf:
-      - $ref: '#/components/schemas/objectspec'
-      - type: object
-        properties:
-          memoryLimitStatusCode:
-            type: string
-            example: OUT-OF-MEMORY
-    resultobjresponsetime:
-      allOf:
-      - $ref: '#/components/schemas/objectspec'
-      - type: object
-        properties:
-          timeoutStatusCode:
-            type: string
-            example: CALC-TIMEOUT
-          responseTimeSeconds:
-            type: number
-            example: 12.3
-    cmpint:
-      allOf:
-      - $ref: '#/components/schemas/classification'
-      - type: object
-        properties:
-          baseline:
-            type: number
-            example: 1
-          comparison:
-            type: number
-            example: 2
-    href:
-      type: string
-      example: /api/v1/evaluations/appId=a84c22cf-31e5-41fe-9e8f-544b85513484&prev=5f5201908b3fc5fc132dbd35
-    comparisonobjMemoryLimit:
-      type: array
-      items:
-        allOf:
-        - $ref: '#/components/schemas/objectspec'
-        - type: object
-          properties:
-            dataSourceStatus:
-              enum:
-              - full
-              - none
-              - baselinemissing
-              - comparisonmissing
-              type: string
-              example: full
-            baselineMemoryLimitStatusCode:
-              type: string
-              example: OUT-OF-MEMORY
-            comparisonMemoryLimitStatusCode:
-              type: string
-              example: OUT-OF-MEMORY
-    resultsingle:
-      allOf:
-      - $ref: '#/components/schemas/objectspec'
-      - type: object
-        properties:
-          cpuQuotient1:
-            type: number
-            example: 12.3
     comparisonfields:
       type: array
       items:
@@ -602,47 +475,6 @@ components:
               - comparisonmissing
               type: string
               example: full
-    comparison:
-      type: object
-      properties:
-        objHeavy:
-          $ref: '#/components/schemas/sortedcomparisonoobjheavy'
-        rowCount:
-          $ref: '#/components/schemas/cmpint'
-        objNoCache:
-          $ref: '#/components/schemas/sortedcomparisonobjresponsetime'
-        sheetCount:
-          $ref: '#/components/schemas/cmpint'
-        fileSizeMib:
-          $ref: '#/components/schemas/cmpfloat'
-        objectCount:
-          $ref: '#/components/schemas/cmpint'
-        maxMemoryMib:
-          $ref: '#/components/schemas/cmpfloat'
-        sheetsCached:
-          $ref: '#/components/schemas/sortedcomparisonobjresponsetime'
-        objSlowCached:
-          $ref: '#/components/schemas/sortedcomparisonobjresponsetime'
-        objMemoryLimit:
-          $ref: '#/components/schemas/comparisonobjMemoryLimit'
-        sheetsUncached:
-          $ref: '#/components/schemas/sortedcomparisonobjresponsetime'
-        documentSizeMib:
-          $ref: '#/components/schemas/cmpfloat'
-        objSlowUncached:
-          $ref: '#/components/schemas/sortedcomparisonobjresponsetime'
-        dataModelSizeMib:
-          $ref: '#/components/schemas/cmpfloat'
-        hasSectionAccess:
-          $ref: '#/components/schemas/cmpbool'
-        topFieldsByBytes:
-          $ref: '#/components/schemas/sortedcomparisonfields'
-        topTablesByBytes:
-          $ref: '#/components/schemas/sortedcomparisontables'
-        objSingleThreaded:
-          $ref: '#/components/schemas/sortedcomparisonobjresponsetime'
-        appOpenTimeSeconds:
-          $ref: '#/components/schemas/cmpfloat'
     evaluation:
       type: object
       properties:
@@ -730,40 +562,33 @@ components:
           type: string
           format: string
           example: my sheet
-    comparisonobjresponsetime:
+    cmpfloat:
+      allOf:
+      - $ref: '#/components/schemas/classification'
+      - type: object
+        properties:
+          baseline:
+            type: number
+            example: 1.1
+          comparison:
+            type: number
+            example: 2.2
+    comparisontables:
       type: array
       items:
         allOf:
-        - $ref: '#/components/schemas/objectspec'
+        - $ref: '#/components/schemas/objecttopspec'
         - type: object
           properties:
-            dataSourceStatus:
-              enum:
-              - full
-              - none
-              - baselinemissing
-              - comparisonmissing
+            name:
               type: string
-              example: full
-            responseTimeSeconds1:
-              $ref: '#/components/schemas/cmpfloatWithTimeout'
-            responseTimeSeconds2:
-              $ref: '#/components/schemas/cmpfloatWithTimeout'
-    comparisonoobjheavy:
-      type: array
-      items:
-        allOf:
-        - $ref: '#/components/schemas/objectspec'
-        - type: object
-          properties:
-            cpuSeconds1:
-              $ref: '#/components/schemas/cmpfloat'
-            cpuSeconds2:
-              $ref: '#/components/schemas/cmpfloat'
-            cpuQuotient1:
-              $ref: '#/components/schemas/cmpfloat'
-            cpuQuotient2:
-              $ref: '#/components/schemas/cmpfloat'
+              example: a
+            byte_size:
+              $ref: '#/components/schemas/cmpint'
+            is_system:
+              $ref: '#/components/schemas/cmpbool'
+            no_of_rows:
+              $ref: '#/components/schemas/cmpint'
             dataSourceStatus:
               enum:
               - full
@@ -822,6 +647,160 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/resultsingle'
+    evaluations:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/evaluation'
+        links:
+          type: object
+          properties:
+            next:
+              type: object
+              properties:
+                href:
+                  $ref: '#/components/schemas/href'
+            prev:
+              type: object
+              properties:
+                href:
+                  $ref: '#/components/schemas/href'
+    objectspec:
+      type: object
+      properties:
+        id:
+          type: string
+          format: string
+          example: fjETFn
+        title:
+          type: string
+          format: string
+          example: my chart
+        sheetId:
+          type: string
+          format: string
+          example: 41dbb01c-d1bd-4528-be05-910ee565988b
+        objectType:
+          type: string
+          example: table
+    resultobjresponsetime:
+      allOf:
+      - $ref: '#/components/schemas/objectspec'
+      - type: object
+        properties:
+          timeoutStatusCode:
+            type: string
+            example: CALC-TIMEOUT
+          responseTimeSeconds:
+            type: number
+            example: 12.3
+    href:
+      type: string
+      example: /api/v1/evaluations/appId=a84c22cf-31e5-41fe-9e8f-544b85513484&prev=5f5201908b3fc5fc132dbd35
+    resultobjMemoryLimit:
+      allOf:
+      - $ref: '#/components/schemas/objectspec'
+      - type: object
+        properties:
+          memoryLimitStatusCode:
+            type: string
+            example: OUT-OF-MEMORY
+    comparisonoobjheavy:
+      type: array
+      items:
+        allOf:
+        - $ref: '#/components/schemas/objectspec'
+        - type: object
+          properties:
+            cpuSeconds1:
+              $ref: '#/components/schemas/cmpfloat'
+            cpuSeconds2:
+              $ref: '#/components/schemas/cmpfloat'
+            cpuQuotient1:
+              $ref: '#/components/schemas/cmpfloat'
+            cpuQuotient2:
+              $ref: '#/components/schemas/cmpfloat'
+            dataSourceStatus:
+              enum:
+              - full
+              - none
+              - baselinemissing
+              - comparisonmissing
+              type: string
+              example: full
+    cmpbool:
+      allOf:
+      - $ref: '#/components/schemas/classification'
+      - type: object
+        properties:
+          baseline:
+            type: boolean
+            example: false
+          comparison:
+            type: boolean
+            example: true
+    resultmetadatatopfields:
+      allOf:
+      - $ref: '#/components/schemas/objecttopspec'
+      - type: object
+        properties:
+          name:
+            type: string
+            example: a
+          byte_size:
+            type: number
+            example: 1234
+    resultsingle:
+      allOf:
+      - $ref: '#/components/schemas/objectspec'
+      - type: object
+        properties:
+          cpuQuotient1:
+            type: number
+            example: 12.3
+    comparison:
+      type: object
+      properties:
+        objHeavy:
+          $ref: '#/components/schemas/sortedcomparisonoobjheavy'
+        rowCount:
+          $ref: '#/components/schemas/cmpint'
+        objNoCache:
+          $ref: '#/components/schemas/sortedcomparisonobjresponsetime'
+        sheetCount:
+          $ref: '#/components/schemas/cmpint'
+        fileSizeMib:
+          $ref: '#/components/schemas/cmpfloat'
+        objectCount:
+          $ref: '#/components/schemas/cmpint'
+        maxMemoryMib:
+          $ref: '#/components/schemas/cmpfloat'
+        sheetsCached:
+          $ref: '#/components/schemas/sortedcomparisonobjresponsetime'
+        objSlowCached:
+          $ref: '#/components/schemas/sortedcomparisonobjresponsetime'
+        objMemoryLimit:
+          $ref: '#/components/schemas/comparisonobjMemoryLimit'
+        sheetsUncached:
+          $ref: '#/components/schemas/sortedcomparisonobjresponsetime'
+        documentSizeMib:
+          $ref: '#/components/schemas/cmpfloat'
+        objSlowUncached:
+          $ref: '#/components/schemas/sortedcomparisonobjresponsetime'
+        dataModelSizeMib:
+          $ref: '#/components/schemas/cmpfloat'
+        hasSectionAccess:
+          $ref: '#/components/schemas/cmpbool'
+        topFieldsByBytes:
+          $ref: '#/components/schemas/sortedcomparisonfields'
+        topTablesByBytes:
+          $ref: '#/components/schemas/sortedcomparisontables'
+        objSingleThreaded:
+          $ref: '#/components/schemas/sortedcomparisonobjresponsetime'
+        appOpenTimeSeconds:
+          $ref: '#/components/schemas/cmpfloat'
     sortedcomparisonoobjheavy:
       allOf:
       - type: object
@@ -844,24 +823,59 @@ components:
             example: full
           relativeDiffDesc:
             $ref: '#/components/schemas/comparisonoobjheavy'
-    objectspec:
+    comparisonobjresponsetime:
+      type: array
+      items:
+        allOf:
+        - $ref: '#/components/schemas/objectspec'
+        - type: object
+          properties:
+            dataSourceStatus:
+              enum:
+              - full
+              - none
+              - baselinemissing
+              - comparisonmissing
+              type: string
+              example: full
+            responseTimeSeconds1:
+              $ref: '#/components/schemas/cmpfloatWithTimeout'
+            responseTimeSeconds2:
+              $ref: '#/components/schemas/cmpfloatWithTimeout'
+    comparisonobjMemoryLimit:
+      type: array
+      items:
+        allOf:
+        - $ref: '#/components/schemas/objectspec'
+        - type: object
+          properties:
+            dataSourceStatus:
+              enum:
+              - full
+              - none
+              - baselinemissing
+              - comparisonmissing
+              type: string
+              example: full
+            baselineMemoryLimitStatusCode:
+              type: string
+              example: OUT-OF-MEMORY
+            comparisonMemoryLimitStatusCode:
+              type: string
+              example: OUT-OF-MEMORY
+    objecttopspec:
       type: object
       properties:
-        id:
+        name:
           type: string
           format: string
-          example: fjETFn
-        title:
-          type: string
-          format: string
-          example: my chart
-        sheetId:
-          type: string
-          format: string
-          example: 41dbb01c-d1bd-4528-be05-910ee565988b
-        objectType:
-          type: string
-          example: table
+          example: some field/table
+        byte_size:
+          type: number
+          example: 12873
+        is_system:
+          type: boolean
+          example: false
     sortedcomparisonfields:
       allOf:
       - type: object
@@ -884,40 +898,24 @@ components:
             example: full
           relativeDiffDesc:
             $ref: '#/components/schemas/comparisonfields'
-    resultmetadatatopfields:
-      allOf:
-      - $ref: '#/components/schemas/objecttopspec'
-      - type: object
-        properties:
-          name:
-            type: string
-            example: a
-          byte_size:
-            type: number
-            example: 1234
-    resultmetadatatoptables:
-      allOf:
-      - $ref: '#/components/schemas/objecttopspec'
-      - type: object
-        properties:
-          name:
-            type: string
-            example: a
-          byte_size:
-            type: number
-            example: 1234
-    resultobjsheet:
+    EvaluatorError:
       type: object
       properties:
-        sheet:
-          $ref: '#/components/schemas/resultobjresponsetime'
-        objectCount:
-          type: number
-          example: 1
-        sheetObjects:
+        errors:
           type: array
           items:
-            $ref: '#/components/schemas/resultobjresponsetime'
+            type: object
+            properties:
+              code:
+                type: string
+                example: ERR-INVALID-AUTH
+              title:
+                type: string
+                example: An error occured
+              status:
+                type: integer
+                format: int32
+                example: 427
     objectmetrics:
       type: object
       properties:
@@ -934,6 +932,62 @@ components:
         responseTimeSeconds:
           type: number
           example: 234.3
+    resultentry:
+      allOf:
+      - $ref: '#/components/schemas/objectspec'
+      - type: object
+        properties:
+          passes:
+            type: array
+            items:
+              $ref: '#/components/schemas/objectmetrics'
+    cmpint:
+      allOf:
+      - $ref: '#/components/schemas/classification'
+      - type: object
+        properties:
+          baseline:
+            type: number
+            example: 1
+          comparison:
+            type: number
+            example: 2
+    resultobjsheet:
+      type: object
+      properties:
+        sheet:
+          $ref: '#/components/schemas/resultobjresponsetime'
+        objectCount:
+          type: number
+          example: 1
+        sheetObjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/resultobjresponsetime'
+    classification:
+      allOf:
+      - type: object
+        properties:
+          diff:
+            type: number
+            example: 0.5
+          trend:
+            type: string
+            example: up
+          absoluteDiff:
+            type: number
+            example: 2.5
+    cmpfloatWithTimeout:
+      allOf:
+      - $ref: '#/components/schemas/cmpfloat'
+      - type: object
+        properties:
+          baselineTimeoutStatusCode:
+            type: string
+            example: CALC-TIMEOUT
+          comparisonTimeoutStatusCode:
+            type: string
+            example: CALC-TIMEOUT
     metadata:
       type: object
       properties:
@@ -967,71 +1021,6 @@ components:
         amountofcardinalfieldvalues:
           type: number
           example: 14442
-    objecttopspec:
-      type: object
-      properties:
-        name:
-          type: string
-          format: string
-          example: some field/table
-        byte_size:
-          type: number
-          example: 12873
-        is_system:
-          type: boolean
-          example: false
-    cmpbool:
-      allOf:
-      - $ref: '#/components/schemas/classification'
-      - type: object
-        properties:
-          baseline:
-            type: boolean
-            example: false
-          comparison:
-            type: boolean
-            example: true
-    cmpfloat:
-      allOf:
-      - $ref: '#/components/schemas/classification'
-      - type: object
-        properties:
-          baseline:
-            type: number
-            example: 1.1
-          comparison:
-            type: number
-            example: 2.2
-    event:
-      type: object
-      properties:
-        details:
-          type: string
-          example: An object failed
-        sheetId:
-          type: string
-          example: gregFG
-        objectId:
-          type: string
-          example: adfRFr
-        severity:
-          type: string
-          example: warning
-        errorCode:
-          type: string
-          example: ERR-GOPHERCISER
-        objectType:
-          type: string
-          example: linechart
-        sheetTitle:
-          type: string
-          example: mysheet
-        objectTitle:
-          type: string
-          example: profit
-        objectVisualization:
-          type: string
-          example: linechart
     sortedcomparisontables:
       allOf:
       - type: object
@@ -1054,3 +1043,14 @@ components:
             example: full
           relativeDiffDesc:
             $ref: '#/components/schemas/comparisontables'
+    resultmetadatatoptables:
+      allOf:
+      - $ref: '#/components/schemas/objecttopspec'
+      - type: object
+        properties:
+          name:
+            type: string
+            example: a
+          byte_size:
+            type: number
+            example: 1234
