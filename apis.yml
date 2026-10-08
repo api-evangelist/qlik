@@ -1011,6 +1011,10 @@ maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 common:
+- type: Plans
+  url: plans/qlik-plans-pricing.yml
+- type: FinOps
+  url: finops/qlik-finops.yml
 - type: Website
   url: https://qlik.dev
 - type: DomainSecurity
