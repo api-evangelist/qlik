@@ -1,0 +1,21 @@
+generated: '2026-10-03'
+method: generated
+generator: extract-docs-artifacts.py skills (local)
+source: openapi/apps.json
+skills:
+- file: skills/qlik-manage-filters.md
+  name: qlik-manage-filters
+  api: openapi/apps.json
+  operations:
+  - filtersList
+  - filtersCreate
+  - filtersGet
+  - filtersUpdate
+  - filtersDelete
+- file: skills/qlik-evaluation-run-and-download.md
+  name: qlik-evaluation-run-and-download
+  api: openapi/apps.json
+  operations:
+  - evaluation#queueEvaluation
+  - evaluation#getOneEvaluation
+  - evaluation#downloadOneEvaluation

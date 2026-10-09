@@ -1,0 +1,25 @@
+generated: '2026-10-03'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://qlik.dev/apis/rest/api-keys/
+sources:
+- https://qlik.dev/apis/rest/api-keys/
+- https://qlik.dev/apis/rest/oauth/
+- https://qlik.dev/apis/rest/oauth-clients/
+- https://qlik.dev/apis/rest/oauth-tokens/
+description: Authentication methods for Qlik REST APIs
+schemes:
+- type: http-bearer
+  name: API Key Bearer Token
+  evidence: 'curl "https://{tenant}.{region}.qlikcloud.com/api/v1/api-keys" \ -H "Authorization: Bearer <access_token>"'
+  location: header
+  header: Authorization
+  how_to_obtain: Create an API key via the API keys endpoint; the response includes a signed JWT token to be used as a Bearer token.
+- type: http-bearer
+  name: OAuth Access Token
+  evidence: 'curl "https://{tenant}.{region}.qlikcloud.com/api/v1/oauth-tokens" \ -H "Authorization: Bearer <access_token>"'
+  location: header
+  header: Authorization
+  how_to_obtain: Obtain an access token via the OAuth token endpoint (POST /oauth/token) using an appropriate grant type.
+docs: https://qlik.dev/apis/rest/api-keys/
+note: 1 extracted row(s) were dropped because their quote was not on the page.

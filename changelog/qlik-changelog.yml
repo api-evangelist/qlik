@@ -1,0 +1,65 @@
+generated: '2026-10-03'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://portal.qlik.dev/changelog/
+sources:
+- https://portal.qlik.dev/changelog/
+- https://qlik.dev/changelog/
+entries:
+- breaking: false
+  highlights:
+  - The Data qualities API adds the PUT /api/data-governance/data-qualities/fields-structures endpoint, which lets you assign a standard or semantic
+    type to one or more fields in a dataset.
+  - Assigning types programmatically lets you correct or standardize how Qlik Cloud interprets fields without manually updating each field in
+    the dataset, for example as part of a data onboarding pipeline.
+  date: '2026-10-02'
+- breaking: false
+  highlights:
+  - Tenant administrators can now configure a Model Context Protocol (MCP) connection between their AI platforms and Qlik Cloud tenants using
+    OAuth Client ID Metadata Documents (CIMD).
+  - CIMD reduces the manual steps required to configure OAuth clients and eliminates the need to manually manage client secrets.
+  date: '2026-09-29'
+- breaking: false
+  highlights:
+  - The Change stores event API is now available, letting you react when users save changes to a change store.
+  - Changes saved (com.qlik.analytics.change-store.changes.saved) is published when a user commits changes in a change store.
+  date: '2026-09-23'
+- breaking: false
+  highlights:
+  - The Semantic types API now includes endpoints for creating, retrieving, updating, deleting, and listing semantic types and the dataset fields
+    using a semantic type.
+  date: '2026-09-22'
+- breaking: false
+  highlights:
+  - Direct Access Agents benchmarking endpoints are now available in the connectivity namespace at /api/connectivity/direct-access-agents.
+  - The new GET endpoints are supported from Direct Access gateway 1.7.17 onward; the benchmark start endpoint is supported from Direct Access
+    gateway 1.7.8 onward.
+  date: '2026-09-22'
+- breaking: false
+  highlights:
+  - You can now download every REST OpenAPI spec as a single ZIP archive instead of downloading each spec individually.
+  - Qlik regenerates the archive with each qlik.dev release from the published REST API specs.
+  date: '2026-09-22'
+- breaking: false
+  highlights:
+  - The new Semantic types API lets you export and import semantic type definitions programmatically.
+  - POST /api/data-governance/semantic-types/actions/export exports semantic types as a JSON file; POST /api/data-governance/semantic-types/actions/import
+    previews and applies imports.
+  date: '2026-09-17'
+- breaking: false
+  highlights:
+  - 'The Qlik MCP server now includes three additional tools purpose‑built for declarative pipeline development: qlik_search, qlik_get_pipeline_project_details,
+    and qlik_search_connection_objects.'
+  - These tools let coding agents query a live Qlik tenant directly from the editor, reducing the risk of pipelines failing on import due to incorrect
+    assumptions.
+  date: '2026-09-11'
+- breaking: false
+  highlights:
+  - Updates have been made to Qlik Automate connectors and blocks, including an optional parameter to assign roles to a group on creation.
+  date: '2026-09-07'
+- breaking: false
+  highlights:
+  - 'Deprecation notice: Legacy Qlik Cloud system events related to identity and access management are deprecated.'
+  date: '2026-09-02'
+note: The changelog page does not provide an explicit versioning scheme or a current version identifier.
+docs: https://portal.qlik.dev/changelog/

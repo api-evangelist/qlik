@@ -1,0 +1,70 @@
+generated: '2026-10-03'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/apps.json
+format: custom
+envelope:
+  media_type: application/json
+  schema: FilterErrors
+coverage:
+  operations: 48
+  statuses_declared: 8
+problems:
+- status: 400
+  title: Bad Request
+  description: Bad request. Malformed syntax, errors in params.
+  operations: 13
+  media_types:
+  - application/json
+  schema: FilterErrors
+- status: 401
+  title: Unauthorized
+  description: Unauthorized, JWT invalid or not provided.
+  operations: 10
+  media_types:
+  - application/json
+  schema: FilterErrors
+- status: 403
+  title: Forbidden
+  description: Forbidden
+  operations: 16
+  media_types:
+  - application/json
+  schema: FilterErrors
+- status: 404
+  title: Not Found
+  description: Not Found
+  operations: 25
+  media_types:
+  - application/json
+  schema: FilterErrors
+- status: 409
+  title: Conflict
+  description: Invalid Business Logic
+  operations: 5
+  media_types:
+  - application/json
+  schema: Errors
+- status: 422
+  title: Unprocessable Content
+  description: Unprocessable entity. The payload contains fields
+  operations: 3
+  media_types:
+  - application/json
+  schema: Errors
+- status: 429
+  title: Too Many Requests
+  description: Too many request. Indicates the user has sent too many requests in a given amount of time, aka "rate
+    limiting".
+  operations: 6
+  media_types:
+  - application/json
+  schema: FilterErrors
+- status: 500
+  title: Internal Server Error
+  description: Internal server error.
+  operations: 15
+  media_types:
+  - application/json
+  schema: FilterErrors

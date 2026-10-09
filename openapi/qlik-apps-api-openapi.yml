@@ -1,0 +1,2535 @@
+openapi: 3.2.0
+info:
+  title: Apps API
+  version: ''
+servers:
+- url: https://{tenant}.{region}.qlikcloud.com
+  variables:
+    region:
+      default: us
+      description: The region the tenant is hosted in
+    tenant:
+      default: your-tenant
+      description: Name of the tenant that will be called
+tags:
+- name: Apps
+paths:
+  /api/v1/apps:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NxApp'
+          headers: {}
+          description: OK
+      description: Creates a new app.
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CreateApp'
+        required: true
+        description: Attributes that the user wants to set in new app.
+      x-qlik-access-control:
+      - create
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Create api apps
+      x-summary-source: derived
+      operationId: postApiV1Apps
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NxApp'
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      description: Retrieves information for a specific app.
+      x-qlik-access-control:
+      - read
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '1'
+        limit: 1000
+      tags:
+      - Apps
+      summary: Get api apps by app id
+      x-summary-source: derived
+      operationId: getApiV1AppsByAppId
+      x-operation-id-source: derived
+    put:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NxApp'
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      description: Updates the information for a specific app.
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/UpdateApp'
+        required: true
+        description: Attributes that user wants to set.
+      x-qlik-access-control:
+      - update
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Replace api apps by app id
+      x-summary-source: derived
+      operationId: putApiV1AppsByAppId
+      x-operation-id-source: derived
+    delete:
+      responses:
+        '200':
+          content:
+            application/json: {}
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      description: Deletes a specific app.
+      x-qlik-access-control:
+      - delete
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Delete api apps by app id
+      x-summary-source: derived
+      operationId: deleteApiV1AppsByAppId
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}/copy:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NxApp'
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      description: Copies a specific app.
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/CreateApp'
+        required: true
+        description: Attributes that should be set in the copy.
+      x-qlik-access-control:
+      - duplicate
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Create api apps by app id copy
+      x-summary-source: derived
+      operationId: postApiV1AppsByAppIdCopy
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}/data/lineage:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LineageInfoRest'
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      description: 'Retrieves the lineage for an app.
+
+        Returns a JSON-formatted array of strings describing the lineage of the app.'
+      x-qlik-access-control:
+      - reload
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '1'
+        limit: 1000
+      tags:
+      - Apps
+      summary: Get api apps by app id data lineage
+      x-summary-source: derived
+      operationId: getApiV1AppsByAppIdDataLineage
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}/data/metadata:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataModelMetadata'
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      description: 'Retrieves the data model and reload statistics metadata of an app.
+
+        An empty metadata structure is returned if the metadata is not available in the app.'
+      x-qlik-access-control:
+      - read
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '1'
+        limit: 1000
+      tags:
+      - Apps
+      summary: Get api apps by app id data metadata
+      x-summary-source: derived
+      operationId: getApiV1AppsByAppIdDataMetadata
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}/export:
+    post:
+      responses:
+        '201':
+          headers:
+            Location:
+              schema:
+                type: string
+              description: The URL of the exported app on Temporary content service.
+          description: Created
+        '400':
+          headers: {}
+          description: Bad request
+        '401':
+          headers: {}
+          description: Unauthorized
+        '403':
+          headers: {}
+          description: Forbidden
+        '404':
+          headers: {}
+          description: Not Found
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      - in: query
+        name: NoData
+        schema:
+          type: boolean
+        description: The flag indicating if only object contents should be exported.
+      description: Exports a specific app.
+      x-qlik-access-control:
+      - read
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Create api apps by app id export
+      x-summary-source: derived
+      operationId: postApiV1AppsByAppIdExport
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}/media/files/{path}:
+    get:
+      responses:
+        '200':
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+          headers: {}
+          description: OK
+        '403':
+          headers: {}
+          description: Forbidden
+        '404':
+          headers: {}
+          description: Not Found
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Unique application identifier.
+      - in: path
+        name: path
+        schema:
+          type: string
+        required: true
+        description: Path to file content.
+      description: 'Gets media content from file.
+
+        Returns a stream of bytes containing the media file content on success, or error if file is not found.'
+      x-qlik-access-control:
+      - read
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '1'
+        limit: 1000
+      tags:
+      - Apps
+      summary: Get api apps by app id media files by path
+      x-summary-source: derived
+      operationId: getApiV1AppsByAppIdMediaFilesByPath
+      x-operation-id-source: derived
+    put:
+      responses:
+        '200':
+          content:
+            application/json: {}
+          headers: {}
+          description: OK
+        '403':
+          headers: {}
+          description: Forbidden
+        '404':
+          headers: {}
+          description: Not Found
+        '409':
+          headers: {}
+          description: Conflict
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Unique application identifier.
+      - in: path
+        name: path
+        schema:
+          type: string
+        required: true
+        description: Path to file content.
+      description: 'Stores the media content file.
+
+        Returns OK if the bytes containing the media file content were successfully stored, or error in case of failure, lack of permission or file already exists on the supplied path.'
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/FileData'
+        required: true
+        description: ''
+      x-qlik-access-control:
+      - update
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Replace api apps by app id media files by path
+      x-summary-source: derived
+      operationId: putApiV1AppsByAppIdMediaFilesByPath
+      x-operation-id-source: derived
+    delete:
+      responses:
+        '200':
+          content:
+            application/json: {}
+          headers: {}
+          description: OK
+        '403':
+          headers: {}
+          description: Forbidden
+        '404':
+          headers: {}
+          description: Not Found
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Unique application identifier.
+      - in: path
+        name: path
+        schema:
+          type: string
+        required: true
+        description: Path to file content.
+      description: 'Deletes a media content file or complete directory.
+
+        Returns OK if the bytes containing the media file (or the complete content of a directory) were successfully deleted, or error in case of failure or lack of permission.'
+      x-qlik-access-control:
+      - update
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Delete api apps by app id media files by path
+      x-summary-source: derived
+      operationId: deleteApiV1AppsByAppIdMediaFilesByPath
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}/media/list/{path}:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppContentList'
+          headers: {}
+          description: OK
+        '403':
+          headers: {}
+          description: Forbidden
+        '404':
+          headers: {}
+          description: Not Found
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Unique application identifier.
+      - in: path
+        name: path
+        schema:
+          type: string
+        required: true
+        description: The path to sub folder with static content relative to the root folder. Use empty path to access the root folder.
+      - in: query
+        name: show
+        schema:
+          type: string
+        description: 'Optional. List output can include files and folders in different ways:
+
+          * Not recursive, default if show option is not supplied or incorrectly specified, results in output with files and empty directories for the path specified only.
+
+          * Recursive(r), use ?show=r or ?show=recursive, results in a recursive output with files, all empty folders are excluded.
+
+          * All(a), use ?show=a or ?show=all, results in a recursive output with files and empty directories.'
+      description: 'Lists media content.
+
+        Returns a JSON formatted array of strings describing the available media content or error if the optional path supplied is not found.'
+      x-qlik-access-control:
+      - read
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '1'
+        limit: 1000
+      tags:
+      - Apps
+      summary: Get api apps by app id media list by path
+      x-summary-source: derived
+      operationId: getApiV1AppsByAppIdMediaListByPath
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}/media/thumbnail:
+    get:
+      responses:
+        '200':
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+          headers: {}
+          description: OK
+        '403':
+          headers: {}
+          description: Forbidden
+        '404':
+          headers: {}
+          description: Not Found
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Unique application identifier.
+      description: 'Gets media content from file currently used as application thumbnail.
+
+        Returns a stream of bytes containing the media file content on success, or error if file is not found.
+
+        The image selected as thumbnail is only updated when application is saved.'
+      x-qlik-access-control:
+      - read
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '1'
+        limit: 1000
+      tags:
+      - Apps
+      summary: Get api apps by app id media thumbnail
+      x-summary-source: derived
+      operationId: getApiV1AppsByAppIdMediaThumbnail
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}/objects/{objectId}/actions/change-owner:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NxAppObject'
+          headers: {}
+          description: OK
+        '400':
+          headers: {}
+          description: Bad request
+        '404':
+          headers: {}
+          description: Not Found
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      - in: path
+        name: objectId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the object.
+      description: 'Sets owner on an app object.
+
+        The user must be the owner of the object.'
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/UpdateOwner'
+        required: true
+        description: New owner.
+      x-qlik-access-control:
+      - update
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Create api apps by app id objects by object id actions change owner
+      x-summary-source: derived
+      operationId: postApiV1AppsByAppIdObjectsByObjectIdActionsChangeOwner
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}/owner:
+    put:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NxApp'
+          headers: {}
+          description: OK
+        '403':
+          headers: {}
+          description: Forbidden
+        '404':
+          headers: {}
+          description: Not Found
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      description: Changes owner of the app.
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/UpdateOwner'
+        required: true
+        description: New owner.
+      x-qlik-access-control:
+      - change_owner
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Replace api apps by app id owner
+      x-summary-source: derived
+      operationId: putApiV1AppsByAppIdOwner
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}/placement:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Placement'
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app
+      description: Retrieves the app size override for an app.
+      x-qlik-access-control:
+      - read
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '1'
+        limit: 1000
+      tags:
+      - Apps
+      summary: Get api apps by app id placement
+      x-summary-source: derived
+      operationId: getApiV1AppsByAppIdPlacement
+      x-operation-id-source: derived
+    put:
+      responses:
+        '200':
+          content:
+            application/json: {}
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app
+      description: Sets the app size override for an app.
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/EngineSize'
+        required: true
+        description: The override information to be used for app placement.
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Replace api apps by app id placement
+      x-summary-source: derived
+      operationId: putApiV1AppsByAppIdPlacement
+      x-operation-id-source: derived
+    delete:
+      responses:
+        '200':
+          content:
+            application/json: {}
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app
+      description: Removes the app size override for an app.
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Delete api apps by app id placement
+      x-summary-source: derived
+      operationId: deleteApiV1AppsByAppIdPlacement
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}/publish:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NxApp'
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      description: Publishes a specific app to a managed space.
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/PublishApp'
+        required: true
+        description: Publish information for the app.
+      x-qlik-access-control:
+      - publish
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Create api apps by app id publish
+      x-summary-source: derived
+      operationId: postApiV1AppsByAppIdPublish
+      x-operation-id-source: derived
+    put:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NxApp'
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      description: Republishes a published app to a managed space.
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/RepublishApp'
+        required: true
+        description: Republish information for the app.
+      x-qlik-access-control:
+      - publish
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Replace api apps by app id publish
+      x-summary-source: derived
+      operationId: putApiV1AppsByAppIdPublish
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}/reloads/logs:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScriptLogList'
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      description: 'Retrieves the metadata about all script logs stored for an app.
+
+        Returns an array of ScriptLogMeta objects.'
+      x-qlik-access-control:
+      - reload
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '1'
+        limit: 1000
+      tags:
+      - Apps
+      summary: Get api apps by app id reloads logs
+      x-summary-source: derived
+      operationId: getApiV1AppsByAppIdReloadsLogs
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}/reloads/logs/{reloadId}:
+    get:
+      responses:
+        '200':
+          content:
+            text/plain:
+              schema:
+                type: string
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      - in: path
+        name: reloadId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the reload.
+      description: 'Retrieves the log of a specific reload.
+
+        Returns the log as "text/plain; charset=UTF-8".'
+      x-qlik-access-control:
+      - reload
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '1'
+        limit: 1000
+      tags:
+      - Apps
+      summary: Get api apps by app id reloads logs by reload id
+      x-summary-source: derived
+      operationId: getApiV1AppsByAppIdReloadsLogsByReloadId
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}/reloads/metadata/{reloadId}:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReloadListMetadata'
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app
+      - in: query
+        name: includeSkipStoreReloads
+        schema:
+          type: boolean
+        description: 'Include metadata for reloads ran with SkipStore flag set to true. Default: false'
+      - in: query
+        name: limit
+        schema:
+          type: string
+        description: 'Maximum number of records to return from this request. Default: 100'
+      - in: query
+        name: reloadId
+        schema:
+          type: string
+        description: Identifier of the reload. Use empty reloadId to get all reloads.
+      description: 'Retrieves the app reload metadata list.
+
+        Reload metadata contains reload information, including reload id, duration, endtime and lineage load info. Data is available for the last 10 reloads of an application.'
+      x-qlik-access-control:
+      - read
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '1'
+        limit: 1000
+      tags:
+      - Apps
+      summary: Get api apps by app id reloads metadata by reload id
+      x-summary-source: derived
+      operationId: getApiV1AppsByAppIdReloadsMetadataByReloadId
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}/scripts:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScriptMetaList'
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      - in: query
+        name: filter
+        schema:
+          type: string
+        description: 'A scim filter expression defining which script versions should be retrieved. Filterable fields are:
+
+          * ScriptId
+
+          * ModifiedTime
+
+          * ModifierId'
+      - in: query
+        name: limit
+        schema:
+          type: string
+        description: Maximum number of records to return from this request.
+      - in: query
+        name: page
+        schema:
+          type: string
+        description: Opaque definition of which page of the result set to return. Returned from a previous call using the same filter. Not yet supported.
+      description: 'Retrieves the script history for an app.
+
+        Returns information about the saved versions of the script in a list sorted with latest first.'
+      x-qlik-access-control:
+      - read
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '1'
+        limit: 1000
+      tags:
+      - Apps
+      summary: Get api apps by app id scripts
+      x-summary-source: derived
+      operationId: getApiV1AppsByAppIdScripts
+      x-operation-id-source: derived
+    post:
+      responses:
+        '200':
+          content:
+            application/json: {}
+          headers: {}
+          description: OK
+        '403':
+          headers: {}
+          description: Forbidden
+        '404':
+          headers: {}
+          description: Not Found
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      description: Sets script for an app.
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/ScriptVersion'
+        required: true
+        description: The script to set.
+      x-qlik-access-control:
+      - update
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Create api apps by app id scripts
+      x-summary-source: derived
+      operationId: postApiV1AppsByAppIdScripts
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}/scripts/{id}:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScriptVersion'
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: Identifier of the script version, or 'current' for retrieving the current version.
+      description: 'Retrieves a version of the script for an app.
+
+        Returns the script text.'
+      x-qlik-access-control:
+      - read
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '1'
+        limit: 1000
+      tags:
+      - Apps
+      summary: Get api apps by app id scripts by id
+      x-summary-source: derived
+      operationId: getApiV1AppsByAppIdScriptsById
+      x-operation-id-source: derived
+    patch:
+      responses:
+        '200':
+          content:
+            application/json: {}
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: Identifier of the script version.
+      description: Updates a specific version of the script for an app.
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/NxPatch'
+        required: true
+        description: 'Array of patches for the object ScriptVersion.
+
+          <div class=note>Patches have limited functionality for this object. Only /versionMessage can be modified using operations add, remove and replace.</div>'
+      x-qlik-access-control:
+      - update
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Update api apps by app id scripts by id
+      x-summary-source: derived
+      operationId: patchApiV1AppsByAppIdScriptsById
+      x-operation-id-source: derived
+    delete:
+      responses:
+        '200':
+          content:
+            application/json: {}
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: Identifier of the script version
+      description: 'Deletes a specific version of the script for an app.
+
+        Fails if the supplied id is the current version.'
+      x-qlik-access-control:
+      - update
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Delete api apps by app id scripts by id
+      x-summary-source: derived
+      operationId: deleteApiV1AppsByAppIdScriptsById
+      x-operation-id-source: derived
+  /api/v1/apps/{appId}/space:
+    put:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NxApp'
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      description: Sets space on a specific app.
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/UpdateSpace'
+        required: true
+        description: New space.
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Replace api apps by app id space
+      x-summary-source: derived
+      operationId: putApiV1AppsByAppIdSpace
+      x-operation-id-source: derived
+    delete:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NxApp'
+          headers: {}
+          description: OK
+      parameters:
+      - in: path
+        name: appId
+        schema:
+          type: string
+        required: true
+        description: Identifier of the app.
+      description: Removes space from a specific app.
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Delete api apps by app id space
+      x-summary-source: derived
+      operationId: deleteApiV1AppsByAppIdSpace
+      x-operation-id-source: derived
+  /api/v1/apps/import:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NxApp'
+          headers: {}
+          description: OK
+        '404':
+          headers: {}
+          description: Not Found
+      parameters:
+      - in: query
+        name: appId
+        schema:
+          type: string
+        description: The app ID of the target app when source is qvw file.
+      - in: query
+        name: fallbackName
+        schema:
+          type: string
+        description: The name of the target app when source does not have a specified name, applicable if source is qvw file.
+      - in: query
+        name: fileId
+        schema:
+          type: string
+        description: The file ID to be downloaded from Temporary Content Service (TCS) and used during import.
+      - in: query
+        name: mode
+        schema:
+          type: string
+        description: 'The import mode. In `new` mode (default), the source app will be imported as a new app.<div class=note>The `autoreplace` mode is an internal mode only and is not permitted for external use.</div>
+
+
+          One of:
+
+          * NEW
+
+          * AUTOREPLACE'
+      - in: query
+        name: name
+        schema:
+          type: string
+        description: The name of the target app.
+      - in: query
+        name: NoData
+        schema:
+          type: boolean
+        description: If NoData is true, the data of the existing app will be kept as is, otherwise it will be replaced by the new incoming data.
+      - in: query
+        name: spaceId
+        schema:
+          type: string
+        description: The space ID of the target app.
+      description: Imports an app into the system.
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              $ref: '#/components/schemas/FileData'
+        description: Path of the source app.
+      x-qlik-access-control:
+      - import
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Create api apps import
+      x-summary-source: derived
+      operationId: postApiV1AppsImport
+      x-operation-id-source: derived
+  /api/v1/apps/privileges:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserPrivileges'
+          headers: {}
+          description: OK
+      description: Gets the app privileges for the current user, such as create app and import app. Empty means that the current user has no app privileges.
+      x-qlik-access-control:
+      - read
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '1'
+        limit: 1000
+      tags:
+      - Apps
+      summary: Get api apps privileges
+      x-summary-source: derived
+      operationId: getApiV1AppsPrivileges
+      x-operation-id-source: derived
+  /api/v1/apps/validatescript:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScriptIssues'
+          headers: {}
+          description: OK
+        '403':
+          headers: {}
+          description: Forbidden
+      description: Validates the script.
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/Script'
+        required: true
+        description: Script to validate.
+      x-qlik-visibility: public
+      x-qlik-stability: locked
+      x-qlik-deprecated: false
+      x-qlik-tier:
+        tier: '2'
+        limit: 100
+      tags:
+      - Apps
+      summary: Create api apps validatescript
+      x-summary-source: derived
+      operationId: postApiV1AppsValidatescript
+      x-operation-id-source: derived
+components:
+  schemas:
+    FrequencyDistributionData:
+      type: object
+      properties:
+        BinsEdges:
+          type: array
+          items:
+            type: number
+            format: double
+          description: Bins edges.
+        Frequencies:
+          type: array
+          items:
+            type: integer
+            format: int32
+          description: Bins frequencies.
+        NumberOfBins:
+          type: integer
+          format: int32
+          description: Number of bins.
+    ScriptLogList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptLogMeta'
+          description: Array of scriptLogMeta.
+    EngineGBSize:
+      type: string
+      oneOf:
+      - title: '0'
+        description: EngineSize_NoOverride
+        x-qlik-const: 0
+      - title: '40'
+        description: EngineSize_40GB
+        x-qlik-const: 1
+      - title: '60'
+        description: EngineSize_60GB
+        x-qlik-const: 2
+      - title: '80'
+        description: EngineSize_80GB
+        x-qlik-const: 3
+      - title: '120'
+        description: EngineSize_120GB
+        x-qlik-const: 4
+      - title: '160'
+        description: EngineSize_160GB
+        x-qlik-const: 5
+      - title: '200'
+        description: EngineSize_200GB
+        x-qlik-const: 6
+    AppAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name (title) of the application
+        usage:
+          $ref: '#/components/schemas/UsageEnum'
+        locale:
+          type: string
+          description: Set custom locale instead of the system default
+        spaceId:
+          type: string
+          description: The space ID of the application
+        description:
+          type: string
+          description: The description of the application
+    NxObjectAttributes:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The object Id.
+        name:
+          type: string
+          description: Object name.
+        ownerId:
+          type: string
+          description: The object owner's Id.
+        approved:
+          type: boolean
+          description: True if the object is approved.
+        createdAt:
+          type: string
+          format: date-time
+          description: The date and time when the object was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: The date and time when the object was modified.
+        objectType:
+          type: string
+          description: The type of the object.
+        description:
+          type: string
+          description: Object description.
+        genericType:
+          $ref: '#/components/schemas/AppObjectGenericType'
+        publishedAt:
+          type: string
+          format: date-time
+          description: The date and time when the object was published, empty if unpublished.
+      description: App object attributes. This structure can also contain extra user-defined attributes.
+    SymbolFrequency:
+      type: object
+      properties:
+        Symbol:
+          $ref: '#/components/schemas/SymbolValue'
+        Frequency:
+          type: integer
+          format: int64
+          description: Frequency of the above symbol in the field
+    UserPrivileges:
+      type: string
+      oneOf:
+      - title: can_create_app
+        x-qlik-const: 0
+      - title: can_import_app
+        x-qlik-const: 1
+      - title: can_create_session_app
+        x-qlik-const: 2
+    NavigationLink:
+      type: object
+      properties:
+        href:
+          type: string
+    PublishApp:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PublishData'
+        moveApp:
+          type: boolean
+          default: false
+          description: The original is moved instead of copied. The current published state of all objects is kept.
+        spaceId:
+          type: string
+          description: The managed space ID where the app will be published.
+        attributes:
+          $ref: '#/components/schemas/AppUpdateAttributes'
+        originAppId:
+          type: string
+          description: If app is moved, originAppId needs to be provided.
+    ScriptMetaList:
+      type: object
+      properties:
+        links:
+          $ref: '#/components/schemas/NavigationLinks'
+        scripts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptMeta'
+          description: Script versions metadata.
+        privileges:
+          type: array
+          items:
+            type: string
+    FieldMetadata:
+      type: object
+      properties:
+        hash:
+          type: string
+          description: Hash of the data in the field. If the data in a reload is the same, the hash will be consistent.
+        name:
+          type: string
+          description: Name of the field.
+        tags:
+          type: array
+          items:
+            type: string
+          description: 'Gives information on a field. For example, it can return the type of the field.
+
+            Examples: key, text, ASCII.'
+        comment:
+          type: string
+          description: Field comment.
+        cardinal:
+          type: integer
+          format: int32
+          description: Number of distinct field values.
+        byte_size:
+          type: integer
+          format: int64
+          description: Static RAM memory used in bytes.
+        is_hidden:
+          type: boolean
+          description: 'If set to true, the field is hidden.
+
+            The default value is false.'
+        is_locked:
+          type: boolean
+          description: 'If set to true, the field is locked.
+
+            The default value is false.'
+        is_system:
+          type: boolean
+          description: 'If set to true, the field is a system field.
+
+            The default value is false.'
+        is_numeric:
+          type: boolean
+          description: 'Is set to true if the value is a numeric.
+
+            The default value is false.'
+        src_tables:
+          type: array
+          items:
+            type: string
+          description: List of table names.
+        is_semantic:
+          type: boolean
+          description: 'If set to true, the field is semantic.
+
+            The default value is false.'
+        total_count:
+          type: integer
+          format: int64
+          description: Total number of field values.
+        distinct_only:
+          type: boolean
+          description: 'If set to true, only distinct field values are shown.
+
+            The default value is false.'
+        always_one_selected:
+          type: boolean
+          description: 'If set to true, the field has one and only one selection (not 0 and not more than 1).
+
+            If this property is set to true, the field cannot be cleared anymore and no more selections can be performed in that field.
+
+            The default value is false.'
+    ScriptIssues:
+      type: object
+      properties:
+        Errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptIssue'
+        Warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptIssue'
+    FieldAttributes:
+      type: object
+      properties:
+        Dec:
+          type: string
+          description: 'Defines the decimal separator.
+
+            Example: **.**'
+        Fmt:
+          type: string
+          description: 'Defines the format pattern that applies to _qText_ .
+
+            Is used in connection to the type of the field (parameter **qType** ).
+
+            For more information, see _Formatting mechanism_.
+
+            Example: _YYYY-MM-DD_ for a date.'
+        Thou:
+          type: string
+          description: 'Defines the thousand separator (if any).
+
+            Is used if **qUseThou** is set to 1.
+
+            Example: **,**'
+        Type:
+          $ref: '#/components/schemas/FieldAttrType'
+        nDec:
+          type: integer
+          format: int32
+          default: 10
+          description: 'Number of decimals.
+
+            Default is 10.'
+        UseThou:
+          type: integer
+          format: int32
+          default: 0
+          description: 'Defines whether or not a thousands separator must be used.
+
+            Default is 0.'
+      description: 'Sets the formatting of a field.
+
+        The properties of _qFieldAttributes_ and the formatting mechanism are described below.
+
+
+        ### Formatting mechanism
+
+        The formatting mechanism depends on the type set in _qType,_ as shown below:
+
+        <div class=note>In case of inconsistencies between the type and the format pattern, the format pattern takes precedence over the type.</div>
+
+
+        ### Type is DATE, TIME, TIMESTAMP or INTERVAL
+
+        The following applies:
+
+        * If a format pattern is defined in _qFmt_ , the formatting is as defined in _qFmt_ .
+
+        * If _qFmt_ is empty, the formatting is defined by the number interpretation variables included at the top of the script ( _TimeFormat_ , _DateFormat_ , _TimeStampFormat_ ).
+
+        * The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ are not used.
+
+
+        ### Type is INTEGER
+
+        The following applies:
+
+        * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the formatting mechanism uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
+
+        * If no format pattern is defined in _qFmt_ , no formatting is applied. The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ and the number interpretation variables defined in the script are not used .
+
+
+        ### Type is REAL
+
+        The following applies:
+
+        * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
+
+        * If no format pattern is defined in _qFmt_ , and if the value is almost an integer value (for example, 14,000012), the value is formatted as an integer. The properties _qDec_ , _qThou_ , _qnDec_ , _qUseThou_ are not used.
+
+        * If no format pattern is defined in _qFmt_ , and if _qnDec_ is defined and not 0, the property _qDec_ is used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
+
+        * If no format pattern is defined in _qFmt_ , and if _qnDec_ is 0, the number of decimals is 14 and the property _qDec_ is used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
+
+
+        ### Type is FIX
+
+        The following applies:
+
+        * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of the script ( _DecimalSep_ and _ThousandSep_ ).
+
+        * If no format pattern is defined in _qFmt_ , the properties _qDec_ and _qnDec_ are used. If _qDec_ is not defined, the variable _DecimalSep_ defined at the top of the script is used.
+
+
+        ### Type is MONEY
+
+        The following applies:
+
+        * If a format pattern is defined in _qFmt_ , the engine looks at the values set in _qDec_ and _qThou_ . If these properties are not defined, the engine uses the number interpretation variables included at the top of any script ( _MoneyDecimalSep_ and _MoneyThousandSep_ ).
+
+        * If no format pattern is defined in _qFmt_ , the engine uses the number interpretation variables included at the top of the script ( _MoneyDecimalSep_ and _MoneyThousandSep_ ).
+
+
+        ### Type is ASCII
+
+        No formatting, _qFmt_ is ignored.'
+    ScriptMeta:
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int64
+          description: Script size.
+        scriptId:
+          type: string
+          description: Script id.
+        modifierId:
+          type: string
+          description: User last modifying script version.
+        modifiedTime:
+          type: string
+          description: Script version last modification time.
+        versionMessage:
+          type: string
+          description: Description of this script version
+    AppUpdateAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name (title) of the application.
+        description:
+          type: string
+          description: The description of the application.
+    UsageEnum:
+      type: string
+      oneOf:
+      - title: ANALYTICS
+        x-qlik-const: 0
+      - title: DATA_PREPARATION
+        x-qlik-const: 1
+      - title: DATAFLOW_PREP
+        x-qlik-const: 2
+      - title: SINGLE_TABLE_PREP
+        x-qlik-const: 3
+      - title: DIRECT_QUERY_MODE
+        x-qlik-const: 4
+    LastReloadMetadata:
+      type: object
+      properties:
+        hardware:
+          $ref: '#/components/schemas/HardwareMeta'
+        cpu_time_spent_ms:
+          type: integer
+          format: int64
+          description: Number of CPU milliseconds it took to reload the app.
+        peak_memory_bytes:
+          type: integer
+          format: int64
+          description: Maximum number of bytes used during reload of the app.
+        fullReloadPeakMemoryBytes:
+          type: integer
+          format: int64
+          description: Maximum number of bytes used during full reload of the app.
+        partialReloadPeakMemoryBytes:
+          type: integer
+          format: int64
+          description: Maximum number of bytes used during partial reload of the app.
+    LineageInfoRest:
+      type: object
+      properties:
+        statement:
+          type: string
+          description: The LOAD and SELECT script statements from the data load script.
+        discriminator:
+          type: string
+          description: 'A string indicating the origin of the data:
+
+            * [filename]: the data comes from a local file.
+
+            * INLINE: the data is entered inline in the load script.
+
+            * RESIDENT: the data comes from a resident table. The table name is listed.
+
+            * AUTOGENERATE: the data is generated from the load script (no external table of data source).
+
+            * Provider: the data comes from a data connection. The connector source name is listed.
+
+            * [webfile]: the data comes from a web-based file.
+
+            * STORE: path to QVD or TXT file where data is stored.
+
+            * EXTENSION: the data comes from a Server Side Extension (SSE).'
+    ScriptIssue:
+      type: object
+      properties:
+        Msg:
+          type: string
+          description: Error or warning string. What is the problem.
+        Tab:
+          type: integer
+          format: int32
+          description: The index of the tab for the issue.
+        Info:
+          type: string
+          description: Additional information like workarounds or clarifications.
+        Line:
+          type: integer
+          format: int32
+          description: Line in the tab of the issue.
+        Column:
+          type: integer
+          format: int32
+          description: UTF-8 byte column of the issue.
+    TableProfilingData:
+      type: object
+      properties:
+        NoOfRows:
+          type: integer
+          format: int64
+          description: Number of rows in the table.
+        FieldProfiling:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldInTableProfilingData'
+          description: Field values profiling info
+    SymbolValue:
+      type: object
+      properties:
+        Text:
+          type: string
+          description: String value of the symbol. This parameter is optional and present only if Symbol is a string.
+        Number:
+          type: number
+          format: double
+          description: Numeric value of the symbol. NaN otherwise.
+    HardwareMeta:
+      type: object
+      properties:
+        total_memory:
+          type: integer
+          format: int64
+          description: RAM available.
+        logical_cores:
+          type: integer
+          format: int32
+          description: Number of logical cores available.
+    Log:
+      type: object
+      properties:
+        log:
+          type: string
+          description: Provides a link to download the log file.
+    NxAppCreatePrivileges:
+      type: object
+      properties:
+        resource:
+          type: string
+          description: Type of resource. For example, sheet, story, bookmark, etc.
+        canCreate:
+          type: boolean
+          description: Is set to true if the user has privileges to create the resource.
+    DataModelMetadata:
+      type: object
+      properties:
+        usage:
+          $ref: '#/components/schemas/UsageEnum'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldMetadata'
+          description: List of field descriptions.
+        tables:
+          type: array
+          items:
+            $ref: '#/components/schemas/TableMetadata'
+          description: List of table descriptions.
+        reload_meta:
+          $ref: '#/components/schemas/LastReloadMetadata'
+        static_byte_size:
+          type: integer
+          format: int64
+          description: Static memory usage for the app.
+        has_section_access:
+          type: boolean
+          description: If set to true, the app has section access configured.
+        is_direct_query_mode:
+          type: boolean
+        tables_profiling_data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TableProfilingData'
+          description: Profiling data of the tables in the app.
+    FieldAttrType:
+      type: string
+      oneOf:
+      - title: U
+        description: UNKNOWN
+        x-qlik-const: 0
+      - title: A
+        description: ASCII
+        x-qlik-const: 1
+      - title: I
+        description: INTEGER
+        x-qlik-const: 10
+      - title: R
+        description: REAL
+        x-qlik-const: 2
+      - title: F
+        description: FIX
+        x-qlik-const: 11
+      - title: M
+        description: MONEY
+        x-qlik-const: 12
+      - title: D
+        description: DATE
+        x-qlik-const: 3
+      - title: T
+        description: TIME
+        x-qlik-const: 4
+      - title: TS
+        description: TIMESTAMP
+        x-qlik-const: 5
+      - title: IV
+        description: INTERVAL
+        x-qlik-const: 6
+    JsonObject:
+      type: object
+      description: Contains dynamic JSON data specified by the client.
+    NxAppObject:
+      type: object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NxObjectAttributes'
+        privileges:
+          type: array
+          items:
+            type: string
+          description: 'Application object privileges.
+
+            Hints to the client what actions the user is allowed to perform.
+
+            Could be any of:
+
+            * read
+
+            * create
+
+            * update
+
+            * delete
+
+            * publish
+
+            * exportdata
+
+            * change_owner'
+      description: Application object attributes and user privileges.
+    UpdateSpace:
+      type: object
+      properties:
+        spaceId:
+          type: string
+    Script:
+      type: object
+      properties:
+        script:
+          type: string
+    UpdateApp:
+      type: object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AppUpdateAttributes'
+    PublishData:
+      type: string
+      oneOf:
+      - title: source
+        x-qlik-const: 0
+      - title: target
+        x-qlik-const: 1
+    ReloadMeta:
+      type: object
+      properties:
+        endTime:
+          type: string
+          format: date-time
+          description: Time when reload ended.
+        success:
+          type: boolean
+          description: true if the reload was successful.
+        duration:
+          type: integer
+          format: int64
+          description: Duration of reload (ms).
+        reloadId:
+          type: string
+          description: Reload identifier.
+        rowLimit:
+          type: integer
+          format: int64
+          default: -1
+          description: If greater than or equal 0, defines max number of rows loaded from a data source.
+        appDbHash:
+          type: string
+          description: A Base64-encoded hash value of the new app database.
+        skipStore:
+          type: boolean
+          default: false
+          description: 'Set to true to skip Store statements.
+
+            The default value is false.'
+        storeHash:
+          type: string
+          description: A Base64-encoded hash value of all fields stored via the store statements.
+        statements:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReloadStatements'
+          description: List of external loaded or stored statements.
+        accessDbHash:
+          type: string
+          description: A Base64-encoded hash value of the new section access database.
+        includeFiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReloadIncludeFile'
+          description: Files brought into the script via include/mustInclude macros.
+        loadFilesBytes:
+          type: integer
+          format: int64
+        isPartialReload:
+          type: boolean
+          description: True if the reload is a partial reload.
+        storeFilesBytes:
+          type: integer
+          format: int64
+        loadExternalBytes:
+          type: integer
+          format: int64
+        loadDataFilesBytes:
+          type: integer
+          format: int64
+        storeDataFilesBytes:
+          type: integer
+          format: int64
+    NxApp:
+      type: object
+      properties:
+        create:
+          type: array
+          items:
+            $ref: '#/components/schemas/NxAppCreatePrivileges'
+          description: Object create privileges. Hints to the client what type of objects the user is allowed to create.
+        attributes:
+          $ref: '#/components/schemas/NxAttributes'
+        privileges:
+          type: array
+          items:
+            type: string
+          description: 'Application privileges.
+
+            Hints to the client what actions the user is allowed to perform.
+
+            Could be any of:
+
+            * read
+
+            * create
+
+            * update
+
+            * delete
+
+            * reload
+
+            * import
+
+            * publish
+
+            * duplicate
+
+            * export
+
+            * exportdata
+
+            * change_owner
+
+            * change_space'
+      description: Application attributes and user privileges.
+    EngineSize:
+      type: object
+      properties:
+        minEngineSize:
+          $ref: '#/components/schemas/EngineGBSize'
+      description: Engine size override for app placement on non reload engines.
+    AppObjectGenericType:
+      type: string
+      oneOf:
+      - title: genericObject
+        x-qlik-const: 0
+      - title: genericBookmark
+        x-qlik-const: 1
+      - title: genericMeasure
+        x-qlik-const: 2
+      - title: genericDimension
+        x-qlik-const: 3
+      - title: genericVariable
+        x-qlik-const: 4
+    CreateApp:
+      type: object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AppAttributes'
+    NavigationLinks:
+      type: object
+      properties:
+        next:
+          $ref: '#/components/schemas/NavigationLink'
+        prev:
+          $ref: '#/components/schemas/NavigationLink'
+    FieldInTableProfilingData:
+      type: object
+      properties:
+        Max:
+          type: number
+          format: double
+          description: Maximum value of numerical values. NaN otherwise.
+        Min:
+          type: number
+          format: double
+          description: Minimum value of numerical values. NaN otherwise.
+        Std:
+          type: number
+          format: double
+          description: Standard deviation of numerical values. NaN otherwise.
+        Sum:
+          type: number
+          format: double
+          description: Sum of all numerical values. NaN otherwise.
+        Name:
+          type: string
+          description: Name of the field.
+        Sum2:
+          type: number
+          format: double
+          description: Squared sum of all numerical values. NaN otherwise.
+        Median:
+          type: number
+          format: double
+          description: Median of all numerical values. NaN otherwise.
+        Average:
+          type: number
+          format: double
+          description: Average of all numerical values. NaN otherwise.
+        Kurtosis:
+          type: number
+          format: double
+          description: Kurtosis of the numerical values. NaN otherwise.
+        Skewness:
+          type: number
+          format: double
+          description: Skewness of the numerical values. NaN otherwise.
+        FieldTags:
+          type: array
+          items:
+            type: string
+          description: List of tags related to the field.
+        Fractiles:
+          type: array
+          items:
+            type: number
+            format: double
+          description: The .01, .05, .1, .25, .5, .75, .9, .95, .99 fractiles. Array of NaN otherwise.
+        NegValues:
+          type: integer
+          format: int64
+          description: Number of negative values
+        PosValues:
+          type: integer
+          format: int64
+          description: Number of positive values
+        LastSorted:
+          type: string
+          description: For textual values the last sorted string.
+        NullValues:
+          type: integer
+          format: int64
+          description: Number of null values
+        TextValues:
+          type: integer
+          format: int64
+          description: Number of textual values
+        ZeroValues:
+          type: integer
+          format: int64
+          description: Number of zero values for numerical values
+        FirstSorted:
+          type: string
+          description: For textual values the first sorted string.
+        AvgStringLen:
+          type: number
+          format: double
+          description: Average string length of textual values. 0 otherwise.
+        DataEvenness:
+          type: number
+          format: double
+          description: Data evenness aka Shannon's entropy normalized to [0,1]
+        EmptyStrings:
+          type: integer
+          format: int64
+          description: Number of empty strings
+        MaxStringLen:
+          type: integer
+          format: int64
+          description: Maximum string length of textual values. 0 otherwise.
+        MinStringLen:
+          type: integer
+          format: int64
+          description: Minimum string length of textual values. 0 otherwise.
+        MostFrequent:
+          type: array
+          items:
+            $ref: '#/components/schemas/SymbolFrequency'
+          description: Three most frequent values and their frequencies
+        NumberFormat:
+          $ref: '#/components/schemas/FieldAttributes'
+        SumStringLen:
+          type: integer
+          format: int64
+          description: Sum of all characters in strings in the field
+        NumericValues:
+          type: integer
+          format: int64
+          description: Number of numeric values
+        DistinctValues:
+          type: integer
+          format: int64
+          description: Number of distinct values
+        DistinctTextValues:
+          type: integer
+          format: int64
+          description: Number of distinct text values
+        DistinctNumericValues:
+          type: integer
+          format: int64
+          description: Number of distinct numeric values
+        FrequencyDistribution:
+          $ref: '#/components/schemas/FrequencyDistributionData'
+    ReloadStatements:
+      type: object
+      properties:
+        qri:
+          type: string
+          description: Resource Identifier.
+        type:
+          type: string
+          description: Type of statement, e.g. Store/Load.
+        label:
+          type: string
+          description: Label of the resource level node in lineage.
+        dataSize:
+          type: integer
+          format: int64
+          description: Data loaded from the network (bytes).
+        duration:
+          type: integer
+          format: int64
+          description: Duration of data generation (ms).
+        nbrOfRows:
+          type: integer
+          format: int64
+          description: Number of rows loaded.
+        tableName:
+          type: string
+          description: Name of the source table in lineage.
+        connection:
+          type: string
+          description: The connection name.
+        nbrOfFields:
+          type: integer
+          format: int64
+          description: Number of fields loaded.
+        connectionId:
+          type: string
+          description: Connection ID.
+        partialReloadOperation:
+          type: string
+          description: Partial load operation. e.g. add/replace/update/merge. n/a when not in partial load mode.
+    NxPatchOperationType:
+      type: string
+      oneOf:
+      - title: add
+        description: Add
+        x-qlik-const: 0
+      - title: remove
+        description: Remove
+        x-qlik-const: 1
+      - title: replace
+        description: Replace
+        x-qlik-const: 2
+    RepublishApp:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PublishData'
+        targetId:
+          type: string
+          description: The target ID to be republished.
+        attributes:
+          $ref: '#/components/schemas/AppUpdateAttributes'
+        checkOriginAppId:
+          type: boolean
+          default: true
+          description: Validate that source app is same as originally published.
+    AppContentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppContentListItem'
+          description: Content list items.
+        library:
+          type: string
+          description: Content library name.
+        subpath:
+          type: string
+          description: Content library relative listing path. Empty in case of root listed or representing actual subpath listed.
+    UpdateOwner:
+      type: object
+      properties:
+        ownerId:
+          type: string
+    ReloadIncludeFile:
+      type: object
+      properties:
+        qri:
+          type: string
+          description: File QRI resource identifier.
+        path:
+          type: string
+          description: File location within the connection.
+        connection:
+          type: string
+          description: The connection name.
+    FileData:
+      type: string
+      format: binary
+    TableMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the table.
+        comment:
+          type: string
+          description: Table comment.
+        is_loose:
+          type: boolean
+          description: 'If set to true, the table is loose due to circular connection.
+
+            The default value is false.'
+        byte_size:
+          type: integer
+          format: int64
+          description: Static RAM memory used in bytes.
+        is_system:
+          type: boolean
+          description: 'If set to true, the table is a system table.
+
+            The default value is false.'
+        no_of_rows:
+          type: integer
+          format: int64
+          description: Number of rows.
+        is_semantic:
+          type: boolean
+          description: 'If set to true, the table is semantic.
+
+            The default value is false.'
+        no_of_fields:
+          type: integer
+          format: int32
+          description: Number of fields.
+        no_of_key_fields:
+          type: integer
+          format: int32
+          description: Number of key fields.
+    NxPatch:
+      type: object
+      properties:
+        Op:
+          $ref: '#/components/schemas/NxPatchOperationType'
+        Path:
+          type: string
+          description: Path to the property to add, remove or replace.
+        Value:
+          type: string
+          description: 'This parameter is not used in a remove operation.
+
+            Corresponds to the value of the property to add or to the new value of the property to update.
+
+            Examples:
+
+            "false", "2", "\"New title\""'
+    ScriptLogMeta:
+      type: object
+      properties:
+        links:
+          $ref: '#/components/schemas/Log'
+        endTime:
+          type: string
+          format: date-time
+          description: Time when reload ended.
+        success:
+          type: boolean
+          description: True if the reload was successful.
+        duration:
+          type: integer
+          format: int64
+          description: Duration of reload (ms).
+        reloadId:
+          type: string
+          description: Reload identifier.
+    NxAttributes:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The App ID.
+        name:
+          type: string
+          description: App name.
+        owner:
+          type: string
+          description: Deprecated. Use the Users API to fetch user metadata.
+          x-qlik-deprecated: true
+        usage:
+          $ref: '#/components/schemas/UsageEnum'
+        custom:
+          $ref: '#/components/schemas/JsonObject'
+        ownerId:
+          type: string
+          description: Identifier of the app owner.
+        encrypted:
+          type: boolean
+          description: If set to true, the app is encrypted.
+        published:
+          type: boolean
+          description: 'For Qlik Cloud, indicates whether the app has been distributed from client-managed, not whether it has been published. To determine
+
+            if the app is published in Qlik Cloud, check for a non-empty value in the publishTime field. For client-managed, determines if the app is published.'
+        thumbnail:
+          type: string
+          description: App thumbnail.
+        createdDate:
+          type: string
+          format: date-time
+          description: The date and time when the app was created.
+        description:
+          type: string
+          description: App description.
+        originAppId:
+          type: string
+          description: The Origin App ID for published apps.
+        publishTime:
+          type: string
+          format: date-time
+          description: The date and time when the app was published, empty if unpublished. Use to determine if an app is published in Qlik Cloud.
+        dynamicColor:
+          type: string
+          description: The dynamic color of the app.
+        modifiedDate:
+          type: string
+          format: date-time
+          description: The date and time when the app was modified.
+        lastReloadTime:
+          type: string
+          format: date-time
+          description: Date and time of the last reload of the app.
+        hasSectionAccess:
+          type: boolean
+          description: If set to true, the app has section access configured,
+        isDirectQueryMode:
+          type: boolean
+          description: True if the app is a Direct Query app, false if not
+      description: App attributes. This structure can also contain extra user-defined attributes.
+    Placement:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+          description: The iso timestamp for when the override was configured.
+        minEngineSize:
+          $ref: '#/components/schemas/EngineGBSize'
+      description: Override for app placement on non reload engines.
+    AppContentListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique content identifier.
+        link:
+          type: string
+          description: Unique content link.
+        name:
+          type: string
+          description: Content name.
+        type:
+          type: string
+          description: Content type.
+    ReloadListMetadata:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReloadMeta'
+          description: Array of ReloadMeta.
+    ScriptVersion:
+      type: object
+      properties:
+        script:
+          type: string
+          description: Script text.
+        versionMessage:
+          type: string
+          description: Description of this script version

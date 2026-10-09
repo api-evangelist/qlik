@@ -1,0 +1,25 @@
+generated: '2026-10-03'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://qlik.dev/apis/rest/pagination-sorting-filtering/
+sources:
+- https://qlik.dev/apis/rest/pagination-sorting-filtering/
+- https://qlik.dev/apis/rest/pagination-sorting-filtering.md
+- https://qlik.dev/apis/rest/api-keys/
+- https://qlik.dev/apis/rest/oauth/
+idempotency:
+  coverage: none
+  evidence: The documentation does not describe any idempotency key or mechanism.
+pagination:
+  style: cursor-based
+  params:
+  - limit
+  response_fields:
+  - links.prev.href
+  - links.next.href
+  evidence: Pagination uses arbitrary unique string cursors returned in the `links` object; clients must follow `links.next` to fetch subsequent
+    pages.
+error_envelope: application/json object with an `errors` array; each error object contains `code`, `title`, `detail`, optional `meta`, `source.pointer`,
+  `source.parameter`, and `status`.
+authentication: Bearer token in the `Authorization` header.
+docs: https://qlik.dev/apis/rest/pagination-sorting-filtering/
