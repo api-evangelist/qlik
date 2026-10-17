@@ -229,35 +229,23 @@ paths:
         limit: 500
 components:
   schemas:
-    AnalysisRecommendationResponseDetail:
-      type: object
-      required:
-      - recAnalyses
-      properties:
-        nluInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/PartialNluInfo'
-        recAnalyses:
-          type: array
-          items:
-            $ref: '#/components/schemas/RecommendedAnalysis'
-    AnalysisDetails:
+    RecommendItems:
       type: object
       properties:
-        title:
-          type: string
-        analysis:
-          $ref: '#/components/schemas/Analysis'
-        analysisGroup:
-          $ref: '#/components/schemas/AnalysisGroup'
-    AnalysisRecommendationResponse:
-      type: object
-      properties:
-        data:
+        fields:
           type: array
           items:
-            $ref: '#/components/schemas/AnalysisRecommendationResponseDetail'
+            $ref: '#/components/schemas/RecommendFieldItem'
+        libItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecommendMasterItem'
+        targetAnalysis:
+          type: object
+          properties:
+            id:
+              type: string
+              description: id of the target analysis, returned by the GET insight-analyses endpoint
     Error:
       type: object
       required:
@@ -288,13 +276,33 @@ components:
           description: References to the source of the error.
       description: An error object.
       x-qlik-visibility: public
-    Href:
+    AnalysisRecommendRequest:
+      type: object
+      oneOf:
+      - $ref: '#/components/schemas/RecommendNaturalLangQuery'
+      - $ref: '#/components/schemas/RecommendItems'
+      description: "Request payload can be of two types, using natural language query or consist of fields or master items and optional target analysis.\nIn below examples, consider sales as a master item and product as field, so to get recommendations using sales and product,\nyou can utilize below three approaches, also you can set language parameter in headers as part of accept-language.\nExamples:\n```\n{\n  'text': 'show me sales by product'\n}\n```\n```\n{\n  'fields': [\n    {\n      'name': 'product'\n    }\n  ],\n  'libItems': [\n    {\n      libId: 'NwQfJ'\n    }\n  ]\n}\n```\n```\n{\n  'fields': [\n    {\n      'name': 'product'\n    }\n  ],\n  'libItems': [\n    {\n      'libId': 'NwQfJ'\n    }\n  ],\n  'targetAnalysis': {\n    'id': 'rank-rank'\n  }\n}\n```\n"
+    CompositionMinMax:
       type: object
       properties:
-        href:
-          type: string
-          format: uri
-          example: http://example.com
+        max:
+          type: number
+        min:
+          type: number
+      description: Upper and lower bounds for items of specific classification types
+    RecommendedAnalysisCore:
+      type: object
+      properties:
+        options:
+          type: object
+          description: (chart options + hypercube definition)
+        analysis:
+          $ref: '#/components/schemas/AnalysisDetails'
+        chartType:
+          $ref: '#/components/schemas/ChartType'
+        relevance:
+          type: number
+          description: percentage of selected items in the analysis to the overall items passed to the endpoint
     AnalysisDescriptorResponse:
       type: object
       properties:
@@ -304,55 +312,44 @@ components:
             $ref: '#/components/schemas/AnalysisDescriptor'
         links:
           $ref: '#/components/schemas/Links'
-    ChartType:
-      enum:
-      - barchart
-      - combochart
-      - distributionplot
-      - kpi
-      - linechart
-      - map
-      - scatterplot
-      - table
-      type: string
-      description: Chart type given to current recommendation
-    Analysis:
-      enum:
-      - breakdown
-      - changePoint
-      - comparison
-      - contribution
-      - correlation
-      - fact
-      - mutualInfo
-      - rank
-      - spike
-      - trend
-      - values
-      type: string
-    RecommendFieldItem:
+    FieldOverride:
       type: object
       properties:
-        name:
+        classifications:
+          type: array
+          items:
+            type: string
+        defaultAggregation:
           type: string
-        overrides:
-          $ref: '#/components/schemas/FieldOverride'
-      description: 'structure for providing fields in recommendation request, user can retrieve the fields using insight-analyses/model endpoint
-
-        '
-    RecommendMasterItem:
-      type: object
+      x-qlik-visibility: public
+    PartialNluInfo:
       properties:
-        libId:
+        role:
+          enum:
+          - dimension
+          - measure
+          - date
           type: string
-        overrides:
-          type: object
-          properties:
-            format:
-              $ref: '#/components/schemas/numberFormat'
-      description: 'structure for providing master items in recommendation request, user can retrieve the libId of master item using insight-analyses/model endpoint
-
-        '
+          description: Role of the token or phrase from query
+        text:
+          type: string
+          description: Matching token or phrase from query
+        type:
+          enum:
+          - field
+          - filter
+          - master_dimension
+          - master_measure
+          - custom_analysis
+          type: string
+          description: Type of token from query
+        fieldName:
+          type: string
+          description: Qlik sense application field selected for given token or phrase
+        fieldValue:
+          type: string
+          description: Filter value found from query
+      description: Contains break down of the asked question in the form of tokens with their classification.
     AnalysisDescriptor:
       type: object
       properties:
@@ -374,24 +371,35 @@ components:
         requiresAvailableAnalysisPeriod:
           type: boolean
           description: Used for period-specific analyses to indicate the temporal dimension must be associated with one or more analysis periods
-    Links:
+    Href:
       type: object
       properties:
-        next:
-          $ref: '#/components/schemas/Href'
-        prev:
-          $ref: '#/components/schemas/Href'
-        self:
-          $ref: '#/components/schemas/Href'
-    AnalysisModelResponse:
+        href:
+          type: string
+          format: uri
+          example: http://example.com
+    AnalysisDetails:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnalysisModelResponseDetail'
-        links:
-          $ref: '#/components/schemas/Links'
+        title:
+          type: string
+        analysis:
+          $ref: '#/components/schemas/Analysis'
+        analysisGroup:
+          $ref: '#/components/schemas/AnalysisGroup'
+    RecommendMasterItem:
+      type: object
+      properties:
+        libId:
+          type: string
+        overrides:
+          type: object
+          properties:
+            format:
+              $ref: '#/components/schemas/numberFormat'
+      description: 'structure for providing master items in recommendation request, user can retrieve the libId of master item using insight-analyses/model endpoint
+
+        '
     Classifications:
       type: array
       items:
@@ -423,16 +431,89 @@ components:
         - yearDay
         type: string
       description: classification defines the default role that attribute can play in an analysis
-    FieldOverride:
+    AnalysisModelResponse:
       type: object
       properties:
-        classifications:
+        data:
           type: array
           items:
-            type: string
-        defaultAggregation:
-          type: string
+            $ref: '#/components/schemas/AnalysisModelResponseDetail'
+        links:
+          $ref: '#/components/schemas/Links'
+    AnalysisRecommendationResponseDetail:
+      type: object
+      required:
+      - recAnalyses
+      properties:
+        nluInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartialNluInfo'
+        recAnalyses:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecommendedAnalysis'
+    Errors:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
       x-qlik-visibility: public
+    ChartType:
+      enum:
+      - barchart
+      - combochart
+      - distributionplot
+      - kpi
+      - linechart
+      - map
+      - scatterplot
+      - table
+      type: string
+      description: Chart type given to current recommendation
+    Links:
+      type: object
+      properties:
+        next:
+          $ref: '#/components/schemas/Href'
+        prev:
+          $ref: '#/components/schemas/Href'
+        self:
+          $ref: '#/components/schemas/Href'
+    AnalysisModelItemField:
+      type: object
+      properties:
+        name:
+          type: string
+          description: populated only for fields
+        isHidden:
+          type: boolean
+          default: false
+          description: whether the field is hidden in business logic
+        classifications:
+          $ref: '#/components/schemas/Classifications'
+        simplifiedClassifications:
+          $ref: '#/components/schemas/SimplifiedClassifications'
+    AnalysisRecommendationResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalysisRecommendationResponseDetail'
+    AnalysisGroup:
+      enum:
+      - anomaly
+      - brekadown
+      - comparison
+      - correl
+      - fact
+      - list
+      - mutualInfo
+      - rank
+      type: string
     SimplifiedClassifications:
       type: array
       items:
@@ -442,6 +523,70 @@ components:
         - temporal
         - geographical
         type: string
+    Analysis:
+      enum:
+      - breakdown
+      - changePoint
+      - comparison
+      - contribution
+      - correlation
+      - fact
+      - mutualInfo
+      - rank
+      - spike
+      - trend
+      - values
+      type: string
+    RecommendNaturalLangQuery:
+      type: object
+      required:
+      - text
+      properties:
+        text:
+          type: string
+          description: The NL query.
+    AnalysisModelItemMasterItem:
+      type: object
+      properties:
+        libId:
+          type: string
+          description: only available for master items
+        caption:
+          type: string
+        isHidden:
+          type: boolean
+          default: false
+          description: whether the master item is hidden in business logic
+        classifications:
+          $ref: '#/components/schemas/Classifications'
+        simplifiedClassifications:
+          $ref: '#/components/schemas/SimplifiedClassifications'
+    numberFormat:
+      type: object
+      properties:
+        qDec:
+          type: string
+        qFmt:
+          type: string
+        qThou:
+          type: string
+        qType:
+          type: string
+        qnDec:
+          type: number
+        qUseThou:
+          type: number
+    RecommendedAnalysis:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/RecommendedAnalysisCore'
+      - type: object
+        properties:
+          parts:
+            type: array
+            items:
+              $ref: '#/components/schemas/RecommendedAnalysisCore'
+            description: part analyses (only for macro analyses)
     AnalysisComposition:
       type: object
       properties:
@@ -462,114 +607,6 @@ components:
               type: string
             short:
               type: string
-    Errors:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-      x-qlik-visibility: public
-    AnalysisModelItemField:
-      type: object
-      properties:
-        name:
-          type: string
-          description: populated only for fields
-        isHidden:
-          type: boolean
-          default: false
-          description: whether the field is hidden in business logic
-        classifications:
-          $ref: '#/components/schemas/Classifications'
-        simplifiedClassifications:
-          $ref: '#/components/schemas/SimplifiedClassifications'
-    PartialNluInfo:
-      properties:
-        role:
-          enum:
-          - dimension
-          - measure
-          - date
-          type: string
-          description: Role of the token or phrase from query
-        text:
-          type: string
-          description: Matching token or phrase from query
-        type:
-          enum:
-          - field
-          - filter
-          - master_dimension
-          - master_measure
-          - custom_analysis
-          type: string
-          description: Type of token from query
-        fieldName:
-          type: string
-          description: Qlik sense application field selected for given token or phrase
-        fieldValue:
-          type: string
-          description: Filter value found from query
-      description: Contains break down of the asked question in the form of tokens with their classification.
-    AnalysisModelItemMasterItem:
-      type: object
-      properties:
-        libId:
-          type: string
-          description: only available for master items
-        caption:
-          type: string
-        isHidden:
-          type: boolean
-          default: false
-          description: whether the master item is hidden in business logic
-        classifications:
-          $ref: '#/components/schemas/Classifications'
-        simplifiedClassifications:
-          $ref: '#/components/schemas/SimplifiedClassifications'
-    AnalysisRecommendRequest:
-      type: object
-      oneOf:
-      - $ref: '#/components/schemas/RecommendNaturalLangQuery'
-      - $ref: '#/components/schemas/RecommendItems'
-      description: "Request payload can be of two types, using natural language query or consist of fields or master items and optional target analysis.\nIn below examples, consider sales as a master item and product as field, so to get recommendations using sales and product,\nyou can utilize below three approaches, also you can set language parameter in headers as part of accept-language.\nExamples:\n```\n{\n  'text': 'show me sales by product'\n}\n```\n```\n{\n  'fields': [\n    {\n      'name': 'product'\n    }\n  ],\n  'libItems': [\n    {\n      libId: 'NwQfJ'\n    }\n  ]\n}\n```\n```\n{\n  'fields': [\n    {\n      'name': 'product'\n    }\n  ],\n  'libItems': [\n    {\n      'libId': 'NwQfJ'\n    }\n  ],\n  'targetAnalysis': {\n    'id': 'rank-rank'\n  }\n}\n```\n"
-    RecommendItems:
-      type: object
-      properties:
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/RecommendFieldItem'
-        libItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/RecommendMasterItem'
-        targetAnalysis:
-          type: object
-          properties:
-            id:
-              type: string
-              description: id of the target analysis, returned by the GET insight-analyses endpoint
-    RecommendNaturalLangQuery:
-      type: object
-      required:
-      - text
-      properties:
-        text:
-          type: string
-          description: The NL query.
-    AnalysisGroup:
-      enum:
-      - anomaly
-      - brekadown
-      - comparison
-      - correl
-      - fact
-      - list
-      - mutualInfo
-      - rank
-      type: string
     AnalysisModelResponseDetail:
       type: object
       properties:
@@ -587,50 +624,13 @@ components:
         isDefinedLogicalModelValid:
           type: boolean
           description: set only if previous property is true, to indicate if the business logic passes validation
-    numberFormat:
+    RecommendFieldItem:
       type: object
       properties:
-        qDec:
+        name:
           type: string
-        qFmt:
-          type: string
-        qThou:
-          type: string
-        qType:
-          type: string
-        qnDec:
-          type: number
-        qUseThou:
-          type: number
-    RecommendedAnalysisCore:
-      type: object
-      properties:
-        options:
-          type: object
-          description: (chart options + hypercube definition)
-        analysis:
-          $ref: '#/components/schemas/AnalysisDetails'
-        chartType:
-          $ref: '#/components/schemas/ChartType'
-        relevance:
-          type: number
-          description: percentage of selected items in the analysis to the overall items passed to the endpoint
-    RecommendedAnalysis:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/RecommendedAnalysisCore'
-      - type: object
-        properties:
-          parts:
-            type: array
-            items:
-              $ref: '#/components/schemas/RecommendedAnalysisCore'
-            description: part analyses (only for macro analyses)
-    CompositionMinMax:
-      type: object
-      properties:
-        max:
-          type: number
-        min:
-          type: number
-      description: Upper and lower bounds for items of specific classification types
+        overrides:
+          $ref: '#/components/schemas/FieldOverride'
+      description: 'structure for providing fields in recommendation request, user can retrieve the fields using insight-analyses/model endpoint
+
+        '

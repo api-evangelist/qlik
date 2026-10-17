@@ -54,7 +54,7 @@
     "apps.json: declared missing tag: evaluation",
     "apps.json: declared missing tag: filters",
     "apps.json: declared missing tag: insight-analyses",
-    "apis.yml register: already-registered"
+    "apis.yml register: written (+4 apis, 9 total)"
   ],
   "skipped": [
     "qlik-apps-api-openapi.yml: previously refined output, superseded by openapi/_original/",

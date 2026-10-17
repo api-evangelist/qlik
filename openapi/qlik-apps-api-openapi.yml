@@ -1362,33 +1362,260 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    FrequencyDistributionData:
+    JsonObject:
+      type: object
+      description: Contains dynamic JSON data specified by the client.
+    FieldAttrType:
+      type: string
+      oneOf:
+      - title: U
+        description: UNKNOWN
+        x-qlik-const: 0
+      - title: A
+        description: ASCII
+        x-qlik-const: 1
+      - title: I
+        description: INTEGER
+        x-qlik-const: 10
+      - title: R
+        description: REAL
+        x-qlik-const: 2
+      - title: F
+        description: FIX
+        x-qlik-const: 11
+      - title: M
+        description: MONEY
+        x-qlik-const: 12
+      - title: D
+        description: DATE
+        x-qlik-const: 3
+      - title: T
+        description: TIME
+        x-qlik-const: 4
+      - title: TS
+        description: TIMESTAMP
+        x-qlik-const: 5
+      - title: IV
+        description: INTERVAL
+        x-qlik-const: 6
+    HardwareMeta:
       type: object
       properties:
-        BinsEdges:
-          type: array
-          items:
-            type: number
-            format: double
-          description: Bins edges.
-        Frequencies:
-          type: array
-          items:
-            type: integer
-            format: int32
-          description: Bins frequencies.
-        NumberOfBins:
+        total_memory:
+          type: integer
+          format: int64
+          description: RAM available.
+        logical_cores:
           type: integer
           format: int32
-          description: Number of bins.
-    ScriptLogList:
+          description: Number of logical cores available.
+    FileData:
+      type: string
+      format: binary
+    ScriptMeta:
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int64
+          description: Script size.
+        scriptId:
+          type: string
+          description: Script id.
+        modifierId:
+          type: string
+          description: User last modifying script version.
+        modifiedTime:
+          type: string
+          description: Script version last modification time.
+        versionMessage:
+          type: string
+          description: Description of this script version
+    TableMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the table.
+        comment:
+          type: string
+          description: Table comment.
+        is_loose:
+          type: boolean
+          description: 'If set to true, the table is loose due to circular connection.
+
+            The default value is false.'
+        byte_size:
+          type: integer
+          format: int64
+          description: Static RAM memory used in bytes.
+        is_system:
+          type: boolean
+          description: 'If set to true, the table is a system table.
+
+            The default value is false.'
+        no_of_rows:
+          type: integer
+          format: int64
+          description: Number of rows.
+        is_semantic:
+          type: boolean
+          description: 'If set to true, the table is semantic.
+
+            The default value is false.'
+        no_of_fields:
+          type: integer
+          format: int32
+          description: Number of fields.
+        no_of_key_fields:
+          type: integer
+          format: int32
+          description: Number of key fields.
+    NxAppCreatePrivileges:
+      type: object
+      properties:
+        resource:
+          type: string
+          description: Type of resource. For example, sheet, story, bookmark, etc.
+        canCreate:
+          type: boolean
+          description: Is set to true if the user has privileges to create the resource.
+    ScriptIssues:
+      type: object
+      properties:
+        Errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptIssue'
+        Warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptIssue'
+    AppUpdateAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name (title) of the application.
+        description:
+          type: string
+          description: The description of the application.
+    Log:
+      type: object
+      properties:
+        log:
+          type: string
+          description: Provides a link to download the log file.
+    ReloadListMetadata:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/ScriptLogMeta'
-          description: Array of scriptLogMeta.
+            $ref: '#/components/schemas/ReloadMeta'
+          description: Array of ReloadMeta.
+    ReloadStatements:
+      type: object
+      properties:
+        qri:
+          type: string
+          description: Resource Identifier.
+        type:
+          type: string
+          description: Type of statement, e.g. Store/Load.
+        label:
+          type: string
+          description: Label of the resource level node in lineage.
+        dataSize:
+          type: integer
+          format: int64
+          description: Data loaded from the network (bytes).
+        duration:
+          type: integer
+          format: int64
+          description: Duration of data generation (ms).
+        nbrOfRows:
+          type: integer
+          format: int64
+          description: Number of rows loaded.
+        tableName:
+          type: string
+          description: Name of the source table in lineage.
+        connection:
+          type: string
+          description: The connection name.
+        nbrOfFields:
+          type: integer
+          format: int64
+          description: Number of fields loaded.
+        connectionId:
+          type: string
+          description: Connection ID.
+        partialReloadOperation:
+          type: string
+          description: Partial load operation. e.g. add/replace/update/merge. n/a when not in partial load mode.
+    LineageInfoRest:
+      type: object
+      properties:
+        statement:
+          type: string
+          description: The LOAD and SELECT script statements from the data load script.
+        discriminator:
+          type: string
+          description: 'A string indicating the origin of the data:
+
+            * [filename]: the data comes from a local file.
+
+            * INLINE: the data is entered inline in the load script.
+
+            * RESIDENT: the data comes from a resident table. The table name is listed.
+
+            * AUTOGENERATE: the data is generated from the load script (no external table of data source).
+
+            * Provider: the data comes from a data connection. The connector source name is listed.
+
+            * [webfile]: the data comes from a web-based file.
+
+            * STORE: path to QVD or TXT file where data is stored.
+
+            * EXTENSION: the data comes from a Server Side Extension (SSE).'
+    Placement:
+      type: object
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+          description: The iso timestamp for when the override was configured.
+        minEngineSize:
+          $ref: '#/components/schemas/EngineGBSize'
+      description: Override for app placement on non reload engines.
+    NxPatchOperationType:
+      type: string
+      oneOf:
+      - title: add
+        description: Add
+        x-qlik-const: 0
+      - title: remove
+        description: Remove
+        x-qlik-const: 1
+      - title: replace
+        description: Replace
+        x-qlik-const: 2
+    AppContentListItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique content identifier.
+        link:
+          type: string
+          description: Unique content link.
+        name:
+          type: string
+          description: Content name.
+        type:
+          type: string
+          description: Content type.
     EngineGBSize:
       type: string
       oneOf:
@@ -1413,197 +1640,99 @@ components:
       - title: '200'
         description: EngineSize_200GB
         x-qlik-const: 6
-    AppAttributes:
+    PublishData:
+      type: string
+      oneOf:
+      - title: source
+        x-qlik-const: 0
+      - title: target
+        x-qlik-const: 1
+    UpdateSpace:
       type: object
       properties:
-        name:
-          type: string
-          description: The name (title) of the application
-        usage:
-          $ref: '#/components/schemas/UsageEnum'
-        locale:
-          type: string
-          description: Set custom locale instead of the system default
         spaceId:
           type: string
-          description: The space ID of the application
-        description:
-          type: string
-          description: The description of the application
-    NxObjectAttributes:
+    NxAttributes:
       type: object
       properties:
         id:
           type: string
-          description: The object Id.
+          description: The App ID.
         name:
           type: string
-          description: Object name.
+          description: App name.
+        owner:
+          type: string
+          description: Deprecated. Use the Users API to fetch user metadata.
+          x-qlik-deprecated: true
+        usage:
+          $ref: '#/components/schemas/UsageEnum'
+        custom:
+          $ref: '#/components/schemas/JsonObject'
         ownerId:
           type: string
-          description: The object owner's Id.
-        approved:
+          description: Identifier of the app owner.
+        encrypted:
           type: boolean
-          description: True if the object is approved.
-        createdAt:
+          description: If set to true, the app is encrypted.
+        published:
+          type: boolean
+          description: 'For Qlik Cloud, indicates whether the app has been distributed from client-managed, not whether it has been published. To determine
+
+            if the app is published in Qlik Cloud, check for a non-empty value in the publishTime field. For client-managed, determines if the app is published.'
+        thumbnail:
+          type: string
+          description: App thumbnail.
+        createdDate:
           type: string
           format: date-time
-          description: The date and time when the object was created.
-        updatedAt:
-          type: string
-          format: date-time
-          description: The date and time when the object was modified.
-        objectType:
-          type: string
-          description: The type of the object.
+          description: The date and time when the app was created.
         description:
           type: string
-          description: Object description.
-        genericType:
-          $ref: '#/components/schemas/AppObjectGenericType'
-        publishedAt:
-          type: string
-          format: date-time
-          description: The date and time when the object was published, empty if unpublished.
-      description: App object attributes. This structure can also contain extra user-defined attributes.
-    SymbolFrequency:
-      type: object
-      properties:
-        Symbol:
-          $ref: '#/components/schemas/SymbolValue'
-        Frequency:
-          type: integer
-          format: int64
-          description: Frequency of the above symbol in the field
-    UserPrivileges:
-      type: string
-      oneOf:
-      - title: can_create_app
-        x-qlik-const: 0
-      - title: can_import_app
-        x-qlik-const: 1
-      - title: can_create_session_app
-        x-qlik-const: 2
-    NavigationLink:
-      type: object
-      properties:
-        href:
-          type: string
-    PublishApp:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/PublishData'
-        moveApp:
-          type: boolean
-          default: false
-          description: The original is moved instead of copied. The current published state of all objects is kept.
-        spaceId:
-          type: string
-          description: The managed space ID where the app will be published.
-        attributes:
-          $ref: '#/components/schemas/AppUpdateAttributes'
+          description: App description.
         originAppId:
           type: string
-          description: If app is moved, originAppId needs to be provided.
-    ScriptMetaList:
+          description: The Origin App ID for published apps.
+        publishTime:
+          type: string
+          format: date-time
+          description: The date and time when the app was published, empty if unpublished. Use to determine if an app is published in Qlik Cloud.
+        dynamicColor:
+          type: string
+          description: The dynamic color of the app.
+        modifiedDate:
+          type: string
+          format: date-time
+          description: The date and time when the app was modified.
+        lastReloadTime:
+          type: string
+          format: date-time
+          description: Date and time of the last reload of the app.
+        hasSectionAccess:
+          type: boolean
+          description: If set to true, the app has section access configured,
+        isDirectQueryMode:
+          type: boolean
+          description: True if the app is a Direct Query app, false if not
+      description: App attributes. This structure can also contain extra user-defined attributes.
+    UpdateApp:
       type: object
       properties:
-        links:
-          $ref: '#/components/schemas/NavigationLinks'
-        scripts:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScriptMeta'
-          description: Script versions metadata.
-        privileges:
-          type: array
-          items:
-            type: string
-    FieldMetadata:
-      type: object
-      properties:
-        hash:
-          type: string
-          description: Hash of the data in the field. If the data in a reload is the same, the hash will be consistent.
-        name:
-          type: string
-          description: Name of the field.
-        tags:
-          type: array
-          items:
-            type: string
-          description: 'Gives information on a field. For example, it can return the type of the field.
-
-            Examples: key, text, ASCII.'
-        comment:
-          type: string
-          description: Field comment.
-        cardinal:
-          type: integer
-          format: int32
-          description: Number of distinct field values.
-        byte_size:
-          type: integer
-          format: int64
-          description: Static RAM memory used in bytes.
-        is_hidden:
-          type: boolean
-          description: 'If set to true, the field is hidden.
-
-            The default value is false.'
-        is_locked:
-          type: boolean
-          description: 'If set to true, the field is locked.
-
-            The default value is false.'
-        is_system:
-          type: boolean
-          description: 'If set to true, the field is a system field.
-
-            The default value is false.'
-        is_numeric:
-          type: boolean
-          description: 'Is set to true if the value is a numeric.
-
-            The default value is false.'
-        src_tables:
-          type: array
-          items:
-            type: string
-          description: List of table names.
-        is_semantic:
-          type: boolean
-          description: 'If set to true, the field is semantic.
-
-            The default value is false.'
-        total_count:
-          type: integer
-          format: int64
-          description: Total number of field values.
-        distinct_only:
-          type: boolean
-          description: 'If set to true, only distinct field values are shown.
-
-            The default value is false.'
-        always_one_selected:
-          type: boolean
-          description: 'If set to true, the field has one and only one selection (not 0 and not more than 1).
-
-            If this property is set to true, the field cannot be cleared anymore and no more selections can be performed in that field.
-
-            The default value is false.'
-    ScriptIssues:
-      type: object
-      properties:
-        Errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScriptIssue'
-        Warnings:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScriptIssue'
+        attributes:
+          $ref: '#/components/schemas/AppUpdateAttributes'
+    AppObjectGenericType:
+      type: string
+      oneOf:
+      - title: genericObject
+        x-qlik-const: 0
+      - title: genericBookmark
+        x-qlik-const: 1
+      - title: genericMeasure
+        x-qlik-const: 2
+      - title: genericDimension
+        x-qlik-const: 3
+      - title: genericVariable
+        x-qlik-const: 4
     FieldAttributes:
       type: object
       properties:
@@ -1710,114 +1839,25 @@ components:
         ### Type is ASCII
 
         No formatting, _qFmt_ is ignored.'
-    ScriptMeta:
+    FrequencyDistributionData:
       type: object
       properties:
-        size:
-          type: integer
-          format: int64
-          description: Script size.
-        scriptId:
-          type: string
-          description: Script id.
-        modifierId:
-          type: string
-          description: User last modifying script version.
-        modifiedTime:
-          type: string
-          description: Script version last modification time.
-        versionMessage:
-          type: string
-          description: Description of this script version
-    AppUpdateAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name (title) of the application.
-        description:
-          type: string
-          description: The description of the application.
-    UsageEnum:
-      type: string
-      oneOf:
-      - title: ANALYTICS
-        x-qlik-const: 0
-      - title: DATA_PREPARATION
-        x-qlik-const: 1
-      - title: DATAFLOW_PREP
-        x-qlik-const: 2
-      - title: SINGLE_TABLE_PREP
-        x-qlik-const: 3
-      - title: DIRECT_QUERY_MODE
-        x-qlik-const: 4
-    LastReloadMetadata:
-      type: object
-      properties:
-        hardware:
-          $ref: '#/components/schemas/HardwareMeta'
-        cpu_time_spent_ms:
-          type: integer
-          format: int64
-          description: Number of CPU milliseconds it took to reload the app.
-        peak_memory_bytes:
-          type: integer
-          format: int64
-          description: Maximum number of bytes used during reload of the app.
-        fullReloadPeakMemoryBytes:
-          type: integer
-          format: int64
-          description: Maximum number of bytes used during full reload of the app.
-        partialReloadPeakMemoryBytes:
-          type: integer
-          format: int64
-          description: Maximum number of bytes used during partial reload of the app.
-    LineageInfoRest:
-      type: object
-      properties:
-        statement:
-          type: string
-          description: The LOAD and SELECT script statements from the data load script.
-        discriminator:
-          type: string
-          description: 'A string indicating the origin of the data:
-
-            * [filename]: the data comes from a local file.
-
-            * INLINE: the data is entered inline in the load script.
-
-            * RESIDENT: the data comes from a resident table. The table name is listed.
-
-            * AUTOGENERATE: the data is generated from the load script (no external table of data source).
-
-            * Provider: the data comes from a data connection. The connector source name is listed.
-
-            * [webfile]: the data comes from a web-based file.
-
-            * STORE: path to QVD or TXT file where data is stored.
-
-            * EXTENSION: the data comes from a Server Side Extension (SSE).'
-    ScriptIssue:
-      type: object
-      properties:
-        Msg:
-          type: string
-          description: Error or warning string. What is the problem.
-        Tab:
+        BinsEdges:
+          type: array
+          items:
+            type: number
+            format: double
+          description: Bins edges.
+        Frequencies:
+          type: array
+          items:
+            type: integer
+            format: int32
+          description: Bins frequencies.
+        NumberOfBins:
           type: integer
           format: int32
-          description: The index of the tab for the issue.
-        Info:
-          type: string
-          description: Additional information like workarounds or clarifications.
-        Line:
-          type: integer
-          format: int32
-          description: Line in the tab of the issue.
-        Column:
-          type: integer
-          format: int32
-          description: UTF-8 byte column of the issue.
+          description: Number of bins.
     TableProfilingData:
       type: object
       properties:
@@ -1830,225 +1870,13 @@ components:
           items:
             $ref: '#/components/schemas/FieldInTableProfilingData'
           description: Field values profiling info
-    SymbolValue:
+    NavigationLinks:
       type: object
       properties:
-        Text:
-          type: string
-          description: String value of the symbol. This parameter is optional and present only if Symbol is a string.
-        Number:
-          type: number
-          format: double
-          description: Numeric value of the symbol. NaN otherwise.
-    HardwareMeta:
-      type: object
-      properties:
-        total_memory:
-          type: integer
-          format: int64
-          description: RAM available.
-        logical_cores:
-          type: integer
-          format: int32
-          description: Number of logical cores available.
-    Log:
-      type: object
-      properties:
-        log:
-          type: string
-          description: Provides a link to download the log file.
-    NxAppCreatePrivileges:
-      type: object
-      properties:
-        resource:
-          type: string
-          description: Type of resource. For example, sheet, story, bookmark, etc.
-        canCreate:
-          type: boolean
-          description: Is set to true if the user has privileges to create the resource.
-    DataModelMetadata:
-      type: object
-      properties:
-        usage:
-          $ref: '#/components/schemas/UsageEnum'
-        fields:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldMetadata'
-          description: List of field descriptions.
-        tables:
-          type: array
-          items:
-            $ref: '#/components/schemas/TableMetadata'
-          description: List of table descriptions.
-        reload_meta:
-          $ref: '#/components/schemas/LastReloadMetadata'
-        static_byte_size:
-          type: integer
-          format: int64
-          description: Static memory usage for the app.
-        has_section_access:
-          type: boolean
-          description: If set to true, the app has section access configured.
-        is_direct_query_mode:
-          type: boolean
-        tables_profiling_data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TableProfilingData'
-          description: Profiling data of the tables in the app.
-    FieldAttrType:
-      type: string
-      oneOf:
-      - title: U
-        description: UNKNOWN
-        x-qlik-const: 0
-      - title: A
-        description: ASCII
-        x-qlik-const: 1
-      - title: I
-        description: INTEGER
-        x-qlik-const: 10
-      - title: R
-        description: REAL
-        x-qlik-const: 2
-      - title: F
-        description: FIX
-        x-qlik-const: 11
-      - title: M
-        description: MONEY
-        x-qlik-const: 12
-      - title: D
-        description: DATE
-        x-qlik-const: 3
-      - title: T
-        description: TIME
-        x-qlik-const: 4
-      - title: TS
-        description: TIMESTAMP
-        x-qlik-const: 5
-      - title: IV
-        description: INTERVAL
-        x-qlik-const: 6
-    JsonObject:
-      type: object
-      description: Contains dynamic JSON data specified by the client.
-    NxAppObject:
-      type: object
-      properties:
-        attributes:
-          $ref: '#/components/schemas/NxObjectAttributes'
-        privileges:
-          type: array
-          items:
-            type: string
-          description: 'Application object privileges.
-
-            Hints to the client what actions the user is allowed to perform.
-
-            Could be any of:
-
-            * read
-
-            * create
-
-            * update
-
-            * delete
-
-            * publish
-
-            * exportdata
-
-            * change_owner'
-      description: Application object attributes and user privileges.
-    UpdateSpace:
-      type: object
-      properties:
-        spaceId:
-          type: string
-    Script:
-      type: object
-      properties:
-        script:
-          type: string
-    UpdateApp:
-      type: object
-      properties:
-        attributes:
-          $ref: '#/components/schemas/AppUpdateAttributes'
-    PublishData:
-      type: string
-      oneOf:
-      - title: source
-        x-qlik-const: 0
-      - title: target
-        x-qlik-const: 1
-    ReloadMeta:
-      type: object
-      properties:
-        endTime:
-          type: string
-          format: date-time
-          description: Time when reload ended.
-        success:
-          type: boolean
-          description: true if the reload was successful.
-        duration:
-          type: integer
-          format: int64
-          description: Duration of reload (ms).
-        reloadId:
-          type: string
-          description: Reload identifier.
-        rowLimit:
-          type: integer
-          format: int64
-          default: -1
-          description: If greater than or equal 0, defines max number of rows loaded from a data source.
-        appDbHash:
-          type: string
-          description: A Base64-encoded hash value of the new app database.
-        skipStore:
-          type: boolean
-          default: false
-          description: 'Set to true to skip Store statements.
-
-            The default value is false.'
-        storeHash:
-          type: string
-          description: A Base64-encoded hash value of all fields stored via the store statements.
-        statements:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReloadStatements'
-          description: List of external loaded or stored statements.
-        accessDbHash:
-          type: string
-          description: A Base64-encoded hash value of the new section access database.
-        includeFiles:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReloadIncludeFile'
-          description: Files brought into the script via include/mustInclude macros.
-        loadFilesBytes:
-          type: integer
-          format: int64
-        isPartialReload:
-          type: boolean
-          description: True if the reload is a partial reload.
-        storeFilesBytes:
-          type: integer
-          format: int64
-        loadExternalBytes:
-          type: integer
-          format: int64
-        loadDataFilesBytes:
-          type: integer
-          format: int64
-        storeDataFilesBytes:
-          type: integer
-          format: int64
+        next:
+          $ref: '#/components/schemas/NavigationLink'
+        prev:
+          $ref: '#/components/schemas/NavigationLink'
     NxApp:
       type: object
       properties:
@@ -2093,37 +1921,190 @@ components:
 
             * change_space'
       description: Application attributes and user privileges.
-    EngineSize:
+    FieldMetadata:
       type: object
       properties:
-        minEngineSize:
-          $ref: '#/components/schemas/EngineGBSize'
-      description: Engine size override for app placement on non reload engines.
-    AppObjectGenericType:
-      type: string
-      oneOf:
-      - title: genericObject
-        x-qlik-const: 0
-      - title: genericBookmark
-        x-qlik-const: 1
-      - title: genericMeasure
-        x-qlik-const: 2
-      - title: genericDimension
-        x-qlik-const: 3
-      - title: genericVariable
-        x-qlik-const: 4
+        hash:
+          type: string
+          description: Hash of the data in the field. If the data in a reload is the same, the hash will be consistent.
+        name:
+          type: string
+          description: Name of the field.
+        tags:
+          type: array
+          items:
+            type: string
+          description: 'Gives information on a field. For example, it can return the type of the field.
+
+            Examples: key, text, ASCII.'
+        comment:
+          type: string
+          description: Field comment.
+        cardinal:
+          type: integer
+          format: int32
+          description: Number of distinct field values.
+        byte_size:
+          type: integer
+          format: int64
+          description: Static RAM memory used in bytes.
+        is_hidden:
+          type: boolean
+          description: 'If set to true, the field is hidden.
+
+            The default value is false.'
+        is_locked:
+          type: boolean
+          description: 'If set to true, the field is locked.
+
+            The default value is false.'
+        is_system:
+          type: boolean
+          description: 'If set to true, the field is a system field.
+
+            The default value is false.'
+        is_numeric:
+          type: boolean
+          description: 'Is set to true if the value is a numeric.
+
+            The default value is false.'
+        src_tables:
+          type: array
+          items:
+            type: string
+          description: List of table names.
+        is_semantic:
+          type: boolean
+          description: 'If set to true, the field is semantic.
+
+            The default value is false.'
+        total_count:
+          type: integer
+          format: int64
+          description: Total number of field values.
+        distinct_only:
+          type: boolean
+          description: 'If set to true, only distinct field values are shown.
+
+            The default value is false.'
+        always_one_selected:
+          type: boolean
+          description: 'If set to true, the field has one and only one selection (not 0 and not more than 1).
+
+            If this property is set to true, the field cannot be cleared anymore and no more selections can be performed in that field.
+
+            The default value is false.'
+    ScriptIssue:
+      type: object
+      properties:
+        Msg:
+          type: string
+          description: Error or warning string. What is the problem.
+        Tab:
+          type: integer
+          format: int32
+          description: The index of the tab for the issue.
+        Info:
+          type: string
+          description: Additional information like workarounds or clarifications.
+        Line:
+          type: integer
+          format: int32
+          description: Line in the tab of the issue.
+        Column:
+          type: integer
+          format: int32
+          description: UTF-8 byte column of the issue.
+    RepublishApp:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PublishData'
+        targetId:
+          type: string
+          description: The target ID to be republished.
+        attributes:
+          $ref: '#/components/schemas/AppUpdateAttributes'
+        checkOriginAppId:
+          type: boolean
+          default: true
+          description: Validate that source app is same as originally published.
+    UpdateOwner:
+      type: object
+      properties:
+        ownerId:
+          type: string
+    PublishApp:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PublishData'
+        moveApp:
+          type: boolean
+          default: false
+          description: The original is moved instead of copied. The current published state of all objects is kept.
+        spaceId:
+          type: string
+          description: The managed space ID where the app will be published.
+        attributes:
+          $ref: '#/components/schemas/AppUpdateAttributes'
+        originAppId:
+          type: string
+          description: If app is moved, originAppId needs to be provided.
+    ScriptVersion:
+      type: object
+      properties:
+        script:
+          type: string
+          description: Script text.
+        versionMessage:
+          type: string
+          description: Description of this script version
+    AppContentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppContentListItem'
+          description: Content list items.
+        library:
+          type: string
+          description: Content library name.
+        subpath:
+          type: string
+          description: Content library relative listing path. Empty in case of root listed or representing actual subpath listed.
     CreateApp:
       type: object
       properties:
         attributes:
           $ref: '#/components/schemas/AppAttributes'
-    NavigationLinks:
+    UserPrivileges:
+      type: string
+      oneOf:
+      - title: can_create_app
+        x-qlik-const: 0
+      - title: can_import_app
+        x-qlik-const: 1
+      - title: can_create_session_app
+        x-qlik-const: 2
+    NxPatch:
       type: object
       properties:
-        next:
-          $ref: '#/components/schemas/NavigationLink'
-        prev:
-          $ref: '#/components/schemas/NavigationLink'
+        Op:
+          $ref: '#/components/schemas/NxPatchOperationType'
+        Path:
+          type: string
+          description: Path to the property to add, remove or replace.
+        Value:
+          type: string
+          description: 'This parameter is not used in a remove operation.
+
+            Corresponds to the value of the property to add or to the new value of the property to update.
+
+            Examples:
+
+            "false", "2", "\"New title\""'
     FieldInTableProfilingData:
       type: object
       properties:
@@ -2252,91 +2233,193 @@ components:
           description: Number of distinct numeric values
         FrequencyDistribution:
           $ref: '#/components/schemas/FrequencyDistributionData'
-    ReloadStatements:
+    SymbolValue:
       type: object
       properties:
-        qri:
+        Text:
           type: string
-          description: Resource Identifier.
-        type:
+          description: String value of the symbol. This parameter is optional and present only if Symbol is a string.
+        Number:
+          type: number
+          format: double
+          description: Numeric value of the symbol. NaN otherwise.
+    NxAppObject:
+      type: object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/NxObjectAttributes'
+        privileges:
+          type: array
+          items:
+            type: string
+          description: 'Application object privileges.
+
+            Hints to the client what actions the user is allowed to perform.
+
+            Could be any of:
+
+            * read
+
+            * create
+
+            * update
+
+            * delete
+
+            * publish
+
+            * exportdata
+
+            * change_owner'
+      description: Application object attributes and user privileges.
+    NxObjectAttributes:
+      type: object
+      properties:
+        id:
           type: string
-          description: Type of statement, e.g. Store/Load.
-        label:
+          description: The object Id.
+        name:
           type: string
-          description: Label of the resource level node in lineage.
-        dataSize:
+          description: Object name.
+        ownerId:
+          type: string
+          description: The object owner's Id.
+        approved:
+          type: boolean
+          description: True if the object is approved.
+        createdAt:
+          type: string
+          format: date-time
+          description: The date and time when the object was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: The date and time when the object was modified.
+        objectType:
+          type: string
+          description: The type of the object.
+        description:
+          type: string
+          description: Object description.
+        genericType:
+          $ref: '#/components/schemas/AppObjectGenericType'
+        publishedAt:
+          type: string
+          format: date-time
+          description: The date and time when the object was published, empty if unpublished.
+      description: App object attributes. This structure can also contain extra user-defined attributes.
+    SymbolFrequency:
+      type: object
+      properties:
+        Symbol:
+          $ref: '#/components/schemas/SymbolValue'
+        Frequency:
           type: integer
           format: int64
-          description: Data loaded from the network (bytes).
+          description: Frequency of the above symbol in the field
+    ReloadMeta:
+      type: object
+      properties:
+        endTime:
+          type: string
+          format: date-time
+          description: Time when reload ended.
+        success:
+          type: boolean
+          description: true if the reload was successful.
         duration:
           type: integer
           format: int64
-          description: Duration of data generation (ms).
-        nbrOfRows:
+          description: Duration of reload (ms).
+        reloadId:
+          type: string
+          description: Reload identifier.
+        rowLimit:
           type: integer
           format: int64
-          description: Number of rows loaded.
-        tableName:
+          default: -1
+          description: If greater than or equal 0, defines max number of rows loaded from a data source.
+        appDbHash:
           type: string
-          description: Name of the source table in lineage.
-        connection:
-          type: string
-          description: The connection name.
-        nbrOfFields:
-          type: integer
-          format: int64
-          description: Number of fields loaded.
-        connectionId:
-          type: string
-          description: Connection ID.
-        partialReloadOperation:
-          type: string
-          description: Partial load operation. e.g. add/replace/update/merge. n/a when not in partial load mode.
-    NxPatchOperationType:
-      type: string
-      oneOf:
-      - title: add
-        description: Add
-        x-qlik-const: 0
-      - title: remove
-        description: Remove
-        x-qlik-const: 1
-      - title: replace
-        description: Replace
-        x-qlik-const: 2
-    RepublishApp:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/PublishData'
-        targetId:
-          type: string
-          description: The target ID to be republished.
-        attributes:
-          $ref: '#/components/schemas/AppUpdateAttributes'
-        checkOriginAppId:
+          description: A Base64-encoded hash value of the new app database.
+        skipStore:
           type: boolean
-          default: true
-          description: Validate that source app is same as originally published.
-    AppContentList:
-      type: object
-      properties:
-        data:
+          default: false
+          description: 'Set to true to skip Store statements.
+
+            The default value is false.'
+        storeHash:
+          type: string
+          description: A Base64-encoded hash value of all fields stored via the store statements.
+        statements:
           type: array
           items:
-            $ref: '#/components/schemas/AppContentListItem'
-          description: Content list items.
-        library:
+            $ref: '#/components/schemas/ReloadStatements'
+          description: List of external loaded or stored statements.
+        accessDbHash:
           type: string
-          description: Content library name.
-        subpath:
-          type: string
-          description: Content library relative listing path. Empty in case of root listed or representing actual subpath listed.
-    UpdateOwner:
+          description: A Base64-encoded hash value of the new section access database.
+        includeFiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReloadIncludeFile'
+          description: Files brought into the script via include/mustInclude macros.
+        loadFilesBytes:
+          type: integer
+          format: int64
+        isPartialReload:
+          type: boolean
+          description: True if the reload is a partial reload.
+        storeFilesBytes:
+          type: integer
+          format: int64
+        loadExternalBytes:
+          type: integer
+          format: int64
+        loadDataFilesBytes:
+          type: integer
+          format: int64
+        storeDataFilesBytes:
+          type: integer
+          format: int64
+    LastReloadMetadata:
       type: object
       properties:
-        ownerId:
+        hardware:
+          $ref: '#/components/schemas/HardwareMeta'
+        cpu_time_spent_ms:
+          type: integer
+          format: int64
+          description: Number of CPU milliseconds it took to reload the app.
+        peak_memory_bytes:
+          type: integer
+          format: int64
+          description: Maximum number of bytes used during reload of the app.
+        fullReloadPeakMemoryBytes:
+          type: integer
+          format: int64
+          description: Maximum number of bytes used during full reload of the app.
+        partialReloadPeakMemoryBytes:
+          type: integer
+          format: int64
+          description: Maximum number of bytes used during partial reload of the app.
+    AppAttributes:
+      type: object
+      properties:
+        name:
           type: string
+          description: The name (title) of the application
+        usage:
+          $ref: '#/components/schemas/UsageEnum'
+        locale:
+          type: string
+          description: Set custom locale instead of the system default
+        spaceId:
+          type: string
+          description: The space ID of the application
+        description:
+          type: string
+          description: The description of the application
     ReloadIncludeFile:
       type: object
       properties:
@@ -2349,66 +2432,14 @@ components:
         connection:
           type: string
           description: The connection name.
-    FileData:
-      type: string
-      format: binary
-    TableMetadata:
+    ScriptLogList:
       type: object
       properties:
-        name:
-          type: string
-          description: Name of the table.
-        comment:
-          type: string
-          description: Table comment.
-        is_loose:
-          type: boolean
-          description: 'If set to true, the table is loose due to circular connection.
-
-            The default value is false.'
-        byte_size:
-          type: integer
-          format: int64
-          description: Static RAM memory used in bytes.
-        is_system:
-          type: boolean
-          description: 'If set to true, the table is a system table.
-
-            The default value is false.'
-        no_of_rows:
-          type: integer
-          format: int64
-          description: Number of rows.
-        is_semantic:
-          type: boolean
-          description: 'If set to true, the table is semantic.
-
-            The default value is false.'
-        no_of_fields:
-          type: integer
-          format: int32
-          description: Number of fields.
-        no_of_key_fields:
-          type: integer
-          format: int32
-          description: Number of key fields.
-    NxPatch:
-      type: object
-      properties:
-        Op:
-          $ref: '#/components/schemas/NxPatchOperationType'
-        Path:
-          type: string
-          description: Path to the property to add, remove or replace.
-        Value:
-          type: string
-          description: 'This parameter is not used in a remove operation.
-
-            Corresponds to the value of the property to add or to the new value of the property to update.
-
-            Examples:
-
-            "false", "2", "\"New title\""'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScriptLogMeta'
+          description: Array of scriptLogMeta.
     ScriptLogMeta:
       type: object
       properties:
@@ -2428,108 +2459,77 @@ components:
         reloadId:
           type: string
           description: Reload identifier.
-    NxAttributes:
+    ScriptMetaList:
       type: object
       properties:
-        id:
-          type: string
-          description: The App ID.
-        name:
-          type: string
-          description: App name.
-        owner:
-          type: string
-          description: Deprecated. Use the Users API to fetch user metadata.
-          x-qlik-deprecated: true
-        usage:
-          $ref: '#/components/schemas/UsageEnum'
-        custom:
-          $ref: '#/components/schemas/JsonObject'
-        ownerId:
-          type: string
-          description: Identifier of the app owner.
-        encrypted:
-          type: boolean
-          description: If set to true, the app is encrypted.
-        published:
-          type: boolean
-          description: 'For Qlik Cloud, indicates whether the app has been distributed from client-managed, not whether it has been published. To determine
-
-            if the app is published in Qlik Cloud, check for a non-empty value in the publishTime field. For client-managed, determines if the app is published.'
-        thumbnail:
-          type: string
-          description: App thumbnail.
-        createdDate:
-          type: string
-          format: date-time
-          description: The date and time when the app was created.
-        description:
-          type: string
-          description: App description.
-        originAppId:
-          type: string
-          description: The Origin App ID for published apps.
-        publishTime:
-          type: string
-          format: date-time
-          description: The date and time when the app was published, empty if unpublished. Use to determine if an app is published in Qlik Cloud.
-        dynamicColor:
-          type: string
-          description: The dynamic color of the app.
-        modifiedDate:
-          type: string
-          format: date-time
-          description: The date and time when the app was modified.
-        lastReloadTime:
-          type: string
-          format: date-time
-          description: Date and time of the last reload of the app.
-        hasSectionAccess:
-          type: boolean
-          description: If set to true, the app has section access configured,
-        isDirectQueryMode:
-          type: boolean
-          description: True if the app is a Direct Query app, false if not
-      description: App attributes. This structure can also contain extra user-defined attributes.
-    Placement:
-      type: object
-      properties:
-        createdAt:
-          type: string
-          format: date-time
-          description: The iso timestamp for when the override was configured.
-        minEngineSize:
-          $ref: '#/components/schemas/EngineGBSize'
-      description: Override for app placement on non reload engines.
-    AppContentListItem:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique content identifier.
-        link:
-          type: string
-          description: Unique content link.
-        name:
-          type: string
-          description: Content name.
-        type:
-          type: string
-          description: Content type.
-    ReloadListMetadata:
-      type: object
-      properties:
-        data:
+        links:
+          $ref: '#/components/schemas/NavigationLinks'
+        scripts:
           type: array
           items:
-            $ref: '#/components/schemas/ReloadMeta'
-          description: Array of ReloadMeta.
-    ScriptVersion:
+            $ref: '#/components/schemas/ScriptMeta'
+          description: Script versions metadata.
+        privileges:
+          type: array
+          items:
+            type: string
+    UsageEnum:
+      type: string
+      oneOf:
+      - title: ANALYTICS
+        x-qlik-const: 0
+      - title: DATA_PREPARATION
+        x-qlik-const: 1
+      - title: DATAFLOW_PREP
+        x-qlik-const: 2
+      - title: SINGLE_TABLE_PREP
+        x-qlik-const: 3
+      - title: DIRECT_QUERY_MODE
+        x-qlik-const: 4
+    DataModelMetadata:
+      type: object
+      properties:
+        usage:
+          $ref: '#/components/schemas/UsageEnum'
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldMetadata'
+          description: List of field descriptions.
+        tables:
+          type: array
+          items:
+            $ref: '#/components/schemas/TableMetadata'
+          description: List of table descriptions.
+        reload_meta:
+          $ref: '#/components/schemas/LastReloadMetadata'
+        static_byte_size:
+          type: integer
+          format: int64
+          description: Static memory usage for the app.
+        has_section_access:
+          type: boolean
+          description: If set to true, the app has section access configured.
+        is_direct_query_mode:
+          type: boolean
+        tables_profiling_data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TableProfilingData'
+          description: Profiling data of the tables in the app.
+    NavigationLink:
+      type: object
+      properties:
+        href:
+          type: string
+    Script:
       type: object
       properties:
         script:
           type: string
-          description: Script text.
-        versionMessage:
-          type: string
-          description: Description of this script version
+    EngineSize:
+      type: object
+      properties:
+        minEngineSize:
+          $ref: '#/components/schemas/EngineGBSize'
+      description: Engine size override for app placement on non reload engines.
