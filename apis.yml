@@ -109,6 +109,8 @@ apis:
   humanURL: https://qlik.dev/apis/
   baseURL: https://{tenant}.{region}.qlikcloud.com/api/v1
   tags:
+  - Application
+  tags_raw:
   - Apps
   properties:
   - type: OpenAPI
@@ -247,6 +249,8 @@ apis:
   humanURL: https://qlik.dev/apis/
   baseURL: https://{tenant}.{region}.qlikcloud.com/api/v1
   tags:
+  - Evaluation
+  tags_raw:
   - evaluation
   properties:
   - type: OpenAPI
@@ -385,6 +389,8 @@ apis:
   humanURL: https://qlik.dev/apis/
   baseURL: https://{tenant}.{region}.qlikcloud.com/api/v1
   tags:
+  - Filters
+  tags_raw:
   - filters
   properties:
   - type: OpenAPI
